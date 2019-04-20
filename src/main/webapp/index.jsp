@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>Task list</title>
-    <link rel="stylesheet" type="text/css" href="resources/styles/tasks.css"
+    <link rel="stylesheet" type="text/css" href="resources/css/tasks.css"
           media="screen" />
-    <script src="resources/scripts/jquery-2.0.3.js"></script>
-    <script src="resources/scripts/jquery-tmpl.js"></script>
+    <script src="resources/js/jquery-2.0.3.js"></script>
+    <script src="resources/js/jquery-tmpl.js"></script>
 </head>
 <body>
 <header>
