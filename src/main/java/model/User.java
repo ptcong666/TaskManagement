@@ -1,70 +1,59 @@
-package com.tirmizee.mvc.model;
+package model;
 
-import java.io.Serializable;
-/**
- * @author tirmizee
- *
- */
-public class User implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private static final long serialVersionUID = 6458624118329647888L;
-	
-	private Long userID;
-	private String userName;
-	private String passWord;
-	private String firstName;
-	private String lastName;
-	
+@Entity
+@Table(name="users")
+public class User {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	protected int id;
+
+	@Column(name="name")
+	protected String name;
+
+	@Column(name="email")
+	protected String email;
+
 	public User() {
 	}
-	
-	public User(Long userID, String userName, String passWord, String firstName, String lastName) {
+
+	public User(String name, String email) {
 		super();
-		this.userID = userID;
-		this.userName = userName;
-		this.passWord = passWord;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
+		this.email = email;
 	}
 
-	public Long getUserID() {
-		return userID;
+	public User(int id, String name, String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
 	}
 
-	public void setUserID(Long userID) {
-		this.userID = userID;
+	public int getId() {
+		return id;
 	}
-
-	public String getUserName() {
-		return userName;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public String getName() {
+		return name;
 	}
-
-	public String getPassWord() {
-		return passWord;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public String getEmail() {
+		return email;
 	}
-
-	public String getFirstName() {
-		return firstName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
 }
