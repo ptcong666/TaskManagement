@@ -9,13 +9,13 @@ import org.hibernate.Transaction;
 import config.HibernateUtil;
 
 public class UserRepository {
-
+    Session session = HibernateUtil.getCurrentSession();
+    Transaction transaction = null;
     /**
      * Save User
      * @param user
      */
     public void saveUser(User user) {
-        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
@@ -29,6 +29,9 @@ public class UserRepository {
             }
             e.printStackTrace();
         }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
     }
 
     /**
@@ -36,7 +39,6 @@ public class UserRepository {
      * @param user
      */
     public void updateUser(User user) {
-        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
@@ -50,6 +52,9 @@ public class UserRepository {
             }
             e.printStackTrace();
         }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
     }
 
     /**
@@ -57,8 +62,6 @@ public class UserRepository {
      * @param id
      */
     public void deleteUser(int id) {
-
-        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
@@ -78,6 +81,9 @@ public class UserRepository {
             }
             e.printStackTrace();
         }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
     }
 
     /**
@@ -86,8 +92,6 @@ public class UserRepository {
      * @return
      */
     public User getUser(int id) {
-
-        Transaction transaction = null;
         User user = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
@@ -102,6 +106,9 @@ public class UserRepository {
             }
             e.printStackTrace();
         }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
         return user;
     }
 
@@ -111,8 +118,6 @@ public class UserRepository {
      */
     @SuppressWarnings("unchecked")
     public List<User> getAllUser() {
-
-        Transaction transaction = null;
         List<User> listOfUser = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
@@ -128,6 +133,9 @@ public class UserRepository {
                 transaction.rollback();
             }
             e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
         }
         return listOfUser;
     }
