@@ -47,6 +47,19 @@ public class Task {
             this.endDate=endDate;
             this.status=status;
         }
+        public Task(int id,String name, String priority,LocalDateTime startDate, LocalDateTime endDate, String status) {
+            super();
+            this.id=id;
+            this.name = name;
+            this.priority=priority;
+            this.startDate=startDate;
+            this.endDate=endDate;
+            this.status=status;
+        }
+
+        public void print(){
+            System.out.println("Id :"+this.id+" name : "+ this.name + " priority : " + this.priority);
+        }
 
 
 

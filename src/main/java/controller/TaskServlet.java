@@ -61,6 +61,10 @@ public class TaskServlet extends HttpServlet {
     private void listTask(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         List<Task> listTask = TaskRepository.getAllTask();
+
+        for(Task t : listTask){
+            t.print();
+        }
         request.setAttribute("listTask", listTask);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
 //		dispatcher.forward(request, response);
@@ -101,10 +105,16 @@ public class TaskServlet extends HttpServlet {
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String email = request.getParameter("email");
+        String priority = request.getParameter("priority");
 
-        //Task task = new Task(id, name, email);
-        //TaskRepository.updateTask(task);
+        LocalDateTime startDate = LocalDateTime.parse(request.getParameter("startDate"));
+        LocalDateTime endDate = LocalDateTime.parse(request.getParameter("endDate"));
+
+        String status = request.getParameter("status");
+
+        Task newTask = new Task(id,name, priority,startDate,endDate,status);
+        TaskRepository.updateTask(newTask);
+
 //		response.sendRedirect("list");
     }
 
