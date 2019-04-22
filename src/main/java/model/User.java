@@ -43,9 +43,13 @@ public class User {
 		this.password=password;
 		this.email=email;
 	}
-	public User(String email, String password) {
-		this.password = password;
+
+	public User(String name, String email, String password, String address, String phone) {
+		this.name = name;
 		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.phone = phone;
 	}
 
 	public void setRolesByString(String roles) {
