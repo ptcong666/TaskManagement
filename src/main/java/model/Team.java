@@ -7,7 +7,7 @@ import javax.persistence.*;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="team_id")
+    @Column(name="id")
     protected int id;
 
     @Column(name="name")

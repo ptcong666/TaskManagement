@@ -38,8 +38,29 @@ public class TaskRepository {
 
     /**
      * Update Task
-     * @param task
+     * @paramtask
      */
+
+    public String getTeamName(int id){
+        String team_name= null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+
+            List<String> name = null;
+
+            List<Integer> teams= session.createQuery("team_id from model.User where id="+id).getResultList();
+            for(Integer t : teams){
+                name = session.createQuery("name from model.Team where id="+t).getResultList();
+            }
+             team_name =name.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return team_name;
+    }
     public void updateTask(Task task) {
         try {
             session = HibernateUtil.getCurrentSession();
@@ -158,7 +179,7 @@ public class TaskRepository {
         try {
             session = HibernateUtil.getCurrentSession();
             UserRepository UserRepository = new UserRepository();
-            List<User> listOfUsers = session.createQuery("from model.User where task_id="+id).getResultList();
+            List<User> listOfUsers = session.createQuery("from model.User where team_id="+id).getResultList();
 
             for(User u: listOfUsers){
                listOfTask.addAll(UserRepository.getTasks(u.getId()));
