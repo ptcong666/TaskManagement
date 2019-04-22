@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.TaskRepository;
+import dao.UserRepository;
 import model.Task;
 
 @WebServlet("/task/*")
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;
+    private UserRepository UserRepository;
 
     public void init() {
         TaskRepository = new TaskRepository();
@@ -46,6 +48,19 @@ public class TaskServlet extends HttpServlet {
                 case "/task/update":
                     updateTask(request, response);
                     break;
+                case "/task/manager":
+                    listTask(request, response);
+                    break;
+                case "/task/developer":
+                    listUserTasks(request, response);
+                    break;
+                case "/task/retrieve/priority":
+                    listUserTasksByPriority(request, response);
+                    break;
+
+                case "/task/retrieve/team":
+                    listUserTasksByTeam(request, response);
+                    break;
                 default:
                     listTask(request, response);
                     break;
@@ -62,6 +77,33 @@ public class TaskServlet extends HttpServlet {
         for(Task t : listTask){
             t.print();
         }
+        request.setAttribute("listTask", listTask);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
+//		dispatcher.forward(request, response);
+    }
+    private void listUserTasks(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Task> listTask = UserRepository.getTasks(id);
+        request.setAttribute("listTask", listTask);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
+//		dispatcher.forward(request, response);
+    }
+
+    private void listUserTasksByPriority(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        String priority = request.getParameter("priority");
+        List<Task> listTask = TaskRepository.getTasksByPriority(priority);
+        request.setAttribute("listTask", listTask);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
+//		dispatcher.forward(request, response);
+    }
+
+
+    private void listUserTasksByTeam(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Task> listTask = TaskRepository.getTasksByTeamId(id);
         request.setAttribute("listTask", listTask);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
 //		dispatcher.forward(request, response);

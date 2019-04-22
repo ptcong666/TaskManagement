@@ -102,10 +102,10 @@ public class UserServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String tasks = request.getParameter("task_id");
-		String team = request.getParameter("team_id");
+		int team = Integer.parseInt(request.getParameter("team_id"));
 		User user = new User(id, name, email);
-//		user.setTaskId(tasks);
-//		user.setTeamId(team);
+		//user.setTaskId(tasks);
+		user.setTeamId(team);
 		UserRepository.updateUser(user);
 //		response.sendRedirect("list");
 	}

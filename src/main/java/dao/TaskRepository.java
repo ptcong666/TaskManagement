@@ -1,6 +1,7 @@
 package dao;
 
 import model.Task;
+import model.User;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -128,4 +129,49 @@ public class TaskRepository {
         }
         return listOfTask;
     }
+
+    /**
+     * Get Task By Priority
+     * @param priority
+     * @return
+     */
+    public List<Task> getTasksByPriority(String priority) {
+
+        List<Task> listOfTask = null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            listOfTask = session.createQuery("from model.Task where priority="+priority).getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return listOfTask;
+    }
+
+
+    public List<Task> getTasksByTeamId(int id ) {
+
+        List<Task> listOfTask = null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            UserRepository UserRepository = new UserRepository();
+            List<User> listOfUsers = session.createQuery("from model.User where task_id="+id).getResultList();
+
+            for(User u: listOfUsers){
+               listOfTask.addAll(UserRepository.getTasks(u.getId()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return listOfTask;
+    }
+
+
 }
+

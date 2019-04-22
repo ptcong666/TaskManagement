@@ -1,8 +1,9 @@
 package dao;
 
 import config.HibernateUtil;
-import model.Task;
+import model.Team;
 import model.User;
+import model.Team;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -27,12 +28,118 @@ public class TeamRepository {
         return listOfUser;
     }
 
-    public List<Task> getTasks(String teamId) {
-        List<Task> listOfTasks = new ArrayList<>();
-        UserRepository userRepository = new UserRepository();
-        for (User user : getDevelopers(teamId)) {
-            listOfTasks.addAll(userRepository.getTasks(user.getId()));
+    public void saveTeam(Team team) {
+        try {
+            session = HibernateUtil.getCurrentSession();
+            // start a transaction
+            transaction = session.beginTransaction();
+            // save the student object
+            session.save(team);
+            // commit transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
         }
-        return listOfTasks;
+        finally {
+            HibernateUtil.closeSession(session);
+        }
     }
+    /**
+     * Update Team
+     * @param team
+     */
+    public void updateTeam(Team team) {
+        try {
+            session = HibernateUtil.getCurrentSession();
+            // start a transaction
+            transaction = session.beginTransaction();
+            // save the student object
+            session.update(team);
+            // commit transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+    }
+
+    /**
+     * Delete Team
+     * @param id
+     */
+    public void deleteTeam(int id) {
+        try {
+            session = HibernateUtil.getCurrentSession();
+            // start a transaction
+            transaction = session.beginTransaction();
+
+            // Delete a team object
+            Team team = session.get(Team.class, id);
+            if (team != null) {
+                session.delete(team);
+                System.out.println("team is deleted");
+            }
+
+            // commit transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+    }
+
+    /**
+     * Get Team By ID
+     * @param id
+     * @return
+     */
+    public Team getTeam(int id) {
+        Team team = null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            team = session.get(Team.class, id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return team;
+    }
+
+    /**
+     * Get all Teams
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public List<Team> getAllTeam() {
+        List<Team> listOfTeam = null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            listOfTeam = session.createQuery("from model.Team").getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return listOfTeam;
+    }
+
+
 }
