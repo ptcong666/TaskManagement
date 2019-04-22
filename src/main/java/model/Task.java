@@ -14,10 +14,10 @@ public class Task {
         @Column(name="id")
         protected int id;
 
-    @Column(name="task_name")
+    @Column(name="name")
         protected String name;
 
-    @Column(name="task_priority")
+    @Column(name="priority")
         protected String priority;
 
     @Column(name="startDate")

@@ -123,11 +123,11 @@ public class TaskServlet extends HttpServlet {
             throws SQLException, IOException {
         String name = request.getParameter("name");
         String priority = request.getParameter("priority");
-
         LocalDateTime startDate = LocalDateTime.parse(request.getParameter("startDate"));
         LocalDateTime endDate = LocalDateTime.parse(request.getParameter("endDate"));
         String status = request.getParameter("status");
         int devId = Integer.parseInt(request.getParameter("dev_id"));
+
         Task newTask = new Task(name, priority,startDate,endDate,status, devId);
         TaskRepository.saveTask(newTask);
 //		response.sendRedirect("list");
