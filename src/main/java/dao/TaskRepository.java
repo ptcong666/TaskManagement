@@ -9,14 +9,15 @@ import org.hibernate.Transaction;
 import config.HibernateUtil;
 
 public class TaskRepository {
-    Session session = HibernateUtil.getCurrentSession();
+    Session session = null;
     Transaction transaction = null;
     /**
      * Save Task
      * @param task
      */
     public void saveTask(Task task) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
@@ -39,7 +40,8 @@ public class TaskRepository {
      * @param task
      */
     public void updateTask(Task task) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
@@ -62,7 +64,8 @@ public class TaskRepository {
      * @param id
      */
     public void deleteTask(int id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
 
@@ -93,17 +96,11 @@ public class TaskRepository {
      */
     public Task getTask(int id) {
         Task task = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start a transaction
-            transaction = session.beginTransaction();
-            // get an task object
+        try {
+            session = HibernateUtil.getCurrentSession();
             task = session.get(Task.class, id);
-            // commit transaction
-            transaction.commit();
+
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
         finally {
@@ -119,19 +116,28 @@ public class TaskRepository {
     @SuppressWarnings("unchecked")
     public List<Task> getAllTask() {
         List<Task> listOfTask = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start a transaction
-            transaction = session.beginTransaction();
-            // get an task object
+        try {
+            session = HibernateUtil.getCurrentSession();
+            listOfTask = session.createQuery("from model.Task").getResultList();
 
-            listOfTask = session.createQuery("from Task").getResultList();
-
-            // commit transaction
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return listOfTask;
+    }
+
+
+    public List<Task> getTasksByUserId(String id) {
+
+        List<Task> listOfTask = null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            listOfTask = session.createQuery("from model.Task where ").getResultList();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
         finally {

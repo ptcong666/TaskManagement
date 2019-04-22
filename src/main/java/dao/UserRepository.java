@@ -7,16 +7,18 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import config.HibernateUtil;
+import org.hibernate.query.Query;
 
 public class UserRepository {
-    Session session = HibernateUtil.getCurrentSession();
+    Session session = null;
     Transaction transaction = null;
     /**
      * Save User
      * @param user
      */
     public void saveUser(User user) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
@@ -39,7 +41,8 @@ public class UserRepository {
      * @param user
      */
     public void updateUser(User user) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
@@ -62,7 +65,8 @@ public class UserRepository {
      * @param id
      */
     public void deleteUser(int id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try  {
+            session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
 
@@ -93,17 +97,11 @@ public class UserRepository {
      */
     public User getUser(int id) {
         User user = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start a transaction
-            transaction = session.beginTransaction();
+        try {
+            session = HibernateUtil.getCurrentSession();
             // get an user object
             user = session.get(User.class, id);
-            // commit transaction
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
         finally {
@@ -119,24 +117,43 @@ public class UserRepository {
     @SuppressWarnings("unchecked")
     public List<User> getAllUser() {
         List<User> listOfUser = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start a transaction
-            transaction = session.beginTransaction();
-            // get an user object
+        try {
+            session = HibernateUtil.getCurrentSession();
+            listOfUser = session.createQuery("from model.User").getResultList();
 
-            listOfUser = session.createQuery("from User").getResultList();
-
-            // commit transaction
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
         finally {
             HibernateUtil.closeSession(session);
         }
         return listOfUser;
+    }
+
+    /**
+     * Login email, password
+     * @param email, password
+     * @return
+     */
+    public User login(String email, String password) {
+        User user = null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            String qstr = "from model.User U where U.email = :email AND U.password = :password";
+            Query query = session.createQuery(qstr);
+            query.setParameter("email", email);
+            query.setParameter("password", password);
+            user = (User)query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return user;
+    }
+
+    public Task[] getTasks(String devId) {
+        return TaskRepository.getTasksByUserId(devId);
     }
 }

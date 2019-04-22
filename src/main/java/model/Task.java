@@ -1,11 +1,6 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,24 +11,26 @@ public class Task {
 
     @Id
         @GeneratedValue(strategy= GenerationType.IDENTITY)
-        @Column(name="id")
+        @Column(name="task_id")
         protected int id;
 
-
-    @Column(name="name")
+    @Column(name="task_name")
         protected String name;
 
-        @Column(name="priority")
+    @Column(name="task_priority")
         protected String priority;
 
-        @Column(name="startDate")
+    @Column(name="startDate")
         protected LocalDateTime startDate;
 
-        @Column(name="endDate")
+    @Column(name="endDate")
         protected LocalDateTime endDate;
 
-        @Column(name="status")
+    @Column(name="status")
         protected String status;
+
+    @Column(name="developers")
+    private String[] developerIds;
 
 
     public Task() {
@@ -84,5 +81,10 @@ public class Task {
     public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
 
     public void setStatus(String status) { this.status = status; }
+
+    public void setDevelopers(String[] developerIds){ this.developerIds=developerIds; }
+
+    public String[] getDevelopers(){ return this.developerIds; }
+
 
 }
