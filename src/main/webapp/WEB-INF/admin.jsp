@@ -140,7 +140,7 @@
                 <div class="card-body">
                     <div class="btn-add">
                         <%--<button class="btn btn-primary btn-block">+</button>--%>
-                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#newModal">+</a>
+                        <a class="btn btn-primary btn-block btn-add" href="#" data-toggle="modal" data-target="#newModal">+</a>
                     </div>
 
                     <div class="table-responsive">
