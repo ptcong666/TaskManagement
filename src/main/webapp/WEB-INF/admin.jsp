@@ -58,7 +58,8 @@
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"
+                   aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
                     <i class="fas fa-search"></i>
@@ -70,7 +71,8 @@
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <span class="badge badge-danger">9+</span>
             </a>
@@ -82,7 +84,8 @@
             </div>
         </li>
         <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <span class="badge badge-danger">7</span>
             </a>
@@ -94,7 +97,8 @@
             </div>
         </li>
         <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
@@ -136,11 +140,13 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Users list</div>
+                    Users list
+                </div>
                 <div class="card-body">
                     <div class="btn-add">
                         <%--<button class="btn btn-primary btn-block">+</button>--%>
-                        <a class="btn btn-primary btn-block btn-add" href="#" data-toggle="modal" data-target="#newModal">+</a>
+                        <a class="btn btn-primary btn-block btn-add" href="#" data-toggle="modal"
+                           data-target="#newModal">+</a>
                     </div>
 
                     <div class="table-responsive">
@@ -157,17 +163,20 @@
                             </thead>
                             <tbody>
                             <c:forEach var="item" items="${listUser}">
-                                <tr>
+                                <tr id="user_${item.id}">
                                     <td>${item.name}</td>
-                                    <%--<td></td>--%>
+                                        <%--<td></td>--%>
                                     <td>${item.email}</td>
                                     <td>${item.address}</td>
-                                    <%--<td></td>--%>
+                                        <%--<td></td>--%>
                                     <td>${item.phone}</td>
-                                    <%--<td></td>--%>
+                                        <%--<td></td>--%>
                                     <td>${item.roles}</td>
-                                    <td><button class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                        <a class="btn btn-sm btn-delete" onclick="setCurrentUser(${item.id})" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i></a></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></button>
+                                        <a class="btn btn-sm btn-delete" onclick="deleteCurrentUser(${item.id})" href="#"
+                                           data-toggle="modal" data-target="#deleteModal"><i
+                                                class="fas fa-trash"></i></a></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -178,7 +187,7 @@
             </div>
 
             <%--<p class="small text-center text-muted my-5">--%>
-                <%--<em>More table examples coming soon...</em>--%>
+            <%--<em>More table examples coming soon...</em>--%>
             <%--</p>--%>
 
         </div>
@@ -205,7 +214,8 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -224,12 +234,13 @@
 </div>
 
 <!-- New user Modal-->
-<div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="newModalLabel">Add new user</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-lab   el="Close">
+                <button class="close" type="button" data-dismiss="modal" aria-lab el="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -239,53 +250,139 @@
                         <form method="POST" action="${pageContext.request.contextPath}/user/insert">
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required="required" autofocus="autofocus" autocomplete="on">
+                                    <input type="text" name="name" id="inputName" class="form-control"
+                                           placeholder="Name" required="required" autofocus="autofocus"
+                                           autocomplete="on">
                                     <label for="inputName">Full name</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" name="address" id="inputAddress" class="form-control" placeholder="Address" required="required" autofocus="autofocus" autocomplete="on">
+                                    <input type="text" name="address" id="inputAddress" class="form-control"
+                                           placeholder="Address" required="required" autofocus="autofocus"
+                                           autocomplete="on">
                                     <label for="inputAddress">Address</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email" required="required" autofocus="autofocus" autocomplete="on">
+                                    <input type="text" name="phone" id="inputPhone" class="form-control"
+                                           placeholder="Address" required="required" autofocus="autofocus"
+                                           autocomplete="on">
+                                    <label for="inputPhone">Phone</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" name="email" id="inputEmail" class="form-control"
+                                           placeholder="Email" required="required" autofocus="autofocus"
+                                           autocomplete="on">
                                     <label for="inputEmail">Email address</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="required" autocomplete="new-password">
+                                    <input type="password" name="password" id="inputPassword" class="form-control"
+                                           placeholder="Password" required="required" autocomplete="new-password">
                                     <label for="inputPassword">Password</label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                    <select name="roles" class="form-control">
-                                        <option value="ADMIN">Admin</option>
-                                        <option value="MANAGER">Project manager</option>
-                                        <option value="DEVELOPER">Developer</option>
-                                    </select>
+                                <select name="roles" class="form-control">
+                                    <option value="ADMIN">Admin</option>
+                                    <option value="MANAGER">Project manager</option>
+                                    <option value="DEVELOPER">Developer</option>
+                                </select>
                             </div>
-                                <div class="modal-buttons">
-                                    <input class="btn btn-primary" type="submit" value="Add"/>
-                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                </div>
+                            <div class="modal-buttons">
+                                <input class="btn btn-primary" type="submit" value="Add"/>
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <%--<div class="modal-footer">--%>
-                <%--<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>--%>
-                <%--<a class="btn btn-primary" href="WEB-INF/login.jsp">Logout</a>--%>
-            <%--</div>--%>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit user Modal-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Add new user</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-lab el="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-login mx-auto">
+                    <div>
+                        <form method="POST" action="${pageContext.request.contextPath}/user/update">
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" name="name" id="editName" class="form-control"
+                                           placeholder="Name" required="required" autofocus="autofocus"
+                                           autocomplete="on">
+                                    <label for="editName">Full name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" name="address" id="editAddress" class="form-control"
+                                           placeholder="Address" required="required" autofocus="autofocus"
+                                           autocomplete="on">
+                                    <label for="editAddress">Address</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" name="phone" id="editPhone" class="form-control"
+                                           placeholder="Address" required="required" autofocus="autofocus"
+                                           autocomplete="on">
+                                    <label for="editPhone">Phone</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" name="email" id="editEmail" class="form-control"
+                                           placeholder="Email" required="required" autofocus="autofocus"
+                                           autocomplete="on">
+                                    <label for="editEmail">Email address</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="password" name="password" id="inputPassword" class="form-control"
+                                           placeholder="Password" required="required" autocomplete="new-password">
+                                    <label for="inputPassword">Password</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select name="roles" class="form-control">
+                                    <option value="ADMIN">Admin</option>
+                                    <option value="MANAGER">Project manager</option>
+                                    <option value="DEVELOPER">Developer</option>
+                                </select>
+                            </div>
+                            <div class="modal-buttons">
+                                <input class="btn btn-primary" type="submit" value="Add"/>
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Delete user Modal-->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -297,7 +394,7 @@
             <div class="modal-body">Are you sure you want to delete this user?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a id="deleteUserBtn" class="btn btn-danger" href="WEB-INF/login.jsp">Delete</a>
+                <a id="deleteUserBtn" class="btn btn-danger" href="#">Delete</a>
             </div>
         </div>
     </div>
@@ -305,20 +402,30 @@
 
 
 <script>
-    function setCurrentUser(id) {
+    function deleteCurrentUser(id) {
         $("#deleteUserBtn").click(function () {
             $.post("/user/delete",
                 {
                     id: id,
-                })
-                .done(function(data){
-                    console.log(data);
-                    alert("User with id: " + id + "is deleted successfully");
-                })
-                .fail(function(err) {
-                    alert("Error occured: " + err)
+                }).done(function (data) {
+                    $("#user_" + id).remove();
+                    $("#deleteModal").toggle();
+                }).fail(function (err) {
+                    alert("error: " + err);
                 });
         })
+    }
+
+    function editCurrentUser(id) {
+            $.get("/user/edit",
+                {
+                    id: id,
+                }).done(function (data) {
+                $("#user_" + id).remove();
+                $("#deleteModal").toggle();
+            }).fail(function (err) {
+                alert("error: " + err);
+            });
     }
 </script>
 
