@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -22,38 +24,40 @@ public class User {
 	@Column(name="email")
 	protected String email;
 
+	@Column(name="password")
+	protected String password;
+
+	@Column(name="address")
+	protected String address;
+
+	@Column(name="phone")
+	protected String phone;
+
+	@Column(name="roles")
+	protected String[] roles;
+
 	public User() {
+
 	}
 
-	public User(String name, String email) {
-		super();
-		this.name = name;
+	public User(String email, String password) {
+		this.password = password;
 		this.email = email;
 	}
 
-	public User(int id, String name, String email) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
+	public void setRolesByString(String roles) {
+		this.roles = roles.split(",");
 	}
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getEmail() {
 		return email;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public List<String> getRoles() {
+		List<String> res = new ArrayList<>();
+		for (String role : roles) {
+			res.add(role);
+		}
+		return res;
 	}
 }
