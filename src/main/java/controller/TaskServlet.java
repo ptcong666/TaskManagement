@@ -24,6 +24,7 @@ public class TaskServlet extends HttpServlet {
 
     public void init() {
         TaskRepository = new TaskRepository();
+        UserRepository = new UserRepository();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -130,6 +131,7 @@ public class TaskServlet extends HttpServlet {
 
         Task newTask = new Task(name, priority,startDate,endDate,status, devId);
         TaskRepository.saveTask(newTask);
+
 //		response.sendRedirect("list");
     }
 
