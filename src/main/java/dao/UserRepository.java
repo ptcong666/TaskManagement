@@ -1,13 +1,12 @@
 package dao;
 
 import model.User;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import config.HibernateUtil;
 import org.hibernate.query.Query;
+import config.*;
+
+import java.util.List;
 
 public class UserRepository {
     Session session = null;

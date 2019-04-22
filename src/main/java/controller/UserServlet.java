@@ -61,6 +61,7 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		List<User> listUser = UserRepository.getAllUser();
 		request.setAttribute("listUser", listUser);
+		request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
 //		dispatcher.forward(request, response);
 	}

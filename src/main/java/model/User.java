@@ -53,6 +53,22 @@ public class User {
 		return email;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
 	public List<String> getRoles() {
 		List<String> res = new ArrayList<>();
 		for (String role : roles) {
