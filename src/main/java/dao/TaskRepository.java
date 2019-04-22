@@ -1,27 +1,27 @@
 package dao;
 
-import model.User;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-import config.*;
-
+import model.Task;
 import java.util.List;
 
-public class UserRepository {
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import config.HibernateUtil;
+
+public class TaskRepository {
     Session session = null;
     Transaction transaction = null;
     /**
-     * Save User
-     * @param user
+     * Save Task
+     * @param task
      */
-    public void saveUser(User user) {
+    public void saveTask(Task task) {
         try {
             session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
-            session.save(user);
+            session.save(task);
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
@@ -36,16 +36,16 @@ public class UserRepository {
     }
 
     /**
-     * Update User
-     * @param user
+     * Update Task
+     * @param task
      */
-    public void updateUser(User user) {
+    public void updateTask(Task task) {
         try {
             session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
-            session.update(user);
+            session.update(task);
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
@@ -60,20 +60,20 @@ public class UserRepository {
     }
 
     /**
-     * Delete User
+     * Delete Task
      * @param id
      */
-    public void deleteUser(int id) {
-        try  {
+    public void deleteTask(int id) {
+        try {
             session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
 
-            // Delete a user object
-            User user = session.get(User.class, id);
-            if (user != null) {
-                session.delete(user);
-                System.out.println("user is deleted");
+            // Delete a task object
+            Task task = session.get(Task.class, id);
+            if (task != null) {
+                session.delete(task);
+                System.out.println("task is deleted");
             }
 
             // commit transaction
@@ -90,35 +90,35 @@ public class UserRepository {
     }
 
     /**
-     * Get User By ID
+     * Get Task By ID
      * @param id
      * @return
      */
-    public User getUser(int id) {
-        User user = null;
+    public Task getTask(int id) {
+        Task task = null;
         try {
             session = HibernateUtil.getCurrentSession();
-            // get an user object
-            user = session.get(User.class, id);
+            task = session.get(Task.class, id);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         finally {
             HibernateUtil.closeSession(session);
         }
-        return user;
+        return task;
     }
 
     /**
-     * Get all Users
+     * Get all Tasks
      * @return
      */
     @SuppressWarnings("unchecked")
-    public List<User> getAllUser() {
-        List<User> listOfUser = null;
+    public List<Task> getAllTask() {
+        List<Task> listOfTask = null;
         try {
             session = HibernateUtil.getCurrentSession();
-            listOfUser = session.createQuery("from model.User").getResultList();
+            listOfTask = session.createQuery("from model.Task").getResultList();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,36 +126,23 @@ public class UserRepository {
         finally {
             HibernateUtil.closeSession(session);
         }
-        return listOfUser;
+        return listOfTask;
     }
 
-    /**
-     * Login email, password
-     * @param email, password
-     * @return
-     */
-    public User login(String email, String password) {
-        User user = null;
+
+    public List<Task> getTasksByUserId(String id) {
+
+        List<Task> listOfTask = null;
         try {
             session = HibernateUtil.getCurrentSession();
-            String qstr = "from model.User U where U.email = :email AND U.password = :password";
-            Query query = session.createQuery(qstr);
-            query.setParameter("email", email);
-            query.setParameter("password", password);
-            user = (User)query.uniqueResult();
+            listOfTask = session.createQuery("from model.Task where developer="+id).getResultList();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         finally {
             HibernateUtil.closeSession(session);
         }
-        return user;
-    }
-
-    public Task[] getTasks(String devId) {
-
-        return TaskRepository.getTasksByUserId(devId
-
-        );
+        return listOfTask;
     }
 }

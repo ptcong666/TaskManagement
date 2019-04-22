@@ -1,11 +1,6 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +31,18 @@ public class User {
 	@Column(name="roles")
 	protected String[] roles;
 
+
+
+
 	public User() {
 
 	}
 
+	public User (int id, String email, String password){
+		this.id=id;
+		this.password=password;
+		this.email=email;
+	}
 	public User(String email, String password) {
 		this.password = password;
 		this.email = email;
@@ -76,4 +79,6 @@ public class User {
 		}
 		return res;
 	}
+
+	
 }

@@ -97,9 +97,12 @@ public class UserServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-
-//		User user = new User(id, name, email);
-//		UserRepository.updateUser(user);
+		String tasks = request.getParameter("task_id");
+		String team = request.getParameter("team_id");
+		User user = new User(id, name, email);
+		user.setTaskId(tasks);
+		user.setTeamId(team);
+		UserRepository.updateUser(user);
 //		response.sendRedirect("list");
 	}
 
