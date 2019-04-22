@@ -1,13 +1,13 @@
 package dao;
 
+import model.Task;
 import model.User;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import config.HibernateUtil;
 import org.hibernate.query.Query;
+import config.*;
+
+import java.util.List;
 
 public class UserRepository {
     Session session = null;
@@ -153,10 +153,18 @@ public class UserRepository {
         return user;
     }
 
-    public Task[] getTasks(String devId) {
+    public List<Task> getTasks(int devId) {
+        List<Task> listOfTask = null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            listOfTask = session.createQuery("from model.Task where developer="+devId).getResultList();
 
-        return TaskRepository.getTasksByUserId(devId
-
-        );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return listOfTask;
     }
 }

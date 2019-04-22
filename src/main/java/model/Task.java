@@ -29,22 +29,23 @@ public class Task {
     @Column(name="status")
         protected String status;
 
-    @Column(name="developers")
-    private String developerIds;
+    @Column(name="developer_id")
+    private int developerId;
 
 
     public Task() {
         }
 
-        public Task(String name, String priority,LocalDateTime startDate, LocalDateTime endDate, String status) {
+        public Task(String name, String priority,LocalDateTime startDate, LocalDateTime endDate, String status, int devId) {
             super();
             this.name = name;
             this.priority=priority;
             this.startDate=startDate;
             this.endDate=endDate;
             this.status=status;
+            this.developerId = devId;
         }
-        public Task(int id,String name, String priority,LocalDateTime startDate, LocalDateTime endDate, String status) {
+        public Task(int id,String name, String priority,LocalDateTime startDate, LocalDateTime endDate, String status, int devId) {
             super();
             this.id=id;
             this.name = name;
@@ -52,6 +53,7 @@ public class Task {
             this.startDate=startDate;
             this.endDate=endDate;
             this.status=status;
+            this.developerId = devId;
         }
 
         public void print(){
@@ -82,9 +84,11 @@ public class Task {
 
     public void setStatus(String status) { this.status = status; }
 
-    public void setDevelopers(String[] developerIds){ this.developerIds=developerIds; }
+    public int getDeveloperId() {
+        return developerId;
+    }
 
-    public String[] getDevelopers(){ return this.developerIds; }
-
-
+    public void setDeveloperId(int developerId) {
+        this.developerId = developerId;
+    }
 }

@@ -140,7 +140,7 @@
                 <div class="card-body">
                     <div class="btn-add">
                         <%--<button class="btn btn-primary btn-block">+</button>--%>
-                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#newModal">+</a>
+                        <a class="btn btn-primary btn-block btn-add" href="#" data-toggle="modal" data-target="#newModal">+</a>
                     </div>
 
                     <div class="table-responsive">
@@ -151,34 +151,25 @@
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Phone</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Baya baya</td>
-                                <td>tiger@gmail.com</td>
-                                <td>Fairfiled</td>
-                                <td>99009900</td>
-                                <td><button class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Huygaa huygaa</td>
-                                <td>tiger@gmail.com</td>
-                                <td>Fairfiled</td>
-                                <td>99009900</td>
-                                <td><button class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Cong Cong</td>
-                                <td>cong@gmail.com</td>
-                                <td>Fairfiled</td>
-                                <td>99009900</td>
-                                <td><button class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></button></td>
-                            </tr>
+                            <c:forEach var="item" items="${listUser}">
+                                <tr>
+                                    <td>${item.name}</td>
+                                    <%--<td></td>--%>
+                                    <td>${item.email}</td>
+                                    <%--<td>${item.address}</td>--%>
+                                    <td></td>
+                                    <%--<td>${item.phone}</td>--%>
+                                    <td></td>
+                                    <td>${item.roles}</td>
+                                    <td><button class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></button></td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -234,59 +225,57 @@
 
 <!-- New user Modal-->
 <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="newModalLabel">Add new user</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" type="button" data-dismiss="modal" aria-lab   el="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="card card-login mx-auto mt-5">
-                    <div class="card-body">
-                        <form method="POST" action="${pageContext.request.contextPath}/admin/add">
+                <div class="card-login mx-auto">
+                    <div>
+                        <form method="POST" action="${pageContext.request.contextPath}/user/insert">
+                            <%--<div class="form-group">--%>
+                                <%--<div class="form-label-group">--%>
+                                    <%--<input autocomplete="off" type="text" name="name" class="form-control" placeholder="Name" required="required" autofocus="autofocus">--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                            <%--<div class="form-group">--%>
+                                <%--<div class="form-label-group">--%>
+                                    <%--<input autocomplete="off" type="text" name="email" class="form-control" placeholder="Email" required="required" autofocus="autofocus">--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="email" id="inputName" name="email" class="form-control" placeholder="Name" required="required" autofocus="autofocus">
-                                    <label for="inputName">Email address</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                    <input type="email" id="inputAddress" name="email" class="form-control" placeholder="Email" required="required" autofocus="autofocus">
-                                    <label for="inputAddress">Email address</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
-                                    <label for="inputEmail">Email address</label>
+                                    <input type="text" name="email" class="form-control" placeholder="em" required="required" autofocus="autofocus" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="password" id="inputPhone" name="password" class="form-control" placeholder="Password" required="required">
-                                    <label for="inputPhone">Password</label>
+                                    <input type="password" name="password" class="form-control" placeholder="pwd" required="required" autocomplete="new-password">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="remember-me">
-                                        Remember Password
-                                    </label>
-                                </div>
+                                    <select name="roles" class="form-control">
+                                        <option value="ADMIN">Admin</option>
+                                        <option value="MANAGER">Project manager</option>
+                                        <option value="DEVELOPER">Developer</option>
+                                    </select>
                             </div>
-                            <input class="btn btn-primary btn-block" type="submit" value="Add" />
+                                <div class="modal-buttons">
+                                    <input class="btn btn-primary" type="submit" value="Add"/>
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="WEB-INF/login.jsp">Logout</a>
-            </div>
+            <%--<div class="modal-footer">--%>
+                <%--<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>--%>
+                <%--<a class="btn btn-primary" href="WEB-INF/login.jsp">Logout</a>--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>

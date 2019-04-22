@@ -16,7 +16,7 @@ public class User {
 	@Column(name="name")
 	protected String name;
 
-	@Column(name="email")
+	@Column(name="email", unique = true)
 	protected String email;
 
 	@Column(name="password")
@@ -31,7 +31,8 @@ public class User {
 	@Column(name="roles")
 	protected String[] roles;
 
-
+	@Column(name="team_id")
+	protected int teamId;
 
 
 	public User() {
@@ -43,9 +44,13 @@ public class User {
 		this.password=password;
 		this.email=email;
 	}
-	public User(String email, String password) {
-		this.password = password;
+
+	public User(String name, String email, String password, String address, String phone) {
+		this.name = name;
 		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.phone = phone;
 	}
 
 	public void setRolesByString(String roles) {
@@ -56,6 +61,22 @@ public class User {
 		return email;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
 	public List<String> getRoles() {
 		List<String> res = new ArrayList<>();
 		for (String role : roles) {
@@ -64,5 +85,27 @@ public class User {
 		return res;
 	}
 
-	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
+	}
 }

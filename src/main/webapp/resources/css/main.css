@@ -9,3 +9,25 @@
 .btn-add {
     width:100px;
 }
+
+.modal-buttons {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal-buttons input {
+    width:20%;
+}
+
+.modal-buttons > :not(:first-child) {
+    margin-left: .25rem;
+}
+
+.modal-buttons > :not(:last-child) {
+    margin-right: .25rem;
+}
