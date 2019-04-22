@@ -4,3 +4,11 @@ margin-left: 15pt;
 .findButton{
     height: 3.3vh;
 }
+#addTeam{
+    margin: 18px;
+}
+.priorities{
+    padding: 10px;
+    margin-top: 5px;
+    margin-right: 10px;
+}

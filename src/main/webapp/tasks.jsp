@@ -31,7 +31,7 @@
     <link href="resources/css/myStyle.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
     <style>
-        .completed{
+        .completed {
             background-color: #1dd1a1;
         }
     </style>
@@ -100,13 +100,14 @@
     </ul>
 
     <div id="content-wrapper">
-
+        <a class="btn btn-primary" id="addTeam" name="newTask" href="#"
+           data-toggle="modal" data-target="#addNewTask">Create New Task</a>
         <div class="container-fluid">
 
 
             <!-- DataTables Example -->
             <div class="input-group">
-                <label class="finders" for="findUserID">Find By User ID
+                <label class="finders" for="findUserID">Find By User ID:
                     <input id="findUserID" type="text" pattern="^\d+" title="Enter only number"/>
                 </label>
                 <div class="input-group-append">
@@ -114,7 +115,7 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <label class="finders" for="findTeamID">Find By Team ID
+                <label class="finders" for="findTeamID">Find By Team ID:
                     <input id="findTeamID" type="text" pattern="^\d+" title="Enter only number"/>
                 </label>
                 <div class="input-group-append">
@@ -123,11 +124,11 @@
                     </button>
                 </div>
                 <label class="finders">Find task by priority:
-                    <select size="1">
-                    <option>Select priority</option>
-                    <option value="important">Important</option>
-                    <option value="regular">Regular</option>
-                </select></label>
+                    <select size="1" class="priorities">
+                        <option>Select priority</option>
+                        <option value="important">Important</option>
+                        <option value="regular">Regular</option>
+                    </select></label>
                 <div class="input-group-append">
                     <button class="btn btn-primary findButton" type="button">
                         <i class="fas fa-search"></i>
@@ -195,7 +196,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <a class="btn btn-primary" id="addTeam" name="newTask" href="#">Create New Task</a>
                 </div>
             </div>
 
@@ -237,6 +237,75 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New task-->
+<div class="modal fade" id="addNewTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add new task</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-body">
+                        <form method="POST" action="${pageContext.request.contextPath}/task/add">
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="taskName" name="taskName" class="form-control"
+                                           required="required"
+                                           autofocus="autofocus">
+                                    <label for="taskName">Task name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+
+                                    <select id="inputPriority" type="text" id="inputPriority" name="priority"
+                                            class="form-control" autofocus="autofocus">
+                                        <option>Choose priority</option>
+                                        <option value="important">Important</option>
+                                        <option value="regular">Regular</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="email" id="inputEmail" name="email" class="form-control"
+                                           placeholder="Email address" required="required" autofocus="autofocus">
+                                    <label for="inputEmail">Email address</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="password" id="inputPhone" name="password" class="form-control"
+                                           placeholder="Password" required="required">
+                                    <label for="inputPhone">Password</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="remember-me">
+                                        Remember Password
+                                    </label>
+                                </div>
+                            </div>
+                            <input class="btn btn-primary btn-block" type="submit" value="Add"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="WEB-INF/login.jsp">Logout</a>
             </div>
         </div>
     </div>

@@ -28,7 +28,8 @@
 
     <!-- Custom styles for this template-->
     <link href="resources/css/sb-admin.css" rel="stylesheet">
-
+    <link href="resources/css/myStyle.css" rel="stylesheet" type="text/css">
+    <script src="resources/js/forDeveloper.js" type="text/javascript"></script>
 </head>
 
 <body id="page-top">
@@ -95,7 +96,8 @@
     </ul>
 
     <div id="content-wrapper">
-
+        <a class="btn btn-primary" id="addTeam" name="newTeam" href="#" data-toggle="modal" data-target="#addNewTeam">
+            Create New Team</a>
         <div class="container-fluid">
 
 
@@ -135,10 +137,9 @@
                                     <td>${each.id}</td>
                                     <td>${each.id}</td>
                                     <td>
-                                        <a class="btn btn-warning" href="#' + ${each.id}}"
-                                           onclick="return confirm('Are ' +
-                                         'you sure that you want to edit a team?')">Edit</a>
-                                        <a class="btn btn-danger" href="#'+${each.id}}" onclick="return confirm('Are you sure ' +
+                                        <a class="btn btn-warning" href="#" + ${each.id}
+                                           data-toggle="modal" data-target="#editTeam">Edit</a>
+                                        <a class="btn btn-danger" href="#"+${each.id} onclick="return confirm('Are you sure ' +
                                          'that you want to delete team?')">Delete</a>
                                     </td>
                                 </tr>
@@ -147,7 +148,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <a class="btn btn-primary" id="addTeam" name="newTeam" href="#">Create New Team</a>
                 </div>
             </div>
 
@@ -193,6 +193,112 @@
         </div>
     </div>
 </div>
+
+<!-- Add Team-->
+<div class="modal fade" id="addNewTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add new team</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-body">
+                        <form method="POST" action="${pageContext.request.contextPath}/team/add">
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="inputID" name="teamId" class="form-control" required="required"
+                                           autofocus="autofocus" pattern="\d+" title="only number">
+                                    <label for="inputID">Team id</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="inputName" name="email" class="form-control" required="required" autofocus="autofocus">
+                                    <label for="inputName">Team name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="inputDevelopers" name="totalDev" class="form-control"
+                                           required="required" autofocus="autofocus" pattern="\d+" title="only number">
+                                    <label for="inputDevelopers">Total developers</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="inputTasks" name="totalTasks" class="form-control"
+                                           required="required" autofocus="autofocus"
+                                           pattern="\d+" title="only number">
+                                    <label for="inputTasks">Total tasks</label>
+                                </div>
+                            </div>
+                            <input class="btn btn-primary btn-block" type="submit" value="Add"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit team-->
+<div class="modal fade" id="editTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newModalLabel">Edit team</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-body">
+                        <form method="POST" action="${pageContext.request.contextPath}/team/edit">
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="editID" name="teamId" class="form-control" required="required"
+                                           autofocus="autofocus" pattern="\d+" title="only number" readonly value="${team.id}">
+                                    <label for="editID">Team id</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="editName" name="email" class="form-control"
+                                           required="required" autofocus="autofocus" value="${team.name}">
+                                    <label for="editName">Team name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="editDevelopers" name="totalDev" class="form-control"
+                                           required="required" autofocus="autofocus" pattern="\d+"
+                                           title="only number" readonly value="${team.totalDev}">
+                                    <label for="editDevelopers">Total developers</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="totalTask" name="totalTasks" class="form-control"
+                                           required="required" autofocus="autofocus"
+                                           pattern="\d+" title="only number" readonly value="${team.totalTask}">
+                                    <label for="totalTask">Total tasks</label>
+                                </div>
+                            </div>
+                            <input class="btn btn-primary btn-block" type="submit" value="Edit"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="resources/vendor/jquery/jquery.min.js"></script>
