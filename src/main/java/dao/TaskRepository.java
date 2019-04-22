@@ -192,7 +192,20 @@ public class TaskRepository {
         }
         return listOfTask;
     }
+    public List<Task> getTasks(int devId) {
+        List<Task> listOfTask = null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            listOfTask = session.createQuery("from model.Task where developer_id="+devId).getResultList();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return listOfTask;
+    }
 
 }
 

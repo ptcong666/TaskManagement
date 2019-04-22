@@ -20,11 +20,9 @@ import model.Task;
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;
-    private UserRepository UserRepository;
 
     public void init() {
         TaskRepository = new TaskRepository();
-        UserRepository = new UserRepository();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -85,7 +83,7 @@ public class TaskServlet extends HttpServlet {
     private void listUserTasks(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
-        List<Task> listTask = UserRepository.getTasks(id);
+        List<Task> listTask = TaskRepository.getTasks(id);
         request.setAttribute("listTask", listTask);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
 //		dispatcher.forward(request, response);
