@@ -1,11 +1,6 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +16,7 @@ public class User {
 	@Column(name="name")
 	protected String name;
 
-	@Column(name="email")
+	@Column(name="email", unique = true)
 	protected String email;
 
 	@Column(name="password")
