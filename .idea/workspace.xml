@@ -6,24 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ed9173b-f691-4ce3-b36b-c4b5b0127673" name="Default Changelist" comment="Merge branch 'congpham' of https://github.com/ptcong666/TaskManagement into huygaa&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/LoginServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/LogoutServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/UserRoleRequestWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/filter/SecurityFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Team.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/AppUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/SecurityUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/UrlPatternUtils.java" afterDir="false" />
+    <list default="true" id="3ed9173b-f691-4ce3-b36b-c4b5b0127673" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/UserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/UserServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/TaskRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/UserRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,15 +36,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/controller/UserRoleRequestWrapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/UserServlet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="106">
@@ -74,76 +50,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/TaskRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="120" column="30" selection-start-line="120" selection-start-column="30" selection-end-line="120" selection-end-column="30" />
+            <state relative-caret-position="586">
+              <caret line="147" column="1" lean-forward="true" selection-start-line="147" selection-start-column="1" selection-end-line="147" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#0#22#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/model/Task.java">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/model/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#868#869#0" expanded="true" />
-                <element signature="e#916#917#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="156" column="46" selection-start-line="156" selection-start-column="30" selection-end-line="156" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#0#67#0" expanded="true" />
-                <element signature="e#4098#4099#0" expanded="true" />
-                <element signature="e#4138#4139#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/model/Team.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#353#354#0" expanded="true" />
-                <element signature="e#384#385#0" expanded="true" />
-                <element signature="e#512#513#0" expanded="true" />
-                <element signature="e#539#540#0" expanded="true" />
-                <element signature="e#579#580#0" expanded="true" />
-                <element signature="e#611#612#0" expanded="true" />
-                <element signature="e#728#729#0" expanded="true" />
-                <element signature="e#763#764#0" expanded="true" />
-                <element signature="e#821#822#0" expanded="true" />
-                <element signature="e#869#870#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="527">
+              <caret line="68" column="17" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -186,14 +108,14 @@
         <option value="$PROJECT_DIR$/src/main/java/model/UserRole.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/UserRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/config/HibernateUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/UserServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/UserRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/TaskRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/Task.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/TaskRepository.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -425,12 +347,20 @@
       <workItem from="1555612898251" duration="3155000" />
       <workItem from="1555638710084" duration="14980000" />
       <workItem from="1555855983850" duration="1503000" />
-      <workItem from="1555946080960" duration="6516000" />
+      <workItem from="1555946080960" duration="6972000" />
     </task>
+    <task id="LOCAL-00001" summary="Merge branch 'congpham' of https://github.com/ptcong666/TaskManagement into huygaa&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1555952785653</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1555952785653</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31289000" />
+    <option name="totallyTimeSpent" value="31745000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="687" y="0" width="855" height="870" extended-state="0" />
@@ -522,13 +452,6 @@
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/lang/Thread.java" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -633,31 +556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="156" column="46" selection-start-line="156" selection-start-column="30" selection-end-line="156" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#0#67#0" expanded="true" />
-            <element signature="e#4098#4099#0" expanded="true" />
-            <element signature="e#4138#4139#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/TaskRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="120" column="30" selection-start-line="120" selection-start-column="30" selection-end-line="120" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Team.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -678,6 +576,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="631">
@@ -690,13 +598,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/Task.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="556">
+          <caret line="156" column="46" selection-start-line="156" selection-start-column="30" selection-end-line="156" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#67#0" expanded="true" />
+            <element signature="e#4098#4099#0" expanded="true" />
+            <element signature="e#4138#4139#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/TaskRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="147" column="1" lean-forward="true" selection-start-line="147" selection-start-column="1" selection-end-line="147" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="68" column="17" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
         </state>
       </provider>
     </entry>
