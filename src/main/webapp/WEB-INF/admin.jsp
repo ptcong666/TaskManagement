@@ -161,13 +161,13 @@
                                     <td>${item.name}</td>
                                     <%--<td></td>--%>
                                     <td>${item.email}</td>
-                                    <%--<td>${item.address}</td>--%>
-                                    <td></td>
-                                    <%--<td>${item.phone}</td>--%>
-                                    <td></td>
+                                    <td>${item.address}</td>
+                                    <%--<td></td>--%>
+                                    <td>${item.phone}</td>
+                                    <%--<td></td>--%>
                                     <td>${item.roles}</td>
                                     <td><button class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i></button></td>
+                                        <a class="btn btn-sm btn-delete" onclick="setCurrentUser(${item.id})" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i></a></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -237,24 +237,28 @@
                 <div class="card-login mx-auto">
                     <div>
                         <form method="POST" action="${pageContext.request.contextPath}/user/insert">
-                            <%--<div class="form-group">--%>
-                                <%--<div class="form-label-group">--%>
-                                    <%--<input autocomplete="off" type="text" name="name" class="form-control" placeholder="Name" required="required" autofocus="autofocus">--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="form-group">--%>
-                                <%--<div class="form-label-group">--%>
-                                    <%--<input autocomplete="off" type="text" name="email" class="form-control" placeholder="Email" required="required" autofocus="autofocus">--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" name="email" class="form-control" placeholder="em" required="required" autofocus="autofocus" autocomplete="off">
+                                    <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required="required" autofocus="autofocus" autocomplete="on">
+                                    <label for="inputName">Full name</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="password" name="password" class="form-control" placeholder="pwd" required="required" autocomplete="new-password">
+                                    <input type="text" name="address" id="inputAddress" class="form-control" placeholder="Address" required="required" autofocus="autofocus" autocomplete="on">
+                                    <label for="inputAddress">Address</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email" required="required" autofocus="autofocus" autocomplete="on">
+                                    <label for="inputEmail">Email address</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="required" autocomplete="new-password">
+                                    <label for="inputPassword">Password</label>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -279,6 +283,44 @@
         </div>
     </div>
 </div>
+
+<!-- Delete user Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteLabel">Delete user</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Are you sure you want to delete this user?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a id="deleteUserBtn" class="btn btn-danger" href="WEB-INF/login.jsp">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function setCurrentUser(id) {
+        $("#deleteUserBtn").click(function () {
+            $.post("/user/delete",
+                {
+                    id: id,
+                })
+                .done(function(data){
+                    console.log(data);
+                    alert("User with id: " + id + "is deleted successfully");
+                })
+                .fail(function(err) {
+                    alert("Error occured: " + err)
+                });
+        })
+    }
+</script>
 
 </body>
 </html>

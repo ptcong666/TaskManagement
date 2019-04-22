@@ -27,6 +27,7 @@
 
     <!-- Custom styles for this template-->
     <link href="resources/css/sb-admin.css" rel="stylesheet">
+    <script src="resources/js/forDeveloper.js" type="text/javascript"></script>
     <style>
         .completed{
             background-color: #1dd1a1;
@@ -40,9 +41,6 @@
 
     <a class="navbar-brand mr-1" href="developer.jsp">Welcome ${user.name}!</a>
 
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-    </button>
 
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -128,9 +126,9 @@
                                     <td>${task.startDate}</td>
                                     <td>${task.endDate}</td>
                                     <td>
-                                        <a class="btn btn-warning" href="#' + ${each.id}}"
-                                           onclick="return confirm('Are you sure that you want to mark as ' +
-                                            'complete task?')">Mark as complete</a>
+                                        <a class="btn btn-warning" data-toggle="modal"
+                                           data-target="#editTask" href="#' + ${task.id}}"
+                                           >Mark as complete</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -176,6 +174,26 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit task as complete-->
+<div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are you sure?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Task status would be changed as completed.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="developer.jsp" id="btnCompleted">Change</a>
             </div>
         </div>
     </div>
