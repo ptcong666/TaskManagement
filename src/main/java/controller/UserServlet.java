@@ -83,7 +83,7 @@ public class UserServlet extends HttpServlet {
 	}
 
 	private void insertUser(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
@@ -92,6 +92,7 @@ public class UserServlet extends HttpServlet {
 		User newUser = new User(name, email, password, address, phone);
 		newUser.setRolesByString(request.getParameter("roles"));
 		UserRepository.saveUser(newUser);
+        request.getRequestDispatcher("/user").forward(request, response);
 //		response.sendRedirect("list");
 	}
 
