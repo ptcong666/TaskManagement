@@ -105,7 +105,7 @@ public class User {
 		this.phone = phone;
 	}
 
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
-	}
+//	public void setTeamId(int teamId) {
+//		this.teamId = teamId;
+//	}
 }
