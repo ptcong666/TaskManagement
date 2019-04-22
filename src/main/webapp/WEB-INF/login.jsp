@@ -13,14 +13,10 @@
   <title>SB Admin - Login</title>
 
   <!-- Custom fonts for this template-->
-  <%--<link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">--%>
   <link rel="stylesheet" href="<c:url value="../resources/vendor/fontawesome-free/css/all.min.css"/>">
-  <%--<jsp:include page="resources/vendor/fontawesome-free/css/all.min.css"/>--%>
 
   <!-- Custom styles for this template-->
-  <%--<link href="resources/css/sb-admin.css" rel="stylesheet">--%>
   <link rel="stylesheet" href="<c:url value="../resources/css/sb-admin.css"/>">
-  <%--<jsp:include page="resources/css/sb-admin.css"/>--%>
 
   <!-- Bootstrap core JavaScript-->
   <script src="../resources/vendor/jquery/jquery.min.js"></script>
