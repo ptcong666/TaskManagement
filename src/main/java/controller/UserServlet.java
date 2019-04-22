@@ -33,9 +33,6 @@ public class UserServlet extends HttpServlet {
 		String action = request.getRequestURI();
 		try {
 			switch (action) {
-				case "/user/new":
-					showNewForm(request, response);
-					break;
 				case "/user/insert":
 					insertUser(request, response);
 					break;
@@ -47,6 +44,15 @@ public class UserServlet extends HttpServlet {
 					break;
 				case "/user/update":
 					updateUser(request, response);
+					break;
+				case "/user/admin":
+					listUser(request, response);
+					break;
+				case "/user/manager":
+					listUser(request, response);
+					break;
+				case "/user/developer":
+					listTask(request, response);
 					break;
 				default:
 					listUser(request, response);
@@ -63,12 +69,6 @@ public class UserServlet extends HttpServlet {
 		request.setAttribute("listUser", listUser);
 		request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
-//		dispatcher.forward(request, response);
-	}
-
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
 //		dispatcher.forward(request, response);
 	}
 
@@ -113,6 +113,13 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		UserRepository.deleteUser(id);
+//		response.sendRedirect("list");
+	}
+
+	private void listTask(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		UserRepository.getTasks(id);
 //		response.sendRedirect("list");
 	}
 }

@@ -34,9 +34,6 @@ public class TaskServlet extends HttpServlet {
         String action = request.getRequestURI();
         try {
             switch (action) {
-                case "/task/new":
-                    showNewForm(request, response);
-                    break;
                 case "/task/insert":
                     insertTask(request, response);
                     break;
@@ -70,12 +67,6 @@ public class TaskServlet extends HttpServlet {
 //		dispatcher.forward(request, response);
     }
 
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("task-form.jsp");
-//		dispatcher.forward(request, response);
-    }
-
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -93,10 +84,9 @@ public class TaskServlet extends HttpServlet {
 
         LocalDateTime startDate = LocalDateTime.parse(request.getParameter("startDate"));
         LocalDateTime endDate = LocalDateTime.parse(request.getParameter("endDate"));
-
         String status = request.getParameter("status");
-
-        Task newTask = new Task(name, priority,startDate,endDate,status);
+        int devId = Integer.parseInt(request.getParameter("dev_id"));
+        Task newTask = new Task(name, priority,startDate,endDate,status, devId);
         TaskRepository.saveTask(newTask);
 //		response.sendRedirect("list");
     }
@@ -111,8 +101,8 @@ public class TaskServlet extends HttpServlet {
         LocalDateTime endDate = LocalDateTime.parse(request.getParameter("endDate"));
 
         String status = request.getParameter("status");
-
-        Task newTask = new Task(id,name, priority,startDate,endDate,status);
+        int devId = Integer.parseInt(request.getParameter("dev_id"));
+        Task newTask = new Task(id,name, priority,startDate,endDate,status, devId);
         TaskRepository.updateTask(newTask);
 
 //		response.sendRedirect("list");

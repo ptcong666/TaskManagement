@@ -31,7 +31,8 @@ public class User {
 	@Column(name="roles")
 	protected String[] roles;
 
-
+	@Column(name="team_id")
+	protected int teamId;
 
 
 	public User() {
@@ -84,5 +85,27 @@ public class User {
 		return res;
 	}
 
-	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
+	}
 }
