@@ -135,7 +135,7 @@ public class TaskRepository {
         List<Task> listOfTask = null;
         try {
             session = HibernateUtil.getCurrentSession();
-            listOfTask = session.createQuery("from model.Task where ").getResultList();
+            listOfTask = session.createQuery("from model.Task where developer="+id).getResultList();
 
         } catch (Exception e) {
             e.printStackTrace();

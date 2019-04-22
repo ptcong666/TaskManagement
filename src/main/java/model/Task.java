@@ -30,7 +30,7 @@ public class Task {
         protected String status;
 
     @Column(name="developers")
-    private String[] developerIds;
+    private String developerIds;
 
 
     public Task() {

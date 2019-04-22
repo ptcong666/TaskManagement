@@ -154,6 +154,9 @@ public class UserRepository {
     }
 
     public Task[] getTasks(String devId) {
-        return TaskRepository.getTasksByUserId(devId);
+
+        return TaskRepository.getTasksByUserId(devId
+
+        );
     }
 }
