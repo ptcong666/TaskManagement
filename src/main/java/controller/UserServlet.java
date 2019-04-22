@@ -33,9 +33,6 @@ public class UserServlet extends HttpServlet {
 		String action = request.getRequestURI();
 		try {
 			switch (action) {
-				case "/user/new":
-					showNewForm(request, response);
-					break;
 				case "/user/insert":
 					insertUser(request, response);
 					break;
@@ -47,6 +44,15 @@ public class UserServlet extends HttpServlet {
 					break;
 				case "/user/update":
 					updateUser(request, response);
+					break;
+				case "/user/admin":
+					listUser(request, response);
+					break;
+				case "/user/manager":
+					listUser(request, response);
+					break;
+				case "/user/developer":
+					listTask(request, response);
 					break;
 				default:
 					listUser(request, response);
@@ -66,12 +72,6 @@ public class UserServlet extends HttpServlet {
 //		dispatcher.forward(request, response);
 	}
 
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-//		dispatcher.forward(request, response);
-	}
-
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -83,12 +83,16 @@ public class UserServlet extends HttpServlet {
 	}
 
 	private void insertUser(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
-		User newUser = new User(email, password);
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		User newUser = new User(name, email, password, address, phone);
 		newUser.setRolesByString(request.getParameter("roles"));
 		UserRepository.saveUser(newUser);
+        request.getRequestDispatcher("/user").forward(request, response);
 //		response.sendRedirect("list");
 	}
 
@@ -97,9 +101,12 @@ public class UserServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-
-//		User user = new User(id, name, email);
-//		UserRepository.updateUser(user);
+		String tasks = request.getParameter("task_id");
+		String team = request.getParameter("team_id");
+		User user = new User(id, name, email);
+//		user.setTaskId(tasks);
+//		user.setTeamId(team);
+		UserRepository.updateUser(user);
 //		response.sendRedirect("list");
 	}
 
@@ -107,6 +114,13 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		UserRepository.deleteUser(id);
+//		response.sendRedirect("list");
+	}
+
+	private void listTask(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		UserRepository.getTasks(id);
 //		response.sendRedirect("list");
 	}
 }

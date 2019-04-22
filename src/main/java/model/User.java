@@ -1,11 +1,6 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +16,7 @@ public class User {
 	@Column(name="name")
 	protected String name;
 
-	@Column(name="email")
+	@Column(name="email", unique = true)
 	protected String email;
 
 	@Column(name="password")
@@ -36,13 +31,26 @@ public class User {
 	@Column(name="roles")
 	protected String[] roles;
 
+	@Column(name="team_id")
+	protected int teamId;
+
+
 	public User() {
 
 	}
 
-	public User(String email, String password) {
-		this.password = password;
+	public User (int id, String email, String password){
+		this.id=id;
+		this.password=password;
+		this.email=email;
+	}
+
+	public User(String name, String email, String password, String address, String phone) {
+		this.name = name;
 		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.phone = phone;
 	}
 
 	public void setRolesByString(String roles) {
@@ -75,5 +83,29 @@ public class User {
 			res.add(role);
 		}
 		return res;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
 	}
 }
