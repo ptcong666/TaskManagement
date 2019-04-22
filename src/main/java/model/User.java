@@ -31,10 +31,18 @@ public class User {
 	@Column(name="roles")
 	protected String[] roles;
 
+
+
+
 	public User() {
 
 	}
 
+	public User (int id, String email, String password){
+		this.id=id;
+		this.password=password;
+		this.email=email;
+	}
 	public User(String email, String password) {
 		this.password = password;
 		this.email = email;
@@ -48,6 +56,22 @@ public class User {
 		return email;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
 	public List<String> getRoles() {
 		List<String> res = new ArrayList<>();
 		for (String role : roles) {
@@ -55,4 +79,6 @@ public class User {
 		}
 		return res;
 	}
+
+	
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+
 import util.SecurityConfig;
 
 @WebServlet("/login")
@@ -25,7 +27,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.getRequestDispatcher("/WEB-INF/views/loginView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class LoginServlet extends HttpServlet {
             String errorMessage = "Invalid userName or Password";
             request.setAttribute("errorMessage", errorMessage);
 
-            request.getRequestDispatcher("/WEB-INF/views/loginView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             return;
         }
 
@@ -58,7 +60,20 @@ public class LoginServlet extends HttpServlet {
         } else {
             // Default after successful login
             // redirect to /userInfo page
-            response.sendRedirect(request.getContextPath() + "/userInfo");
+            String role = userAccount.getRoles().get(0);
+            switch (role) {
+                case SecurityConfig.ROLE_ADMIN:
+                    response.sendRedirect(request.getContextPath() + "/user");
+                    break;
+                case SecurityConfig.ROLE_MANAGER:
+                    response.sendRedirect(request.getContextPath() + "/user");
+                    break;
+                case SecurityConfig.ROLE_DEVELOPER:
+                    response.sendRedirect(request.getContextPath() + "/user");
+                    break;
+            }
+
+//            response.sendRedirect(request.getContextPath() + "/userInfo");
         }
 
     }
