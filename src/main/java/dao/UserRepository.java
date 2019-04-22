@@ -152,10 +152,10 @@ public class UserRepository {
         return user;
     }
 
-    public Task[] getTasks(String devId) {
-
-        return TaskRepository.getTasksByUserId(devId
-
-        );
-    }
+//    public Task[] getTasks(String devId) {
+//
+//        return TaskRepository.getTasksByUserId(devId
+//
+//        );
+//    }
 }
