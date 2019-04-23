@@ -295,7 +295,7 @@
                                 </select>
                             </div>
                             <div class="modal-buttons">
-                                <input class="btn btn-primary" type="submit" value="Add"/>
+                                <input class="btn btn-primary" type="submit" value="Edit"/>
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                             </div>
                         </form>
