@@ -12,17 +12,18 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+            throws IOException, ServletException {
         request.getSession().invalidate();
 
         // Redrect to Home Page.
-        response.sendRedirect(request.getContextPath() + "/");
+//        response.sendRedirect(request.getContextPath() + "/");
+//        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+            throws IOException, ServletException {
         this.doGet(request, response);
     }
 
