@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/user");
                     break;
                 case SecurityConfig.ROLE_DEVELOPER:
-                    response.sendRedirect(request.getContextPath() + "/task?id=" + userAccount.getId());
+                    response.sendRedirect(request.getContextPath() + "/task/developer?id=" + userAccount.getId());
                     break;
             }
 

@@ -137,8 +137,7 @@
                                     <td>${each.team.name}</td>
                                     <td>
                                         <a class="btn btn-warning" href="#' + ${each.id}}"
-                                           onclick="return confirm('Are you sure that ' +
-                                            'you want to change team for a developer?')">Change Team</a>
+                                           data-toggle="modal" data-target="#changeTeam"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -187,6 +186,54 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit task-->
+<div class="modal fade" id="changeTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change team for developer</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-body">
+                        <form method="POST" action="${pageContext.request.contextPath}/manager/edit">
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="editDeveloperId" name="taskName" class="form-control"
+                                           autofocus="autofocus" value="${developer.id}" readonly>
+                                    <label for="editDeveloperId">Developer id</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="editDeveloperName" name="developerName" class="form-control"
+                                           readonly autofocus="autofocus" value="${developer.name}">
+                                    <label for="editDeveloperName">Developer name</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="editTeamName" name="inputDevId" class="form-control"
+                                           required="required">
+                                    <label for="editTeamName">Team name</label>
+                                </div>
+                            </div>
+                            <input class="btn btn-primary btn-block" type="submit" value="Edit & Save"/>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
