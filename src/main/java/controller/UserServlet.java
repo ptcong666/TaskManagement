@@ -73,8 +73,11 @@ public class UserServlet extends HttpServlet {
 
 	private void listDeveloper(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<User> listUser = UserRepository.getAllUser();
-		List<User> developerUser = UserRepository.filterDeveloper(listUser);
+		List<User> listUser=null,developerUser=null;
+		listUser = UserRepository.getAllUser();
+		System.out.println(listUser);
+		developerUser = UserRepository.filterDeveloper(listUser);
+		System.out.println(developerUser);
 		request.setAttribute("listUser", developerUser);
 		System.out.println(developerUser.size());
 		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
