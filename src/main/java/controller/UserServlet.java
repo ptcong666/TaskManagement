@@ -93,7 +93,12 @@ public class UserServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
-		User newUser = new User(name, email, password, address, phone);
+		User newUser = new User();
+		newUser.setEmail(email);
+		newUser.setPassword(password);
+		newUser.setName(name);
+		newUser.setPhone(phone);
+		newUser.setAddress(address);
 		newUser.setRolesByString(request.getParameter("roles"));
 		UserRepository.saveUser(newUser);
         request.getRequestDispatcher("/user").forward(request, response);
@@ -105,9 +110,11 @@ public class UserServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-		String tasks = request.getParameter("task_id");
-		int team = Integer.parseInt(request.getParameter("team_id"));
-		User user = new User(id, name, email);
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String password = request.getParameter("password");
+		User user = new User(id, name, email, password, address, phone);
+		user.setRolesByString(request.getParameter("roles"));
 		//user.setTaskId(tasks);
 //		user.setTeamId(team);
 		UserRepository.updateUser(user);

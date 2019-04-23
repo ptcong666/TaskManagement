@@ -29,7 +29,7 @@ public class User {
 	protected String phone;
 
 	@Column(name="roles")
-	protected String[] roles;
+	protected String[] roles = new String[3];
 
 	@Column(name="team_id")
 	protected int teamId;
@@ -45,7 +45,7 @@ public class User {
 		this.email=email;
 	}
 
-	public User(String name, String email, String password, String address, String phone) {
+	public User(int id, String name, String email, String password, String address, String phone) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
