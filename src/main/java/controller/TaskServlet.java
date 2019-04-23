@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import dao.TaskRepository;
 import dao.UserRepository;
 import model.Task;
@@ -126,6 +127,10 @@ public class TaskServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Task existingTask = TaskRepository.getTask(id);
+        String json = new Gson().toJson(existingTask);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-form.jsp");
 //		request.setAttribute("task", existingTask);
 //		dispatcher.forward(request, response);
@@ -150,7 +155,7 @@ public class TaskServlet extends HttpServlet {
     }
 
     private void updateTask(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ServletException{
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String priority = request.getParameter("priority");
@@ -159,11 +164,12 @@ public class TaskServlet extends HttpServlet {
         LocalDate endDate = LocalDate.parse(request.getParameter("endDate"));
 
         String status = request.getParameter("status");
-        int devId = Integer.parseInt(request.getParameter("dev_id"));
+        int devId = Integer.parseInt(request.getParameter("developerId"));
         Task newTask = new Task(id,name, priority,startDate,endDate,status, devId);
         TaskRepository.updateTask(newTask);
 
 //		response.sendRedirect("list");
+        request.getRequestDispatcher("WEB-INF/tasks.jsp").forward(request, response);
     }
 
     private void deleteTask(HttpServletRequest request, HttpServletResponse response)

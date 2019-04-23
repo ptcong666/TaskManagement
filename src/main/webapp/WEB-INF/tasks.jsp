@@ -332,15 +332,17 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
+
             <div class="modal-body">
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-body">
-                        <form method="POST" action="${pageContext.request.contextPath}/task/insert">
+                        <form method="POST" action="${pageContext.request.contextPath}/task/update">
+                            <input type="hidden" id="editId" name="id">
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input type="text" id="taskEditName" name="name" class="form-control"
                                            required="required"
-                                           autofocus="autofocus" value="${task.name}">
+                                           autofocus="autofocus">
                                     <label for="taskEditName">Task name</label>
                                 </div>
                             </div>
@@ -357,30 +359,28 @@
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input type="date" id="editStartDate" name="startDate" class="form-control"
-                                           required="required" autofocus="autofocus" value="${task.startDate}">
+                                           required="required" autofocus="autofocus">
                                     <label for="editStartDate">Start date</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input type="date" id="editEndDate" name="endDate" class="form-control"
-                                           required="required" autofocus="autofocus" value="${task.startDate}">
+                                           required="required" autofocus="autofocus">
                                     <label for="editEndDate">End date</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="editDeveloperId" name="dev_id" class="form-control"
-                                           required="required" pattern="\d+" title="only number"
-                                           value="${task.dev_id}">
+                                    <input type="text" id="editDeveloperId" name="developerId" class="form-control"
+                                           required="required" pattern="\d+" title="only number">
                                     <label for="editDeveloperId">Developer id</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input type="text" id="editStatus" name="status" class="form-control"
-                                           required="required"
-                                           value="${task.status}">
+                                           required="required">
                                     <label for="editStatus">Status</label>
                                 </div>
                             </div>
@@ -444,7 +444,7 @@
                     id: id,
                 }).done(function (data) {
                 $("#task_" + id).remove();
-                $("#deleteModal").toggle();
+                $("#deleteModal").modal("hide");
             }).fail(function (err) {
                 alert("error: " + err);
             });
@@ -456,13 +456,22 @@
             {
                 id: id,
             }).done(function (data) {
-            $("#task_" + id).remove();
-            $("#deleteModal").toggle();
+
+            $("#editId").val(data.id);
+            $("#taskEditName").val(data.name);
+            $("#editPriority").val(data.priority);
+            $("#editStartDate").val(data.startDate);
+            $("#editEndDate").val(data.endDate);
+            $("#editDeveloperId").val(data.developerId);
+            $("#editStatus").val(data.status);
+
         }).fail(function (err) {
             alert("error: " + err);
         });
     }
 </script>
 </body>
+
+
 
 </html>
