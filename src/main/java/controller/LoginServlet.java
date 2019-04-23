@@ -26,18 +26,15 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        redirect(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User userAccount = UserRepository.login(email, password);
-
         if (userAccount == null) {
             String errorMessage = "Invalid userName or Password";
             request.setAttribute("errorMessage", errorMessage);
@@ -45,37 +42,40 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             return;
         }
-
         AppUtils.storeLoginedUser(request.getSession(), userAccount);
+        redirect(request, response);
+    }
 
-        //
-        int redirectId = -1;
+    private void redirect(HttpServletRequest request, HttpServletResponse response) {
         try {
-            redirectId = Integer.parseInt(request.getParameter("redirectId"));
-        } catch (Exception e) {
-        }
-        String requestUri = AppUtils.getRedirectAfterLoginUrl(request.getSession(), redirectId);
-        if (requestUri != null) {
-            response.sendRedirect(requestUri);
-        } else {
-            // Default after successful login
-            // redirect to /userInfo page
-            String role = userAccount.getRoles().get(0);
-            switch (role) {
-                case SecurityConfig.ROLE_ADMIN:
-                    response.sendRedirect(request.getContextPath() + "/user");
-                    break;
-                case SecurityConfig.ROLE_MANAGER:
-                    response.sendRedirect(request.getContextPath() + "/user");
-                    break;
-                case SecurityConfig.ROLE_DEVELOPER:
-                    response.sendRedirect(request.getContextPath() + "/task/developer?id=" + userAccount.getId());
-                    break;
+            User userAccount = AppUtils.getLoginedUser(request.getSession());
+            if (userAccount == null) {
+                request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                return;
             }
-
-//            response.sendRedirect(request.getContextPath() + "/userInfo");
+            int redirectId = request.getParameter("redirectId") == null ? -1 : Integer.parseInt(request.getParameter("redirectId"));
+            String requestUri = AppUtils.getRedirectAfterLoginUrl(request.getSession(), redirectId);
+            if (requestUri != null) {
+                response.sendRedirect(requestUri);
+            } else {
+                // Default after successful login
+                // redirect to /userInfo page
+                String role = userAccount.getRoles().get(0);
+                switch (role) {
+                    case SecurityConfig.ROLE_ADMIN:
+                        response.sendRedirect(request.getContextPath() + "/user");
+                        break;
+                    case SecurityConfig.ROLE_MANAGER:
+                        response.sendRedirect(request.getContextPath() + "/user");
+                        break;
+                    case SecurityConfig.ROLE_DEVELOPER:
+                        response.sendRedirect(request.getContextPath() + "/task/developer");
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
-
 }

@@ -39,31 +39,6 @@ public class TaskRepository {
         }
     }
 
-    /**
-     * Update Task
-     * @paramtask
-     */
-
-    public String getTeamName(int id){
-        String team_name= null;
-        try {
-            session = HibernateUtil.getCurrentSession();
-
-            List<String> name = null;
-
-            List<Integer> teams= session.createQuery("team_id from model.User where id="+id).getResultList();
-            for(Integer t : teams){
-                name = session.createQuery("name from model.Team where id="+t).getResultList();
-            }
-             team_name =name.get(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            HibernateUtil.closeSession(session);
-        }
-        return team_name;
-    }
     public void updateTask(Task task) {
         try {
             session = HibernateUtil.getCurrentSession();
@@ -210,16 +185,10 @@ public class TaskRepository {
         return listOfTask;
     }
 
-    public List<String> getTeamName(List<Task> tasks) {
-        List<String> res = new ArrayList<>();
-        UserRepository userRepository = new UserRepository();
+    public String getTeamName(int teamId) {
         TeamRepository teamRepository = new TeamRepository();
-        for (Task task : tasks) {
-            User user = userRepository.getUser(task.getDeveloperId());
-            Team team = teamRepository.getTeam(user.getTeamId());
-            res.add(team.getName());
-        }
-        return res;
+        Team team = teamRepository.getTeam(teamId);
+        return team.getName();
     }
 }
 

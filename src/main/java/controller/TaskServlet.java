@@ -15,14 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 import dao.TaskRepository;
 import dao.UserRepository;
 import model.Task;
+import model.User;
+import util.AppUtils;
 
 @WebServlet("/task/*")
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;
+    private UserRepository userRepository;
 
     public void init() {
         TaskRepository = new TaskRepository();
+        userRepository = new UserRepository();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -82,13 +86,14 @@ public class TaskServlet extends HttpServlet {
     }
     private void listUserTasks(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        List<Task> listTask = TaskRepository.getTasks(id);
+        User user = AppUtils.getLoginedUser(request.getSession());
+        List<Task> listTask = TaskRepository.getTasks(user.getId());
         request.setAttribute("listTask", listTask);
-        List<String> listName = TaskRepository.getTeamName(listTask);
-        request.setAttribute("listName", listName);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
-//		dispatcher.forward(request, response);
+        String teamName = TaskRepository.getTeamName(user.getTeamId());
+        request.setAttribute("teamName", teamName);
+        request.setAttribute("user", user);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/developer.jsp");
+		dispatcher.forward(request, response);
     }
 
     private void listUserTasksByPriority(HttpServletRequest request, HttpServletResponse response)
