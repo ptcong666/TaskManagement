@@ -33,7 +33,7 @@ public class SecurityConfig {
         urlPatterns2.add("/team");
         urlPatterns2.add("/developers");
         urlPatterns2.add("/developers/*");
-        urlPatterns3.add("/user/manager");
+        urlPatterns2.add("/user/manager");
 
         mapConfig.put(ROLE_MANAGER, urlPatterns2);
 
