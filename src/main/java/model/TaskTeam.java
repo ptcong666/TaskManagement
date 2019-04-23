@@ -14,10 +14,8 @@ public class TaskTeam extends Task{
     }
     public TaskTeam(int id,String name, String priority,LocalDateTime startDate, LocalDateTime endDate, String status, int devId, String teamName) {
         super(id, name, priority, startDate, endDate, status, devId);
-
         this.teamName = teamName;
     }
-
 
     public String getTeamName() { return teamName; }
 

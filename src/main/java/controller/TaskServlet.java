@@ -87,8 +87,9 @@ public class TaskServlet extends HttpServlet {
         request.setAttribute("listTask", listTask);
         List<String> listName = TaskRepository.getTeamName(listTask);
         request.setAttribute("listName", listName);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
-//		dispatcher.forward(request, response);
+
+		request.getRequestDispatcher("developer.jsp").forward(request, response);
+
     }
 
     private void listUserTasksByPriority(HttpServletRequest request, HttpServletResponse response)
