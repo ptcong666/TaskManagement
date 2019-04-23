@@ -73,6 +73,18 @@ public class UserServlet extends HttpServlet {
 //		dispatcher.forward(request, response);
 	}
 
+	private void listDeveloper(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<User> listUser = UserRepository.getAllUser();
+		List<User> developerUser = UserRepository.filterDeveloper(listUser);
+		request.setAttribute("listUser", developerUser);
+		System.out.println(developerUser.size());
+		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+//		dispatcher.forward(request, response);
+	}
+
+
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -135,17 +147,6 @@ public class UserServlet extends HttpServlet {
 		UserRepository.getTasks(id);
 //		response.sendRedirect("list");
 	}
-	private void listDeveloper(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException,ServletException{
-		List<User> listUser = UserRepository.getAllUser();
-		List<User> developerUser = UserRepository.filterDeveloper(listUser);
-		request.setAttribute("listUser", developerUser);
-		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
-//		dispatcher.forward(request, response);
-	}
-
-
 
 
 }
