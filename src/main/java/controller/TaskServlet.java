@@ -72,21 +72,17 @@ public class TaskServlet extends HttpServlet {
     private void listTask(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         List<Task> listTask = TaskRepository.getAllTask();
-
-        for(Task t : listTask){
-            t.print();
-        }
+        List<Integer> teamId = TaskRepository.getTeamIdsByTask(listTask);
+        request.setAttribute("teamId", teamId);
         request.setAttribute("listTask", listTask);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
-//		dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks.jsp");
+		dispatcher.forward(request, response);
     }
     private void listUserTasks(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         User user = AppUtils.getLoginedUser(request.getSession());
         List<Task> listTask = TaskRepository.getTasks(user.getId());
         request.setAttribute("listTask", listTask);
-        int teamId = user.getTeamId();
-        request.setAttribute("teamId", teamId);
         request.setAttribute("user", user);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/developer.jsp");
 		dispatcher.forward(request, response);
