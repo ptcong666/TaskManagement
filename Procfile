@@ -1,1 +1,1 @@
-web: java -jar target/dependency/webapp-runner.jar target/TaskManagement.war
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/dependency/webapp-runner.jar target/TaskManagement.war
