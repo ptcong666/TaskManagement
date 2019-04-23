@@ -23,11 +23,11 @@ import util.AppUtils;
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;
-    private UserRepository userRepository;
+    private UserRepository UserRepository;
 
     public void init() {
         TaskRepository = new TaskRepository();
-        userRepository = new UserRepository();
+        UserRepository = new UserRepository();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -78,7 +78,11 @@ public class TaskServlet extends HttpServlet {
         List<Integer> teamId = TaskRepository.getTeamIdsByTask(listTask);
         request.setAttribute("teamId", teamId);
         request.setAttribute("listTask", listTask);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks.jsp");
+        List<User> listUser = UserRepository.getAllUser();
+        List<User> developerUser = UserRepository.filterDeveloper(listUser);
+        request.setAttribute("listDevelopers", developerUser);
+        System.out.println(developerUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks.jsp");
 		dispatcher.forward(request, response);
     }
     private void listUserTasks(HttpServletRequest request, HttpServletResponse response)
@@ -175,7 +179,7 @@ public class TaskServlet extends HttpServlet {
     }
 
     private void deleteTask(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         TaskRepository.deleteTask(id);
 //		response.sendRedirect("list");

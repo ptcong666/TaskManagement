@@ -26,6 +26,7 @@
 
     <!-- Page level plugin CSS-->
     <link href="../resources/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <script src="../resources/vendor/jquery/jquery.min.js"></script>
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin.css" rel="stylesheet">
@@ -36,7 +37,8 @@
         .completed {
             background-color: #1dd1a1;
         }
-        .hidebtn{
+
+        .hidebtn {
             visibility: hidden;
         }
     </style>
@@ -177,7 +179,8 @@
                             </tfoot>
                             <tbody>
                             <c:forEach var="each" items="${listTask}" varStatus="status">
-                                <tr <c:if test='${each.status=="completed"}'> class="completed"</c:if>>
+                                <tr id="task_${each.id}" <c:if
+                                        test='${each.status=="completed"}'> class="completed"</c:if>>
                                     <td>${each.name}</td>
                                     <td>${each.priority}</td>
                                     <td>${each.startDate}</td>
@@ -188,10 +191,10 @@
                                     <td>
                                         <a class="btn btn-warning" href="#' + ${each.id}}"
                                            data-toggle="modal" data-target="#editTask"
-                                        onclick="editCurrentTask(${each.id})"><i class="fas fa-edit"></i></a>
+                                           onclick="editCurrentTask(${each.id})"><i class="fas fa-edit"></i></a>
                                         <a class="btn btn-danger" href="#'+${each.id}}"
                                            data-toggle="modal" data-target="#deleteModal"
-                                        onclick="deleteCurrentTask(${each.id})"><i class="fas fa-trash"></i></a>
+                                           onclick="deleteCurrentTask(${each.id})"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -278,15 +281,17 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="taskStatus" name="status" class="form-control"
-                                           required="required"
-                                           autofocus="autofocus">
-                                    <label for="taskStatus">Status</label>
+                                    <p class="titlePragraph">Choose status of task:</p>
+                                    <select id="taskStatus" type="text" name="status"
+                                            class="form-control" autofocus="autofocus">
+                                        <option value="inprogress">In progress</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
                                 </div>
                             </div>
-
 
                             <div class="form-group">
                                 <div class="form-label-group">
@@ -304,9 +309,15 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="inputDeveloperId" name="dev_id" class="form-control"
-                                           required="required" pattern="\d+" title="only number">
-                                    <label for="inputDeveloperId">Developer id</label>
+                                    <%--<input type="text" id="inputDeveloperId" name="dev_id" class="form-control"--%>
+                                    <%--required="required" pattern="\d+" title="only number">--%>
+                                    <%--<label for="inputDeveloperId">Developer id</label>--%>
+                                    <p class="titlePragraph">Choose developer id:</p>
+                                    <select type="text" name="dev_id" id="inputDeveloperId">
+                                        <c:forEach var="dev" items="${listDevelopers}">
+                                            <option>${dev.id}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                             </div>
                             <input class="btn btn-primary btn-block" type="submit" value="Add & Save"/>
@@ -317,8 +328,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <!-- Edit task-->
@@ -370,18 +379,36 @@
                                     <label for="editEndDate">End date</label>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="editDeveloperId" name="developerId" class="form-control"
-                                           required="required" pattern="\d+" title="only number">
-                                    <label for="editDeveloperId">Developer id</label>
+                                    <%--<input type="text" id="inputDeveloperId" name="dev_id" class="form-control"--%>
+                                    <%--required="required" pattern="\d+" title="only number">--%>
+                                    <%--<label for="inputDeveloperId">Developer id</label>--%>
+                                    <p class="titlePragraph">Choose developer id:</p>
+                                    <select type="text" name="developerId" id="editDeveloperId">
+                                        <c:forEach var="dev" items="${listDevelopers}">
+                                            <option>${dev.id}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                             </div>
+                            <%--<div class="form-group">--%>
+                                <%--<div class="form-label-group">--%>
+                                    <%--<input type="text" id="editDeveloperId" name="developerId" class="form-control"--%>
+                                           <%--required="required" pattern="\d+" title="only number">--%>
+                                    <%--<label for="editDeveloperId">Developer id</label>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="editStatus" name="status" class="form-control"
-                                           required="required">
-                                    <label for="editStatus">Status</label>
+                                    <p class="titlePragraph">Choose status of task:</p>
+                                    <select id="editStatus" type="text" name="status"
+                                            class="form-control" autofocus="autofocus">
+                                        <option value="inprogress">In progress</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
                                 </div>
                             </div>
                             <input class="btn btn-primary btn-block" type="submit" value="Edit & Save"/>
@@ -395,7 +422,8 @@
 
 
 <!-- Delete task Modal-->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -407,7 +435,7 @@
             <div class="modal-body">Are you sure you want to delete this task?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a id="deleteTaskBtn" class="btn btn-danger" href="tasks.jsp">Delete</a>
+                <a id="deleteTaskBtn" class="btn btn-danger" href="#">Delete</a>
             </div>
         </div>
     </div>
@@ -434,10 +462,11 @@
 <script src="../resources/js/demo/chart-area-demo.js"></script>
 
 <script
-        src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<%--src="https://code.jquery.com/jquery-3.4.0.js"></script>--%>
 
 <script>
     function deleteCurrentTask(id) {
+        console.log(id);
         $("#deleteTaskBtn").click(function () {
             $.post("/task/delete",
                 {
@@ -457,11 +486,16 @@
                 id: id,
             }).done(function (data) {
 
+            let sDate = data.startDate;
+            let eDate = data.endDate;
+            let sFilledDate = new Date(sDate.year, sDate.month - 1, sDate.day, 0, 0, 0);
+            let eFilledDate = new Date(eDate.year, eDate.month - 1, eDate.day, 0, 0, 0);
+
             $("#editId").val(data.id);
             $("#taskEditName").val(data.name);
             $("#editPriority").val(data.priority);
-            $("#editStartDate").val(data.startDate);
-            $("#editEndDate").val(data.endDate);
+            $("#editStartDate").val(sFilledDate);
+            $("#editEndDate").val(eFilledDate);
             $("#editDeveloperId").val(data.developerId);
             $("#editStatus").val(data.status);
 
@@ -471,7 +505,6 @@
     }
 </script>
 </body>
-
 
 
 </html>

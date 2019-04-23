@@ -81,7 +81,7 @@
                 <span style="color: #f1f2f6;">Developer table</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="tasks">
+            <a class="nav-link" href="task">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Task table</span></a>
         </li>
