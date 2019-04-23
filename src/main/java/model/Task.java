@@ -1,7 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="task")
@@ -21,10 +21,10 @@ public class Task {
         protected String priority;
 
     @Column(name="startDate")
-        protected LocalDateTime startDate;
+        protected LocalDate startDate;
 
     @Column(name="endDate")
-        protected LocalDateTime endDate;
+        protected LocalDate endDate;
 
     @Column(name="status")
         protected String status;
@@ -36,7 +36,7 @@ public class Task {
     public Task() {
         }
 
-        public Task(String name, String priority,LocalDateTime startDate, LocalDateTime endDate, String status, int devId) {
+        public Task(String name, String priority,LocalDate startDate, LocalDate endDate, String status, int devId) {
             super();
             this.name = name;
             this.priority=priority;
@@ -45,7 +45,7 @@ public class Task {
             this.status=status;
             this.developerId = devId;
         }
-        public Task(int id,String name, String priority,LocalDateTime startDate, LocalDateTime endDate, String status, int devId) {
+        public Task(int id,String name, String priority,LocalDate startDate, LocalDate endDate, String status, int devId) {
             super();
             this.id=id;
             this.name = name;
@@ -68,9 +68,9 @@ public class Task {
 
     public String getPriority() { return priority; }
 
-    public LocalDateTime getStartDate() { return startDate; }
+    public LocalDate getStartDate() { return startDate; }
 
-    public LocalDateTime getEndDate() { return endDate; }
+    public LocalDate getEndDate() { return endDate; }
 
     public String getStatus() { return status; }
 
@@ -78,9 +78,9 @@ public class Task {
 
     public void setPriority(String priority) { this.priority = priority; }
 
-    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
-    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
+    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
 
     public void setStatus(String status) { this.status = status; }
 

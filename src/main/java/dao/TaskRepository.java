@@ -184,8 +184,27 @@ public class TaskRepository {
         }
         return listOfTask;
     }
+    public List<Integer> getTeamIdsByTask(List<Task> tasks){
+        List<Integer> teamIds= null;
+        try {
+            session = HibernateUtil.getCurrentSession();
+            List<User> user;
+            for(Task t: tasks){
 
-    public String getTeamName(int teamId) {
+
+              user = session.createQuery("from model.User where id="+t.getDeveloperId()).getResultList();
+             teamIds.add(user.get(0).getTeamId());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return teamIds;
+    }
+
+    public String getTeamId(int teamId) {
         TeamRepository teamRepository = new TeamRepository();
         Team team = teamRepository.getTeam(teamId);
         return team.getName();
