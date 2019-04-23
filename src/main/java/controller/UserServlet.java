@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import dao.UserRepository;
 import model.User;
+import model.Team;
 
 @WebServlet(urlPatterns = {"/user", "/user/*"})
 public class UserServlet extends HttpServlet {
@@ -76,11 +77,15 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		List<User> listUser=null,developerUser=null;
 		listUser = UserRepository.getAllUser();
+		List<Team> team = null;
 		System.out.println(listUser);
 		if(listUser!=null){
+
 			developerUser = filterDeveloper(listUser);
 			if(developerUser!=null){
 				request.setAttribute("listUser", developerUser);
+				team = UserRepository.getTeamByUser(listUser);
+				request.setAttribute("team", team);
 				System.out.println(developerUser.size());
 			}
 			else {

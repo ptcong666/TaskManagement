@@ -2,6 +2,7 @@ package dao;
 
 import model.Task;
 import model.User;
+import model.Team;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -178,6 +179,28 @@ public class UserRepository {
             HibernateUtil.closeSession(session);
         }
         return listOfTask;
+    }
+
+    public List<Team> getTeamByUser(List<User> users){
+        List<Team> teams = null;
+        Team t;
+        try {
+            session = HibernateUtil.getCurrentSession();
+
+            for(User u:users){
+                t =(Team) session.createQuery("from model.Team where id="+u.getTeamId()).getResultList().get(0);
+             if(t!=null){
+                 teams.add(t);
+             }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            HibernateUtil.closeSession(session);
+        }
+        return teams;
     }
 
 }
