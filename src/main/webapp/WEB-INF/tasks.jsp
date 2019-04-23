@@ -94,13 +94,13 @@
                 <span>Developer table</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="task">
+            <a class="nav-link" href="/task">
                 <i class="fas fa-fw fa-table"></i>
                 <span style="color: #f1f2f6;">Task table</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="team">
+            <a class="nav-link" href="/team">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Team table</span></a>
         </li>
@@ -312,10 +312,10 @@
                                     <%--<input type="text" id="inputDeveloperId" name="dev_id" class="form-control"--%>
                                     <%--required="required" pattern="\d+" title="only number">--%>
                                     <%--<label for="inputDeveloperId">Developer id</label>--%>
-                                    <p class="titlePragraph">Choose developer id:</p>
+                                    <p class="titlePragraph">Choose developer name:</p>
                                     <select type="text" name="dev_id" id="inputDeveloperId">
                                         <c:forEach var="dev" items="${listDevelopers}">
-                                            <option>${dev.id}</option>
+                                            <option>${dev.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -385,10 +385,10 @@
                                     <%--<input type="text" id="inputDeveloperId" name="dev_id" class="form-control"--%>
                                     <%--required="required" pattern="\d+" title="only number">--%>
                                     <%--<label for="inputDeveloperId">Developer id</label>--%>
-                                    <p class="titlePragraph">Choose developer id:</p>
+                                    <p class="titlePragraph">Choose developer name:</p>
                                     <select type="text" name="developerId" id="editDeveloperId">
                                         <c:forEach var="dev" items="${listDevelopers}">
-                                            <option>${dev.id}</option>
+                                            <option>${dev.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
