@@ -94,6 +94,9 @@ public class TaskRepository {
      * @param id
      * @return
      */
+
+
+
     public Task getTask(int id) {
         Task task = null;
         try {
@@ -185,15 +188,15 @@ public class TaskRepository {
         return listOfTask;
     }
     public List<Integer> getTeamIdsByTask(List<Task> tasks){
-        List<Integer> teamIds= null;
+        List<Integer> teamIds= new ArrayList<Integer>();
         try {
             session = HibernateUtil.getCurrentSession();
-            List<User> user;
+            UserRepository userRepository = new UserRepository();
+
             for(Task t: tasks){
 
+               teamIds.add(userRepository.getUser(t.getDeveloperId()).getTeamId());
 
-              user = session.createQuery("from model.User where id="+t.getDeveloperId()).getResultList();
-             teamIds.add(user.get(0).getTeamId());
             }
         } catch (Exception e) {
             e.printStackTrace();
