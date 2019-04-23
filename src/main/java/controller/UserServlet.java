@@ -98,7 +98,6 @@ public class UserServlet extends HttpServlet {
 	public static List<User> filterDeveloper(List<User> Users){
 		List<User> listDevelopers = new ArrayList<>();
 		for(User u: Users){
-			System.out.println(u.getRoles());
 			if(u.getRoles().contains("DEVELOPER")){
 
 				listDevelopers.add(u);
