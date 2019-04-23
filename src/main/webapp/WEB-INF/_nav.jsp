@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <title>Title</title>
@@ -28,7 +29,7 @@
 
     <!-- Navbar Search -->
     <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <span class="navbar-brand">Welcome!</span>
+        <span class="navbar-brand">${loginedUser.name}!</span>
     </div>
 
     <!-- Navbar -->
