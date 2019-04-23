@@ -138,7 +138,7 @@
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <footer style="width:100%;" class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
                     <span>Copyright © WAP April</span>

@@ -106,7 +106,7 @@ public class UserServlet extends HttpServlet {
 	}
 
 	private void updateUser(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
@@ -118,6 +118,7 @@ public class UserServlet extends HttpServlet {
 		//user.setTaskId(tasks);
 //		user.setTeamId(team);
 		UserRepository.updateUser(user);
+		request.getRequestDispatcher("/user").forward(request, response);
 //		response.sendRedirect("list");
 	}
 
