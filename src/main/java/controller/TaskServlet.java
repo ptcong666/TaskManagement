@@ -145,7 +145,8 @@ public class TaskServlet extends HttpServlet {
         LocalDate startDate = LocalDate.parse(request.getParameter("startDate"));
         LocalDate endDate = LocalDate.parse(request.getParameter("endDate"));
         String status = request.getParameter("status");
-        int devId = Integer.parseInt(request.getParameter("developerId "));
+        String dev_id =request.getParameter("dev_id");
+        int devId = Integer.parseInt(dev_id);
 
         Task newTask = new Task(name, priority,startDate,endDate,status, devId);
         TaskRepository.saveTask(newTask);
