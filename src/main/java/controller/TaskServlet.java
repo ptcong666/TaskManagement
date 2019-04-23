@@ -18,7 +18,7 @@ import model.Task;
 import model.User;
 import util.AppUtils;
 
-@WebServlet("/task/*")
+@WebServlet(urlPatterns = {"/task", "/task/*"})
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;

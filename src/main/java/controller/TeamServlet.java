@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.TeamRepository;
 import model.Team;
 
-@WebServlet("/team/*")
+@WebServlet(urlPatterns = {"/team", "/team/*"})
 public class TeamServlet extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
@@ -62,8 +62,8 @@ public class TeamServlet extends HttpServlet{
         List<Team> listTeam = TeamRepository.getAllTeam();
 
         request.setAttribute("listTeam", listTeam);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("team-list.jsp");
-//		dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("team.jsp");
+		dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)

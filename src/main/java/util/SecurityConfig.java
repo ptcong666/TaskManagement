@@ -20,33 +20,27 @@ public class SecurityConfig {
         // Configure For "DEVELOPER" Role.
         List<String> urlPatterns1 = new ArrayList<String>();
 
-        urlPatterns1.add("/tasks");
+        urlPatterns1.add("/task/*");
 
         mapConfig.put(ROLE_DEVELOPER, urlPatterns1);
 
         // Configure For "MANAGER" Role.
         List<String> urlPatterns2 = new ArrayList<String>();
 
-        urlPatterns2.add("/tasks");
-        urlPatterns2.add("/tasks/add");
-        urlPatterns2.add("/tasks/edit");
-        urlPatterns2.add("/tasks/delete");
+        urlPatterns2.add("/task/*");
+        urlPatterns2.add("/task");
+        urlPatterns2.add("/team/*");
         urlPatterns2.add("/team");
-        urlPatterns2.add("/team/add");
-        urlPatterns2.add("/team/edit");
-        urlPatterns2.add("/team/delete");
         urlPatterns2.add("/developers");
-        urlPatterns2.add("/developers/assign");
+        urlPatterns2.add("/developers/*");
 
         mapConfig.put(ROLE_MANAGER, urlPatterns2);
 
         // Configure For "ADMIN" Role.
         List<String> urlPatterns3 = new ArrayList<String>();
 
-        urlPatterns3.add("/users");
-        urlPatterns3.add("/users/add");
-        urlPatterns3.add("/users/edit");
-        urlPatterns3.add("/users/delete");
+        urlPatterns3.add("/user");
+        urlPatterns3.add("/admin");
         urlPatterns3.add("/user/*");
 
 

@@ -17,7 +17,7 @@ public class LogoutServlet extends HttpServlet {
 
         // Redrect to Home Page.
 //        response.sendRedirect(request.getContextPath() + "/");
-//        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/login").forward(request, response);
 
     }
 
