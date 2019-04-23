@@ -101,7 +101,7 @@ public class TaskServlet extends HttpServlet {
             request.setAttribute("listTask", listTask);
 
         }
-        else if(request.getParameter("id")!=null) {
+        else if(request.getParameter(" ")!=null) {
             int id = Integer.parseInt(request.getParameter("id"));
             listTask = TaskRepository.getTasksByTeamId(id);
             request.setAttribute("listTask", listTask);
@@ -146,6 +146,7 @@ public class TaskServlet extends HttpServlet {
         LocalDate endDate = LocalDate.parse(request.getParameter("endDate"));
         String status = request.getParameter("status");
         String dev_id =request.getParameter("dev_id");
+
         int devId = Integer.parseInt(dev_id);
 
         Task newTask = new Task(name, priority,startDate,endDate,status, devId);

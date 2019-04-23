@@ -76,10 +76,19 @@ public class UserServlet extends HttpServlet {
 		List<User> listUser=null,developerUser=null;
 		listUser = UserRepository.getAllUser();
 		System.out.println(listUser);
-		developerUser = UserRepository.filterDeveloper(listUser);
-		System.out.println(developerUser);
-		request.setAttribute("listUser", developerUser);
-		System.out.println(developerUser.size());
+		if(listUser!=null){
+			developerUser = UserRepository.filterDeveloper(listUser);
+			if(developerUser!=null){
+				request.setAttribute("listUser", developerUser);
+				System.out.println(developerUser.size());
+			}
+			else {
+				System.out.println("Developer user is not found");
+			}
+		}
+		else{
+			System.out.println("User not found");
+		}
 		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
 //		dispatcher.forward(request, response);
