@@ -179,13 +179,5 @@ public class UserRepository {
         }
         return listOfTask;
     }
-    public List<User> filterDeveloper(List<User> Users){
-        List<User> listDevelopers = null;
-        for(User u: Users){
-            if(u.getRoles().contains("developer")){
-                listDevelopers.add(u);
-            }
-        }
-        return listDevelopers;
-    }
+
 }

@@ -79,7 +79,7 @@ public class TaskServlet extends HttpServlet {
         request.setAttribute("teamId", teamId);
         request.setAttribute("listTask", listTask);
         List<User> listUser = UserRepository.getAllUser();
-        List<User> developerUser = UserRepository.filterDeveloper(listUser);
+        List<User> developerUser = UserServlet.filterDeveloper(listUser);
         request.setAttribute("listDevelopers", developerUser);
         System.out.println(developerUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks.jsp");

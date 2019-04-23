@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -77,7 +78,7 @@ public class UserServlet extends HttpServlet {
 		listUser = UserRepository.getAllUser();
 		System.out.println(listUser);
 		if(listUser!=null){
-			developerUser = UserRepository.filterDeveloper(listUser);
+			developerUser = filterDeveloper(listUser);
 			if(developerUser!=null){
 				request.setAttribute("listUser", developerUser);
 				System.out.println(developerUser.size());
@@ -94,6 +95,17 @@ public class UserServlet extends HttpServlet {
 //		dispatcher.forward(request, response);
 	}
 
+	public static List<User> filterDeveloper(List<User> Users){
+		List<User> listDevelopers = new ArrayList<>();
+		for(User u: Users){
+			System.out.println(u.getRoles());
+			if(u.getRoles().contains("DEVELOPER")){
+
+				listDevelopers.add(u);
+			}
+		}
+		return listDevelopers;
+	}
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
