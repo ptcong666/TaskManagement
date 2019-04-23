@@ -62,8 +62,8 @@ public class TeamServlet extends HttpServlet{
         List<Team> listTeam = TeamRepository.getAllTeam();
 
         request.setAttribute("listTeam", listTeam);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("team-list.jsp");
-//		dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/team.jsp");
+		dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
