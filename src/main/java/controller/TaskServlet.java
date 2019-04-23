@@ -133,7 +133,7 @@ public class TaskServlet extends HttpServlet {
     }
 
     private void insertTask(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ServletException{
         String name = request.getParameter("name");
         String priority = request.getParameter("priority");
 
@@ -145,7 +145,8 @@ public class TaskServlet extends HttpServlet {
         Task newTask = new Task(name, priority,startDate,endDate,status, devId);
         TaskRepository.saveTask(newTask);
 
-//		response.sendRedirect("list");
+//		response.sendRedirect("WEB-INF/tasks.jsp");
+        request.getRequestDispatcher("WEB-INF/tasks.jsp").forward(request, response);
     }
 
     private void updateTask(HttpServletRequest request, HttpServletResponse response)

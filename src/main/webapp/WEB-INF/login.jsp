@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link rel="stylesheet" href="<c:url value="../resources/css/sb-admin.css"/>">
+  <link rel="stylesheet" href="<c:url value="../resources/css/main.css"/>">
 
   <!-- Bootstrap core JavaScript-->
   <script src="../resources/vendor/jquery/jquery.min.js"></script>
@@ -27,14 +28,22 @@
 
 </head>
 
+<div id="pageloader">
+  <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+</div>
+
 <body class="bg-dark">
+
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form method="POST" action="${pageContext.request.contextPath}/login">
+        <form id="loginForm" method="POST" action="${pageContext.request.contextPath}/login">
           <div class="form-group">
+            <c:if test="${not empty errorMessage}">
+              <div class="err-msg"><c:out value="${errorMessage}"/></div>
+            </c:if>
             <div class="form-label-group">
               <input type="email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" id="inputEmail" name="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
               <label for="inputEmail">Email address</label>
@@ -64,7 +73,13 @@
     </div>
   </div>
 
-
+  <script>
+    $(document).ready(function(){
+      $("#loginForm").on("submit", function(){
+        $("#pageloader").fadeIn();
+      });//submit
+    });//document ready
+  </script>
 
 </body>
 

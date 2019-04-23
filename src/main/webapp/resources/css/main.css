@@ -43,3 +43,29 @@
     line-height: inherit;
     white-space: nowrap;
 }
+
+.err-msg {
+    color: red;
+    font-size:10px;
+    margin-bottom: 5px;
+}
+
+#pageloader
+{
+    background: rgba( 255, 255, 255, 0.8 );
+    display: none;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    top: 0;
+}
+
+#pageloader img
+{
+    left: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+    position: absolute;
+    top: 50%;
+}

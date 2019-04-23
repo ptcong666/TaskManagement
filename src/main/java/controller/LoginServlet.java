@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         User userAccount = UserRepository.login(email, password);
         if (userAccount == null) {
-            String errorMessage = "Invalid userName or Password";
+            String errorMessage = "Invalid user email or password";
             request.setAttribute("errorMessage", errorMessage);
 
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
                         response.sendRedirect(request.getContextPath() + "/user");
                         break;
                     case SecurityConfig.ROLE_MANAGER:
-                        response.sendRedirect(request.getContextPath() + "/task/manager");
+                        response.sendRedirect(request.getContextPath() + "/user/manager");
                         break;
                     case SecurityConfig.ROLE_DEVELOPER:
                         response.sendRedirect(request.getContextPath() + "/task/developer");
