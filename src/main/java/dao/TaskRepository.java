@@ -185,7 +185,7 @@ public class TaskRepository {
         return listOfTask;
     }
 
-    public String getTeamName(int teamId) {
+    public String getTeamId(int teamId) {
         TeamRepository teamRepository = new TeamRepository();
         Team team = teamRepository.getTeam(teamId);
         return team.getName();

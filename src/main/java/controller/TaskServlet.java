@@ -85,8 +85,8 @@ public class TaskServlet extends HttpServlet {
         User user = AppUtils.getLoginedUser(request.getSession());
         List<Task> listTask = TaskRepository.getTasks(user.getId());
         request.setAttribute("listTask", listTask);
-        String teamName = TaskRepository.getTeamName(user.getTeamId());
-        request.setAttribute("teamName", teamName);
+        int teamId = user.getTeamId();
+        request.setAttribute("teamId", teamId);
         request.setAttribute("user", user);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/developer.jsp");
 		dispatcher.forward(request, response);
