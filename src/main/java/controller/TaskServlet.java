@@ -140,7 +140,7 @@ public class TaskServlet extends HttpServlet {
         LocalDate startDate = LocalDate.parse(request.getParameter("startDate"));
         LocalDate endDate = LocalDate.parse(request.getParameter("endDate"));
         String status = request.getParameter("status");
-        int devId = Integer.parseInt(request.getParameter("dev_id"));
+        int devId = Integer.parseInt(request.getParameter("developerId"));
 
         Task newTask = new Task(name, priority,startDate,endDate,status, devId);
         TaskRepository.saveTask(newTask);
@@ -162,6 +162,7 @@ public class TaskServlet extends HttpServlet {
         int devId = Integer.parseInt(request.getParameter("dev_id"));
         Task newTask = new Task(id,name, priority,startDate,endDate,status, devId);
         TaskRepository.updateTask(newTask);
+
 //		response.sendRedirect("list");
     }
 

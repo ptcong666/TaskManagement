@@ -45,7 +45,7 @@ public class UserRepository {
             session = HibernateUtil.getCurrentSession();
             // start a transaction
             transaction = session.beginTransaction();
-            // save the student object
+            // save the user object
             String qstr = "update model.User U set U.name = :name, U.email = :email, U.address = :address, U.phone = :phone, U.password = :password, U.roles = :roles " +
                     "" +
                     "where U.id = :id";
