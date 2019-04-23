@@ -85,6 +85,8 @@ public class TaskServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         List<Task> listTask = TaskRepository.getTasks(id);
         request.setAttribute("listTask", listTask);
+        List<String> listName = TaskRepository.getTeamName(listTask);
+        request.setAttribute("listName", listName);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
 //		dispatcher.forward(request, response);
     }
@@ -94,6 +96,7 @@ public class TaskServlet extends HttpServlet {
         String priority = request.getParameter("priority");
         List<Task> listTask = TaskRepository.getTasksByPriority(priority);
         request.setAttribute("listTask", listTask);
+
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
 //		dispatcher.forward(request, response);
     }

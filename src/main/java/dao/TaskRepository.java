@@ -2,6 +2,9 @@ package dao;
 
 import model.Task;
 import model.User;
+import model.Team;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -207,5 +210,16 @@ public class TaskRepository {
         return listOfTask;
     }
 
+    public List<String> getTeamName(List<Task> tasks) {
+        List<String> res = new ArrayList<>();
+        UserRepository userRepository = new UserRepository();
+        TeamRepository teamRepository = new TeamRepository();
+        for (Task task : tasks) {
+            User user = userRepository.getUser(task.getDeveloperId());
+            Team team = teamRepository.getTeam(user.getTeamId());
+            res.add(team.getName());
+        }
+        return res;
+    }
 }
 

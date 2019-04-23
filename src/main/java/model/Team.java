@@ -13,6 +13,8 @@ import javax.persistence.*;
     @Column(name="name")
     protected String name;
 
+    public Team() {}
+
     public Team(String name) {
         this.name =name;
     }
