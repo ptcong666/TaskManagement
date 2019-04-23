@@ -119,6 +119,7 @@ public class TaskServlet extends HttpServlet {
         else{
             System.out.println("no retrieved task");
         }
+        request.getRequestDispatcher("/WEB-INF/tasks.jsp").forward(request, response);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
 //		dispatcher.forward(request, response);
     }
