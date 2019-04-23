@@ -150,7 +150,6 @@ public class TaskServlet extends HttpServlet {
         int devId = Integer.parseInt(request.getParameter("dev_id"));
         Task newTask = new Task(id,name, priority,startDate,endDate,status, devId);
         TaskRepository.updateTask(newTask);
-
 //		response.sendRedirect("list");
     }
 

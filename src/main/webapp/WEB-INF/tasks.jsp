@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,23 +22,23 @@
     <title>Project manager page</title>
 
     <!-- Custom fonts for this template-->
-    <link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Page level plugin CSS-->
-    <link href="resources/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="../resources/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="resources/css/sb-admin.css" rel="stylesheet">
-    <link href="resources/css/myStyle.css" rel="stylesheet">
+    <link href="../resources/css/sb-admin.css" rel="stylesheet">
+    <link href="../resources/css/myStyle.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
-    <link href="resources/css/myStyle.css" type="text/css" rel="stylesheet">
+    <link href="../resources/css/myStyle.css" type="text/css" rel="stylesheet">
 </head>
 
 <body id="page-top">
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="manager.jsp">Welcome ${manager.name}</a>
+    <a class="navbar-brand mr-1" href="manager.jsp">Welcome ${user.name}</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -149,8 +150,8 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Developer ID</th>
-                                <th>Team ID</th>
                                 <th>Status</th>
+                                <th>Team ID</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -161,21 +162,21 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Developer ID</th>
-                                <th>Team ID</th>
                                 <th>Status</th>
+                                <th>Team ID</th>
                                 <th>Action</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="each" items="${listTask}">
+                            <c:forEach var="each" items="${listTask}" varStatus="status">
                                 <tr <c:if test='${task.status=="completed"}'> class="completed"</c:if>>
                                     <td>${each.name}</td>
                                     <td>${each.priority}</td>
                                     <td>${each.startDate}</td>
                                     <td>${each.endDate}</td>
-                                    <td>${each.devID}</td>
-                                    <td>${each.teamName}</td>
+                                    <td>${each.developerId}</td>
                                     <td>${each.status}</td>
+                                    <td>${teamId}</td>
                                     <td>
                                         <a class="btn btn-warning" href="#' + ${each.id}}"
                                            data-toggle="modal" data-target="#editTask"
@@ -230,7 +231,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="../login.html">Logout</a>
             </div>
         </div>
     </div>
@@ -250,10 +251,10 @@
             <div class="modal-body">
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-body">
-                        <form method="POST" action="${pageContext.request.contextPath}/task/add">
+                        <form method="POST" action="${pageContext.request.contextPath}/task/insert">
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="taskName" name="taskName" class="form-control"
+                                    <input type="text" id="taskName" name="name" class="form-control"
                                            required="required"
                                            autofocus="autofocus">
                                     <label for="taskName">Task name</label>
@@ -262,13 +263,23 @@
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <p class="titlePragraph">Choose priority of a task:</p>
-                                    <select id="inputPriority" type="text" id="inputPriority" name="priority"
+                                    <select id="inputPriority" type="text" name="priority"
                                             class="form-control" autofocus="autofocus">
                                         <option value="important">Important</option>
                                         <option value="regular">Regular</option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="taskStatus" name="status" class="form-control"
+                                           required="required"
+                                           autofocus="autofocus">
+                                    <label for="taskStatus">Status</label>
+                                </div>
+                            </div>
+
+
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input type="date" id="inputStartDate" name="startDate" class="form-control"
@@ -278,14 +289,14 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="date" id="inputEndDate" name="startDate" class="form-control"
+                                    <input type="date" id="inputEndDate" name="endDate" class="form-control"
                                            required="required" autofocus="autofocus">
                                     <label for="inputEndDate">End date</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="inputDeveloperId" name="inputDevId" class="form-control"
+                                    <input type="text" id="inputDeveloperId" name="dev_id" class="form-control"
                                            required="required" pattern="\d+" title="only number">
                                     <label for="inputDeveloperId">Developer id</label>
                                 </div>
@@ -316,12 +327,12 @@
             <div class="modal-body">
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-body">
-                        <form method="POST" action="${pageContext.request.contextPath}/task/edit">
+                        <form method="POST" action="${pageContext.request.contextPath}/task/insert">
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="taskEditName" name="taskName" class="form-control"
+                                    <input type="text" id="taskEditName" name="name" class="form-control"
                                            required="required"
-                                           autofocus="autofocus">
+                                           autofocus="autofocus" value="${task.name}">
                                     <label for="taskEditName">Task name</label>
                                 </div>
                             </div>
@@ -338,22 +349,31 @@
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <input type="date" id="editStartDate" name="startDate" class="form-control"
-                                           required="required" autofocus="autofocus">
-                                    <label for="inputStartDate">Start date</label>
+                                           required="required" autofocus="autofocus" value="${task.startDate}">
+                                    <label for="editStartDate">Start date</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="date" id="editEndDate" name="startDate" class="form-control"
-                                           required="required" autofocus="autofocus">
-                                    <label for="inputEndDate">End date</label>
+                                    <input type="date" id="editEndDate" name="endDate" class="form-control"
+                                           required="required" autofocus="autofocus" value="${task.startDate}">
+                                    <label for="editEndDate">End date</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="editDeveloperId" name="inputDevId" class="form-control"
-                                           required="required" pattern="\d+" title="only number">
+                                    <input type="text" id="editDeveloperId" name="dev_id" class="form-control"
+                                           required="required" pattern="\d+" title="only number"
+                                           value="${task.dev_id}">
                                     <label for="editDeveloperId">Developer id</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="editStatus" name="status" class="form-control"
+                                           required="required"
+                                           value="${task.status}">
+                                    <label for="editStatus">Status</label>
                                 </div>
                             </div>
                             <input class="btn btn-primary btn-block" type="submit" value="Edit & Save"/>
@@ -387,23 +407,23 @@
 
 
 <!-- Bootstrap core JavaScript-->
-<script src="resources/vendor/jquery/jquery.min.js"></script>
-<script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../resources/vendor/jquery/jquery.min.js"></script>
+<script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Page level plugin JavaScript-->
-<script src="resources/vendor/chart.js/Chart.min.js"></script>
-<script src="resources/vendor/datatables/jquery.dataTables.js"></script>
-<script src="resources/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="../resources/vendor/chart.js/Chart.min.js"></script>
+<script src="../resources/vendor/datatables/jquery.dataTables.js"></script>
+<script src="../resources/vendor/datatables/dataTables.bootstrap4.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="resources/js/sb-admin.min.js"></script>
+<script src="../resources/js/sb-admin.min.js"></script>
 
 <!-- Demo scripts for this page-->
-<script src="resources/js/demo/datatables-demo.js"></script>
-<script src="resources/js/demo/chart-area-demo.js"></script>
+<script src="../resources/js/demo/datatables-demo.js"></script>
+<script src="../resources/js/demo/chart-area-demo.js"></script>
 
 <script
         src="https://code.jquery.com/jquery-3.4.0.js"></script>

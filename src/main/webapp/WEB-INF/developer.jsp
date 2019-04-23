@@ -99,7 +99,6 @@
                                 <tr>
                                     <th>Task Name</th>
                                     <th>Status</th>
-                                    <th>Team Id</th>
                                     <th>Priority</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
@@ -110,7 +109,6 @@
                                 <tr>
                                     <th>Task Name</th>
                                     <th>Status</th>
-                                    <th>Team Id</th>
                                     <th>Priority</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
@@ -122,14 +120,13 @@
                                     <tr <c:if test='${task.status=="completed"}'> class="completed"</c:if>>
                                         <td>${task.name}</td>
                                         <td>${task.status}</td>
-                                        <td>${teamName}</td>
                                         <td>${task.priority}</td>
                                         <td>${task.startDate}</td>
                                         <td>${task.endDate}</td>
                                         <td>
                                             <a class="btn btn-warning" data-toggle="modal"
-                                               data-target="#editTask" href="/task/edit?id=' + ${task.id}}"
-                                            >Mark as complete</a>
+                                               data-target="#editTask"
+                                               onclick="editCurrentTask(${task.id})">Mark as complete</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -195,7 +192,7 @@
             <div class="modal-body">Task status would be changed as completed.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="developer.jsp" id="btnCompleted">Change</a>
+                <a class="btn btn-primary" href="#" id="editTaskBtn">Change</a>
             </div>
         </div>
     </div>
@@ -219,7 +216,22 @@
 <!-- Demo scripts for this page-->
 <script src="../resources/js/demo/datatables-demo.js"></script>
 <script src="../resources/js/demo/chart-area-demo.js"></script>
+<script>
+function editCurrentTask(id) {
+    $.get("/task/update",
+        {
+            id: id,
+        })
+        .done(function (data) {
 
+
+        })
+        .fail(function (err) {
+            alert("error: " + err);
+        });
+}
+
+</script>
 </body>
 
 </html>
