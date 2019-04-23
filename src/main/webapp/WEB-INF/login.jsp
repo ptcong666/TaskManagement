@@ -45,7 +45,7 @@
               <div class="err-msg"><c:out value="${errorMessage}"/></div>
             </c:if>
             <div class="form-label-group">
-              <input type="email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" id="inputEmail" name="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+              <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
               <label for="inputEmail">Email address</label>
             </div>
           </div>
