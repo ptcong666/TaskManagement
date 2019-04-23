@@ -190,7 +190,7 @@ public class TaskRepository {
             session = HibernateUtil.getCurrentSession();
             for(Task t: tasks){
 
-                teamIds.addAll(session.createQuery("team_id from model.User where id="+t.getDeveloperId()).getResultList());
+                teamIds.addAll(session.createQuery("select team_id from model.User where id="+t.getDeveloperId()).getResultList());
             }
         } catch (Exception e) {
             e.printStackTrace();
