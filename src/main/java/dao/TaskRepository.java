@@ -188,10 +188,11 @@ public class TaskRepository {
         List<Integer> teamIds= null;
         try {
             session = HibernateUtil.getCurrentSession();
+            List<User> user;
             for(Task t: tasks){
 
 
-             List<User> user = session.createQuery("from model.User where id="+t.getDeveloperId()).getResultList();
+              user = session.createQuery("from model.User where id="+t.getDeveloperId()).getResultList();
              teamIds.add(user.get(0).getTeamId());
             }
         } catch (Exception e) {
