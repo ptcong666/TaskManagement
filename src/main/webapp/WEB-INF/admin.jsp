@@ -173,7 +173,9 @@
                                         <%--<td></td>--%>
                                     <td>${item.roles}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-edit"><i class="fas fa-edit"></i></button>
+                                        <a class="btn btn-sm btn-edit" onclick="editCurrentUser(${item.id})" href="#"
+                                           data-toggle="modal" data-target="#editModal"><i
+                                                class="fas fa-edit"></i></a>
                                         <a class="btn btn-sm btn-delete" onclick="deleteCurrentUser(${item.id})" href="#"
                                            data-toggle="modal" data-target="#deleteModal"><i
                                                 class="fas fa-trash"></i></a></td>
@@ -282,7 +284,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="password" name="password" id="inputPassword" class="form-control"
+                                    <input type="text" name="password" id="inputPassword" class="form-control"
                                            placeholder="Password" required="required" autocomplete="new-password">
                                     <label for="inputPassword">Password</label>
                                 </div>
@@ -356,13 +358,13 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="password" name="password" id="inputPassword" class="form-control"
+                                    <input type="text" name="password" id="editPassword" class="form-control"
                                            placeholder="Password" required="required" autocomplete="new-password">
                                     <label for="inputPassword">Password</label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <select name="roles" class="form-control">
+                                <select id="editRole" name="roles" class="form-control">
                                     <option value="ADMIN">Admin</option>
                                     <option value="MANAGER">Project manager</option>
                                     <option value="DEVELOPER">Developer</option>
@@ -417,13 +419,21 @@
     }
 
     function editCurrentUser(id) {
-            $.get("/user/edit",
-                {
-                    id: id,
-                }).done(function (data) {
-                $("#user_" + id).remove();
-                $("#deleteModal").toggle();
-            }).fail(function (err) {
+        $.get("/user/edit",
+            {
+                id: id,
+            })
+            .done(function (data) {
+                // $("#editModal").toggle();
+                console.log(data);
+                $("#editAddress").val(data.address);
+                $("#editPhone").val(data.phone);
+                $("#editName").val(data.name);
+                $("#editEmail").val(data.email);
+                $("#editPassword").val(data.password);
+                $("#editRole").val(data.roles[0]);
+            })
+            .fail(function (err) {
                 alert("error: " + err);
             });
     }

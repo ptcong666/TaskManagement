@@ -105,7 +105,7 @@ public class UserServlet extends HttpServlet {
 		int team = Integer.parseInt(request.getParameter("team_id"));
 		User user = new User(id, name, email);
 		//user.setTaskId(tasks);
-		user.setTeamId(team);
+//		user.setTeamId(team);
 		UserRepository.updateUser(user);
 //		response.sendRedirect("list");
 	}
