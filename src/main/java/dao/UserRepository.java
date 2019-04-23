@@ -121,6 +121,7 @@ public class UserRepository {
         return user;
     }
 
+
     /**
      * Get all Users
      * @return
@@ -177,5 +178,14 @@ public class UserRepository {
             HibernateUtil.closeSession(session);
         }
         return listOfTask;
+    }
+    public List<User> filterDeveloper(List<User> Users){
+        List<User> listDevelopers = null;
+        for(User u: Users){
+            if(u.getRoles().contains("developer")){
+                listDevelopers.add(u);
+            }
+        }
+        return listDevelopers;
     }
 }

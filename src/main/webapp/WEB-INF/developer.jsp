@@ -30,8 +30,11 @@
     <link href="../resources/css/sb-admin.css" rel="stylesheet">
     <script src="../resources/js/forDeveloper.js" type="text/javascript"></script>
     <style>
-        .completed{
+        .completed {
             background-color: #1dd1a1;
+        }
+        .hidebtn{
+            visibility: hidden;
         }
     </style>
 </head>
@@ -119,14 +122,16 @@
                                 <c:forEach var="task" items="${listTask}">
                                     <tr <c:if test='${task.status=="completed"}'> class="completed"</c:if>>
                                         <td>${task.name}</td>
-                                        <td>${task.status}</td>
+                                        <td id="taskStatus_${task.id}">${task.status}</td>
                                         <td>${task.priority}</td>
                                         <td>${task.startDate}</td>
                                         <td>${task.endDate}</td>
-                                        <td>
+                                        <td <c:if test='${task.status=="completed"}'>class="hidebtn"</c:if>>
                                             <a class="btn btn-warning" data-toggle="modal"
                                                data-target="#editTask"
                                                onclick="editCurrentTask(${task.id})">Mark as complete</a>
+
+
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -217,19 +222,25 @@
 <script src="../resources/js/demo/datatables-demo.js"></script>
 <script src="../resources/js/demo/chart-area-demo.js"></script>
 <script>
-function editCurrentTask(id) {
-    $.get("/task/update",
-        {
-            id: id,
+    function editCurrentTask(id) {
+        $("#editTaskBtn").click(function () {
+            $.get("/task/complete",
+                {
+                    task_id: id,
+                    status: "completed"
+                })
+                .done(function (data) {
+                    $("#taskStatus_" + id).html("completed");
+                    $("#editTask").modal("hide");
+                })
+                .fail(function (err) {
+                    // $("#taskStatus_"+id).html("completed");
+                    // $("#editTask").modal("hide");
+                    // alert("error: " + err);
+                });
         })
-        .done(function (data) {
 
-
-        })
-        .fail(function (err) {
-            alert("error: " + err);
-        });
-}
+    }
 
 </script>
 </body>

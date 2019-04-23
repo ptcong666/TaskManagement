@@ -32,6 +32,14 @@
     <link href="../resources/css/myStyle.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
     <link href="../resources/css/myStyle.css" type="text/css" rel="stylesheet">
+    <style>
+        .completed {
+            background-color: #1dd1a1;
+        }
+        .hidebtn{
+            visibility: hidden;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -79,18 +87,18 @@
     <ul class="sidebar navbar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="manager.jsp">
+            <a class="nav-link" href="user/manager">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Developer table</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="tasks.jsp">
+            <a class="nav-link" href="task">
                 <i class="fas fa-fw fa-table"></i>
                 <span style="color: #f1f2f6;">Task table</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="team.jsp">
+            <a class="nav-link" href="team">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Team table</span></a>
         </li>
@@ -169,14 +177,14 @@
                             </tfoot>
                             <tbody>
                             <c:forEach var="each" items="${listTask}" varStatus="status">
-                                <tr <c:if test='${task.status=="completed"}'> class="completed"</c:if>>
+                                <tr <c:if test='${each.status=="completed"}'> class="completed"</c:if>>
                                     <td>${each.name}</td>
                                     <td>${each.priority}</td>
                                     <td>${each.startDate}</td>
                                     <td>${each.endDate}</td>
                                     <td>${each.developerId}</td>
                                     <td>${each.status}</td>
-                                    <td>${teamId}</td>
+                                    <td>${teamId[status.index]}</td>
                                     <td>
                                         <a class="btn btn-warning" href="#' + ${each.id}}"
                                            data-toggle="modal" data-target="#editTask"

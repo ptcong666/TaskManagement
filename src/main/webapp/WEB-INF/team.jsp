@@ -77,19 +77,19 @@
     <ul class="sidebar navbar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="manager.jsp">
+            <a class="nav-link" href="user/manager">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Developer table</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="tasks.jsp">
+            <a class="nav-link" href="task">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Task table</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="team.jsp">
+            <a class="nav-link" href="team">
                 <i class="fas fa-fw fa-table"></i>
                 <span style="color: #f1f2f6;">Team table</span></a>
         </li>

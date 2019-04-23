@@ -113,6 +113,7 @@ public class TaskServlet extends HttpServlet {
     private void completeTask(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         int task_id = Integer.parseInt(request.getParameter("task_id"));
+        System.out.println(task_id);
         String status = request.getParameter("status");
         Task task = TaskRepository.getTask(task_id);
         task.setStatus(status);
@@ -120,7 +121,6 @@ public class TaskServlet extends HttpServlet {
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
 //		dispatcher.forward(request, response);
     }
-
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
@@ -133,7 +133,7 @@ public class TaskServlet extends HttpServlet {
     }
 
     private void insertTask(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ServletException{
         String name = request.getParameter("name");
         String priority = request.getParameter("priority");
 
@@ -145,7 +145,8 @@ public class TaskServlet extends HttpServlet {
         Task newTask = new Task(name, priority,startDate,endDate,status, devId);
         TaskRepository.saveTask(newTask);
 
-//		response.sendRedirect("list");
+//		response.sendRedirect("WEB-INF/tasks.jsp");
+        request.getRequestDispatcher("WEB-INF/tasks.jsp").forward(request, response);
     }
 
     private void updateTask(HttpServletRequest request, HttpServletResponse response)

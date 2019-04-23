@@ -173,6 +173,7 @@ public class TaskRepository {
         }
         return listOfTask;
     }
+
     public List<Task> getTasks(int devId) {
         List<Task> listOfTask = null;
         try {
@@ -192,11 +193,15 @@ public class TaskRepository {
         try {
             session = HibernateUtil.getCurrentSession();
             UserRepository userRepository = new UserRepository();
-
+            int id;
             for(Task t: tasks){
-
-               teamIds.add(userRepository.getUser(t.getDeveloperId()).getTeamId());
-
+               if(userRepository.getUser(t.getDeveloperId())!=null){
+                   id = userRepository.getUser(t.getDeveloperId()).getTeamId();
+               }
+               else {
+                   id =0;
+               }
+               teamIds.add(id);
             }
         } catch (Exception e) {
             e.printStackTrace();
