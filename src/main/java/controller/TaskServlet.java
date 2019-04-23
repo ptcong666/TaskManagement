@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -97,20 +98,27 @@ public class TaskServlet extends HttpServlet {
 
     private void retrieveTask(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Task> listTask;
+        List<Task> listTask = new ArrayList<>();
 
         if(request.getParameter("priority")!=null){
             String priority = request.getParameter("priority");
             listTask = TaskRepository.getTasksByPriority(priority);
-            request.setAttribute("listTask", listTask);
-
         }
-        else if(request.getParameter(" ")!=null) {
+        else if(request.getParameter("team_id")!=null) {
             int id = Integer.parseInt(request.getParameter("id"));
             listTask = TaskRepository.getTasksByTeamId(id);
+        }
+        else if(request.getParameter("user_id")!=null){
+            int id = Integer.parseInt(request.getParameter("user_id"));
+                        listTask = TaskRepository.getTasks(id);
+        }
+        if(listTask!=null){
+
             request.setAttribute("listTask", listTask);
         }
-
+        else{
+            System.out.println("no retrieved task");
+        }
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("task-list.jsp");
 //		dispatcher.forward(request, response);
     }
