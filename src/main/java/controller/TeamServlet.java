@@ -67,7 +67,7 @@ public class TeamServlet extends HttpServlet{
 
         request.setAttribute("listTeam", listTeam);
         List<User> listUser = UserRepository.getAllUser();
-        List<User> developerUser = UserRepository.filterDeveloper(listUser);
+        List<User> developerUser = UserServlet.filterDeveloper(listUser);
         request.setAttribute("listDevelopers", developerUser);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/team.jsp");
 		dispatcher.forward(request, response);
