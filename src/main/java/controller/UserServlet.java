@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import dao.UserRepository;
 import model.User;
 
@@ -76,10 +77,13 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		User existingUser = UserRepository.getUser(id);
+		String json = new Gson().toJson(existingUser);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(json);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
 //		request.setAttribute("user", existingUser);
 //		dispatcher.forward(request, response);
-
 	}
 
 	private void insertUser(HttpServletRequest request, HttpServletResponse response)
@@ -89,7 +93,12 @@ public class UserServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
-		User newUser = new User(name, email, password, address, phone);
+		User newUser = new User();
+		newUser.setEmail(email);
+		newUser.setPassword(password);
+		newUser.setName(name);
+		newUser.setPhone(phone);
+		newUser.setAddress(address);
 		newUser.setRolesByString(request.getParameter("roles"));
 		UserRepository.saveUser(newUser);
         request.getRequestDispatcher("/user").forward(request, response);
@@ -97,16 +106,19 @@ public class UserServlet extends HttpServlet {
 	}
 
 	private void updateUser(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-		String tasks = request.getParameter("task_id");
-		int team = Integer.parseInt(request.getParameter("team_id"));
-		User user = new User(id, name, email);
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String password = request.getParameter("password");
+		User user = new User(id, name, email, password, address, phone);
+		user.setRolesByString(request.getParameter("roles"));
 		//user.setTaskId(tasks);
-		user.setTeamId(team);
+//		user.setTeamId(team);
 		UserRepository.updateUser(user);
+		request.getRequestDispatcher("/user").forward(request, response);
 //		response.sendRedirect("list");
 	}
 
