@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import dao.UserRepository;
 import model.User;
 
-@WebServlet("/user/*")
+@WebServlet(urlPatterns = {"/user", "/user/*"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserRepository UserRepository;
@@ -69,8 +69,6 @@ public class UserServlet extends HttpServlet {
 		List<User> listUser = UserRepository.getAllUser();
 		request.setAttribute("listUser", listUser);
 		request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
-//		dispatcher.forward(request, response);
 	}
 
 	private void listDeveloper(HttpServletRequest request, HttpServletResponse response)
@@ -93,9 +91,6 @@ public class UserServlet extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-//		request.setAttribute("user", existingUser);
-//		dispatcher.forward(request, response);
 	}
 
 	private void insertUser(HttpServletRequest request, HttpServletResponse response)
@@ -114,7 +109,6 @@ public class UserServlet extends HttpServlet {
 		newUser.setRolesByString(request.getParameter("roles"));
 		UserRepository.saveUser(newUser);
         request.getRequestDispatcher("/user").forward(request, response);
-//		response.sendRedirect("list");
 	}
 
 	private void updateUser(HttpServletRequest request, HttpServletResponse response)
@@ -127,25 +121,20 @@ public class UserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		User user = new User(id, name, email, password, address, phone);
 		user.setRolesByString(request.getParameter("roles"));
-		//user.setTaskId(tasks);
-//		user.setTeamId(team);
 		UserRepository.updateUser(user);
 		request.getRequestDispatcher("/user").forward(request, response);
-//		response.sendRedirect("list");
 	}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		UserRepository.deleteUser(id);
-//		response.sendRedirect("list");
 	}
 
 	private void listTask(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		UserRepository.getTasks(id);
-//		response.sendRedirect("list");
 	}
 
 

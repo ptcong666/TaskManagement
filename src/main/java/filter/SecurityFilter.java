@@ -72,7 +72,7 @@ public class SecurityFilter implements Filter {
             if (!hasPermission) {
 
                 RequestDispatcher dispatcher
-                        = request.getServletContext().getRequestDispatcher("/WEB-INF/views/accessDenied.jsp");
+                        = request.getServletContext().getRequestDispatcher("/WEB-INF/accessDenied.jsp");
 
                 dispatcher.forward(request, response);
                 return;

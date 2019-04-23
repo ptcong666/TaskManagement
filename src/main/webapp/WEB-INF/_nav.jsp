@@ -70,7 +70,6 @@
         $.post("/logout")
             .done(function () {
                 $("#logoutModal").modal('hide');
-                window.location.href = "/login";
             }).fail(function (err) {
                 console.log("Error:" + err);
             });

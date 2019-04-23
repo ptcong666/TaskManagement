@@ -32,8 +32,8 @@
       <div class="container-fluid">
 
         <!-- Page Content -->
-        <h1 class="display-1">404</h1>
-        <p class="lead">Page not found. You can
+        <h1 class="display-1">Oops Something is wrong!</h1>
+        <p class="lead">You don't have the permission to access this page
           <a href="javascript:history.back()">go back</a>
           to the previous page, or
           <a href="/">return home</a>.</p>
