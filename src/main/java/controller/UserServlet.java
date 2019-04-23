@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import dao.UserRepository;
 import model.User;
 
@@ -76,10 +77,13 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		User existingUser = UserRepository.getUser(id);
+		String json = new Gson().toJson(existingUser);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(json);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
 //		request.setAttribute("user", existingUser);
 //		dispatcher.forward(request, response);
-
 	}
 
 	private void insertUser(HttpServletRequest request, HttpServletResponse response)
