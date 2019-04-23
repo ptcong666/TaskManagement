@@ -12,3 +12,9 @@ margin-left: 15pt;
     margin-top: 5px;
     margin-right: 10px;
 }
+.completed {
+    background-color: #1dd1a1;
+}
+.titlePragraph{
+    font-style: italic;
+}

@@ -36,7 +36,6 @@
 </head>
 
 <body id="page-top">
-
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
     <a class="navbar-brand mr-1" href="developer.jsp">Welcome ${user.name}!</a>
@@ -93,47 +92,49 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Task Name</th>
-                                <th>Status</th>
-                                <th>Team Name</th>
-                                <th>Priority</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Task Name</th>
-                                <th>Status</th>
-                                <th>Team Name</th>
-                                <th>Priority</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Action</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            <c:forEach var="task" items="${tasks}">
-                                <tr <c:if test='${task.status=="completed"}'> class="completed"</c:if>>
-                                    <td>${task.name}</td>
-                                    <td>${task.status}</td>
-                                    <td>${task.team.name}</td>
-                                    <td>${task.priority}</td>
-                                    <td>${task.startDate}</td>
-                                    <td>${task.endDate}</td>
-                                    <td>
-                                        <a class="btn btn-warning" data-toggle="modal"
-                                           data-target="#editTask" href="#' + ${task.id}}"
-                                           >Mark as complete</a>
-                                    </td>
+                        <form action="task/developer" method="get">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Task Name</th>
+                                    <th>Status</th>
+                                    <th>Team Id</th>
+                                    <th>Priority</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Action</th>
                                 </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Task Name</th>
+                                    <th>Status</th>
+                                    <th>Team Id</th>
+                                    <th>Priority</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <c:forEach var="task" items="${listTask}">
+                                    <tr <c:if test='${task.status=="completed"}'> class="completed"</c:if>>
+                                        <td>${task.name}</td>
+                                        <td>${task.status}</td>
+                                        <td>${task.teamId}</td>
+                                        <td>${task.priority}</td>
+                                        <td>${task.startDate}</td>
+                                        <td>${task.endDate}</td>
+                                        <td>
+                                            <a class="btn btn-warning" data-toggle="modal"
+                                               data-target="#editTask" href="/task/edit?id=' + ${task.id}}"
+                                            >Mark as complete</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>

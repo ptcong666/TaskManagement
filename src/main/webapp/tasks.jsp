@@ -30,11 +30,7 @@
     <link href="resources/css/sb-admin.css" rel="stylesheet">
     <link href="resources/css/myStyle.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
-    <style>
-        .completed {
-            background-color: #1dd1a1;
-        }
-    </style>
+    <link href="resources/css/myStyle.css" type="text/css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -101,7 +97,7 @@
 
     <div id="content-wrapper">
         <a class="btn btn-primary" id="addTeam" name="newTask" href="#"
-           data-toggle="modal" data-target="#addNewTask">Create New Task</a>
+           data-toggle="modal" data-target="#addNewTask">+</a>
         <div class="container-fluid">
 
 
@@ -153,7 +149,6 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Developer ID</th>
-                                <th>Developer Name</th>
                                 <th>Team ID</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -166,29 +161,28 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Developer ID</th>
-                                <th>Developer Name</th>
                                 <th>Team ID</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="each" items="${tasks}">
+                            <c:forEach var="each" items="${listTask}">
                                 <tr <c:if test='${task.status=="completed"}'> class="completed"</c:if>>
                                     <td>${each.name}</td>
                                     <td>${each.priority}</td>
                                     <td>${each.startDate}</td>
                                     <td>${each.endDate}</td>
-                                    <td>${each.developer.id}</td>
-                                    <td>${each.developer.name}</td>
-                                    <td>${each.team.id}</td>
+                                    <td>${each.devID}</td>
+                                    <td>${each.teamName}</td>
                                     <td>${each.status}</td>
                                     <td>
                                         <a class="btn btn-warning" href="#' + ${each.id}}"
-                                           onclick="return confirm('Are ' +
-                                         'you sure that you want to edit a task?')">Edit</a>
-                                        <a class="btn btn-danger" href="#'+${each.id}}" onclick="return confirm('Are ' +
-                                         'you sure that you want to delete a task?')">Delete</a>
+                                           data-toggle="modal" data-target="#editTask"
+                                        onclick="editCurrentTask(${each.id})"><i class="fas fa-edit"></i></a>
+                                        <a class="btn btn-danger" href="#'+${each.id}}"
+                                           data-toggle="modal" data-target="#deleteModal"
+                                        onclick="deleteCurrentTask(${each.id})"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -245,7 +239,7 @@
 <!-- New task-->
 <div class="modal fade" id="addNewTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add new task</h5>
@@ -267,10 +261,9 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-
+                                    <p class="titlePragraph">Choose priority of a task:</p>
                                     <select id="inputPriority" type="text" id="inputPriority" name="priority"
                                             class="form-control" autofocus="autofocus">
-                                        <option>Choose priority</option>
                                         <option value="important">Important</option>
                                         <option value="regular">Regular</option>
                                     </select>
@@ -278,38 +271,120 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="email" id="inputEmail" name="email" class="form-control"
-                                           placeholder="Email address" required="required" autofocus="autofocus">
-                                    <label for="inputEmail">Email address</label>
+                                    <input type="date" id="inputStartDate" name="startDate" class="form-control"
+                                           required="required" autofocus="autofocus">
+                                    <label for="inputStartDate">Start date</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="password" id="inputPhone" name="password" class="form-control"
-                                           placeholder="Password" required="required">
-                                    <label for="inputPhone">Password</label>
+                                    <input type="date" id="inputEndDate" name="startDate" class="form-control"
+                                           required="required" autofocus="autofocus">
+                                    <label for="inputEndDate">End date</label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="remember-me">
-                                        Remember Password
-                                    </label>
+                                <div class="form-label-group">
+                                    <input type="text" id="inputDeveloperId" name="inputDevId" class="form-control"
+                                           required="required" pattern="\d+" title="only number">
+                                    <label for="inputDeveloperId">Developer id</label>
                                 </div>
                             </div>
-                            <input class="btn btn-primary btn-block" type="submit" value="Add"/>
+                            <input class="btn btn-primary btn-block" type="submit" value="Add & Save"/>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="WEB-INF/login.jsp">Logout</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Edit task-->
+<div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit task</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-body">
+                        <form method="POST" action="${pageContext.request.contextPath}/task/edit">
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="taskEditName" name="taskName" class="form-control"
+                                           required="required"
+                                           autofocus="autofocus">
+                                    <label for="taskEditName">Task name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <p class="titlePragraph">Choose priority of a task:</p>
+                                    <select id="editPriority" type="text" name="priority"
+                                            class="form-control" autofocus="autofocus">
+                                        <option value="important">Important</option>
+                                        <option value="regular">Regular</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="date" id="editStartDate" name="startDate" class="form-control"
+                                           required="required" autofocus="autofocus">
+                                    <label for="inputStartDate">Start date</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="date" id="editEndDate" name="startDate" class="form-control"
+                                           required="required" autofocus="autofocus">
+                                    <label for="inputEndDate">End date</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="editDeveloperId" name="inputDevId" class="form-control"
+                                           required="required" pattern="\d+" title="only number">
+                                    <label for="editDeveloperId">Developer id</label>
+                                </div>
+                            </div>
+                            <input class="btn btn-primary btn-block" type="submit" value="Edit & Save"/>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- Delete task Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteLabel">Delete task</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Are you sure you want to delete this task?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a id="deleteTaskBtn" class="btn btn-danger" href="tasks.jsp">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="resources/vendor/jquery/jquery.min.js"></script>
@@ -332,6 +407,34 @@
 
 <script
         src="https://code.jquery.com/jquery-3.4.0.js"></script>
+
+<script>
+    function deleteCurrentTask(id) {
+        $("#deleteTaskBtn").click(function () {
+            $.post("/task/delete",
+                {
+                    id: id,
+                }).done(function (data) {
+                $("#task_" + id).remove();
+                $("#deleteModal").toggle();
+            }).fail(function (err) {
+                alert("error: " + err);
+            });
+        })
+    }
+
+    function editCurrentTask(id) {
+        $.get("/task/edit",
+            {
+                id: id,
+            }).done(function (data) {
+            $("#task_" + id).remove();
+            $("#deleteModal").toggle();
+        }).fail(function (err) {
+            alert("error: " + err);
+        });
+    }
+</script>
 </body>
 
 </html>
