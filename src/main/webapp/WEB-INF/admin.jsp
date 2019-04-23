@@ -47,37 +47,15 @@
 </head>
 <body id="page-top">
 
-<%--<c:set var="pageName" value="Admin dashboard" scope="request"/>--%>
-<%--<jsp:include page="_nav.jsp"></jsp:include>--%>
 <jsp:include page="_nav.jsp">
     <jsp:param name="pageName" value="Admin dashboard"/>
 </jsp:include>
 
 
 <div id="wrapper">
-
-    <!-- Sidebar -->
-    <%--<ul class="sidebar navbar-nav">--%>
-        <%--<li class="nav-item">--%>
-            <%--<a class="nav-link" href="index.html">--%>
-                <%--<i class="fas fa-fw fa-tachometer-alt"></i>--%>
-                <%--<span>Dashboard</span>--%>
-            <%--</a>--%>
-        <%--</li>--%>
-    <%--</ul>--%>
-
     <div id="content-wrapper">
 
         <div class="container-fluid">
-
-            <%--<!-- Breadcrumbs-->--%>
-            <%--<ol class="breadcrumb">--%>
-                <%--<li class="breadcrumb-item">--%>
-                    <%--<a href="#">Dashboard</a>--%>
-                <%--</li>--%>
-                <%--<li class="breadcrumb-item active">Tables</li>--%>
-            <%--</ol>--%>
-
             <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
@@ -107,12 +85,9 @@
                             <c:forEach var="item" items="${listUser}">
                                 <tr id="user_${item.id}">
                                     <td>${item.name}</td>
-                                        <%--<td></td>--%>
                                     <td>${item.email}</td>
                                     <td>${item.address}</td>
-                                        <%--<td></td>--%>
                                     <td>${item.phone}</td>
-                                        <%--<td></td>--%>
                                     <td>${item.roles}</td>
                                     <td>
                                         <a class="btn btn-sm btn-edit" onclick="editCurrentUser(${item.id})" href="#"
@@ -127,16 +102,9 @@
                         </table>
                     </div>
                 </div>
-                <%--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>--%>
             </div>
 
-            <%--<p class="small text-center text-muted my-5">--%>
-            <%--<em>More table examples coming soon...</em>--%>
-            <%--</p>--%>
-
         </div>
-        <!-- /.container-fluid -->
-
         <!-- Sticky Footer -->
         <footer style="width:100%;" class="sticky-footer">
             <div class="container my-auto">
@@ -150,8 +118,6 @@
     <!-- /.content-wrapper -->
 
 </div>
-<!-- /#wrapper -->
-
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
