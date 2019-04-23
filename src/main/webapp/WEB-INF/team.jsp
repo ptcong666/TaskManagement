@@ -83,13 +83,13 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="task">
+            <a class="nav-link" href="/task">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Task table</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="team">
+            <a class="nav-link" href="/team">
                 <i class="fas fa-fw fa-table"></i>
                 <span style="color: #f1f2f6;">Team table</span></a>
         </li>
@@ -130,11 +130,11 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="each" items="${teams}">
+                            <c:forEach var="each" items="${listTeam}">
                                 <tr>
                                     <td>${each.id}</td>
-                                    <td>${each.id}</td>
-                                    <td>${each.id}</td>
+                                    <td>${each.name}</td>
+                                    <td>${listDevelopers.size()}</td>
                                     <td>${each.id}</td>
                                     <td>
                                         <a class="btn btn-warning" href="#" + ${each.id}

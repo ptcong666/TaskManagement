@@ -81,13 +81,13 @@
                 <span style="color: #f1f2f6;">Developer table</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="task">
+            <a class="nav-link" href="/task">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Task table</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="team">
+            <a class="nav-link" href="/team">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Team table</span></a>
         </li>
