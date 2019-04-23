@@ -309,17 +309,16 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <%--<input type="text" id="inputDeveloperId" name="dev_id" class="form-control"--%>
-                                    <%--required="required" pattern="\d+" title="only number">--%>
-                                    <%--<label for="inputDeveloperId">Developer id</label>--%>
                                     <p class="titlePragraph">Choose developer name:</p>
-                                    <select type="text" name="dev_id" id="inputDeveloperId">
+                                    <select type="text" name="dev_id" id="inputDeveloperId"
+                                            class="form-control" autofocus="autofocus">
                                         <c:forEach var="dev" items="${listDevelopers}">
-                                            <option>${dev.name}</option>
+                                            <option value="${dev.id}">${dev.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                             </div>
+
                             <input class="btn btn-primary btn-block" type="submit" value="Add & Save"/>
                         </form>
                     </div>
@@ -382,13 +381,11 @@
 
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <%--<input type="text" id="inputDeveloperId" name="dev_id" class="form-control"--%>
-                                    <%--required="required" pattern="\d+" title="only number">--%>
-                                    <%--<label for="inputDeveloperId">Developer id</label>--%>
                                     <p class="titlePragraph">Choose developer name:</p>
-                                    <select type="text" name="developerId" id="editDeveloperId">
+                                    <select type="text" name="developerId" id="editDeveloperId"
+                                            class="form-control" autofocus="autofocus">
                                         <c:forEach var="dev" items="${listDevelopers}">
-                                            <option>${dev.name}</option>
+                                           <option value="${dev.id}">${dev.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -496,7 +493,7 @@
             $("#editPriority").val(data.priority);
             $("#editStartDate").val(sFilledDate);
             $("#editEndDate").val(eFilledDate);
-            $("#editDeveloperId").val(data.developerId);
+            $("#editDeveloperId").value(data.developerId);
             $("#editStatus").val(data.status);
 
         }).fail(function (err) {

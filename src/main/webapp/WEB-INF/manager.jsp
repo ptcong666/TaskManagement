@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,13 +129,13 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="each" items="${developers}">
+                            <c:forEach var="each" items="${listUser}">
                                 <tr>
                                     <td>${each.id}</td>
                                     <td>${each.name}</td>
-                                    <td>${each.task.id}</td>
-                                    <td>${each.task.name}</td>
-                                    <td>${each.team.name}</td>
+                                    <%--<td>${each.task.id}</td>--%>
+                                    <%--<td>${each.task.name}</td>--%>
+                                    <%--<td>${each.team.name}</td>--%>
                                     <td>
                                         <a class="btn btn-warning" href="#' + ${each.id}}"
                                            data-toggle="modal" data-target="#changeTeam"><i class="fas fa-edit"></i></a>

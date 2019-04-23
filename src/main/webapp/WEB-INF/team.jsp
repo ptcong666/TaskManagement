@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,8 +116,7 @@
                             <tr>
                                 <th>Team Id</th>
                                 <th>Team Name</th>
-                                <th>Total Developers</th>
-                                <th>Total Tasks</th>
+
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -124,22 +124,19 @@
                             <tr>
                                 <th>Team Id</th>
                                 <th>Team Name</th>
-                                <th>Total Developers</th>
-                                <th>Total Tasks</th>
+
                                 <th>Action</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="each" items="${listTeam}">
+                            <c:forEach var="team" items="${listTeam}">
                                 <tr>
-                                    <td>${each.id}</td>
-                                    <td>${each.name}</td>
-                                    <td>${listDevelopers.size()}</td>
-                                    <td>${each.id}</td>
+                                    <td>${team.id}</td>
+                                    <td>${team.name}</td>
                                     <td>
-                                        <a class="btn btn-warning" href="#" + ${each.id}
+                                        <a class="btn btn-warning" href="#"
                                            data-toggle="modal" data-target="#editTeam"><i class="fas fa-edit"></i></a>
-                                        <a class="btn btn-danger" href="#"+${each.id}
+                                        <a class="btn btn-danger" href="#"
                                            data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
