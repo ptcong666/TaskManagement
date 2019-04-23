@@ -46,6 +46,7 @@ public class User {
 	}
 
 	public User(int id, String name, String email, String password, String address, String phone) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -85,6 +86,10 @@ public class User {
 		return res;
 	}
 
+	public String[] getRoles2() {
+		return this.roles;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -111,5 +116,13 @@ public class User {
 
 	public int getTeamId() {
 		return teamId;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setRoles(String[] roles) {
+		this.roles = roles;
 	}
 }

@@ -46,7 +46,18 @@ public class UserRepository {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
-            session.update(user);
+            String qstr = "update model.User U set U.name = :name, U.email = :email, U.address = :address, U.phone = :phone, U.password = :password, U.roles = :roles " +
+                    "" +
+                    "where U.id = :id";
+            Query query = session.createQuery(qstr);
+            query.setParameter("name", user.getName());
+            query.setParameter("email", user.getEmail());
+            query.setParameter("address", user.getAddress());
+            query.setParameter("phone", user.getPhone());
+            query.setParameter("password", user.getPassword());
+            query.setParameter("roles", user.getRoles2());
+            query.setParameter("id", user.getId());
+            query.executeUpdate();
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
