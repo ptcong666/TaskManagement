@@ -50,7 +50,7 @@ public class UserServlet extends HttpServlet {
 					listUser(request, response);
 					break;
 				case "/user/manager":
-					listUser(request, response);
+					listDeveloper(request, response);
 					break;
 				case "/user/developer":
 					listTask(request, response);
@@ -135,4 +135,17 @@ public class UserServlet extends HttpServlet {
 		UserRepository.getTasks(id);
 //		response.sendRedirect("list");
 	}
+	private void listDeveloper(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException,ServletException{
+		List<User> listUser = UserRepository.getAllUser();
+		List<User> developerUser = UserRepository.filterDeveloper(listUser);
+		request.setAttribute("listUser", developerUser);
+		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+//		dispatcher.forward(request, response);
+	}
+
+
+
+
 }
