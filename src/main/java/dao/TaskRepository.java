@@ -113,7 +113,10 @@ public class TaskRepository {
         return task;
     }
 
-
+    /**
+     * Get all Tasks
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public List<Task> getAllTask() {
         List<Task> listOfTask = null;
@@ -132,8 +135,8 @@ public class TaskRepository {
 
     /**
      * Get Task By Priority
-     *
-     *
+     * @param priority
+     * @return
      */
     public List<Task> getTasksByPriority(String prio) {
 
@@ -144,6 +147,7 @@ public class TaskRepository {
 
             Query query = session.createQuery("from model.Task T where T.priority= :prio");
             query.setParameter("prio",prio);
+
             listOfTask = query.list();
 
         } catch (Exception e) {
@@ -190,21 +194,20 @@ public class TaskRepository {
         }
         return listOfTask;
     }
-    public List<Team> getTeamsByTask(List<Task> tasks){
-        List<Team> teamIds= new ArrayList<Team>();
+    public List<Integer> getTeamIdsByTask(List<Task> tasks){
+        List<Integer> teamIds= new ArrayList<Integer>();
         try {
             session = HibernateUtil.getCurrentSession();
             UserRepository userRepository = new UserRepository();
-            Team team;
-            TeamRepository teamRepository = new TeamRepository();
+            int id;
             for(Task t: tasks){
                if(userRepository.getUser(t.getDeveloperId())!=null){
-                   team = teamRepository.getTeam(userRepository.getUser(t.getDeveloperId()).getTeamId());
+                   id = userRepository.getUser(t.getDeveloperId()).getTeamId();
                }
                else {
-                   team = null;
+                   id =0;
                }
-               teamIds.add(team);
+               teamIds.add(id);
             }
         } catch (Exception e) {
             e.printStackTrace();

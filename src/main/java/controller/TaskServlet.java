@@ -18,10 +18,9 @@ import dao.TaskRepository;
 import dao.UserRepository;
 import model.Task;
 import model.User;
-import model.Team;
 import util.AppUtils;
 
-@WebServlet(urlPatterns = {"/task", "/task/*", "/developer"})
+@WebServlet(urlPatterns = {"/task", "/task/*"})
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;
@@ -57,7 +56,7 @@ public class TaskServlet extends HttpServlet {
                 case "/task/manager":
                     listTask(request, response);
                     break;
-                case "/developer":
+                case "/task/developer":
                     listUserTasks(request, response);
                     break;
                 case "/task/retrieve":
@@ -77,8 +76,8 @@ public class TaskServlet extends HttpServlet {
     private void listTask(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         List<Task> listTask = TaskRepository.getAllTask();
-        List<Team> team = TaskRepository.getTeamsByTask(listTask);
-        request.setAttribute("teams", team);
+        List<Integer> teamId = TaskRepository.getTeamIdsByTask(listTask);
+        request.setAttribute("teamId", teamId);
         request.setAttribute("listTask", listTask);
         List<User> listUser = UserRepository.getAllUser();
         List<User> developerUser = UserServlet.filterDeveloper(listUser);
@@ -87,8 +86,6 @@ public class TaskServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks.jsp");
 		dispatcher.forward(request, response);
     }
-
-
     private void listUserTasks(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         User user = AppUtils.getLoginedUser(request.getSession());
@@ -118,8 +115,7 @@ public class TaskServlet extends HttpServlet {
                         listTask = TaskRepository.getTasks(id);
         }
         if(listTask!=null){
-            List<Team> team = TaskRepository.getTeamsByTask(listTask);
-            request.setAttribute("team", team);
+
             request.setAttribute("listTask", listTask);
         }
         else{
