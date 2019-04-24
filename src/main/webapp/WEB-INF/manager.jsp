@@ -170,7 +170,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit task</h5>
+                <h5 class="modal-title">Change team name for a developer</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -218,6 +218,7 @@
             {
                 id: id,
             }).done(function (data) {
+                alert(data.id);
             $("#editId").val(data.id);
             $("#editDeveloperName").val(data.name);
             $("#editTeam").value(data.team_id);

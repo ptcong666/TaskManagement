@@ -35,42 +35,9 @@
 
 <body id="page-top">
 
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-    <a class="navbar-brand mr-1" href="manager.jsp">Welcome ${manager.name}</a>
-
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"
-                   aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>
-
-    <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-circle fa-fw"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-            </div>
-        </li>
-    </ul>
-
-</nav>
+<jsp:include page="_nav.jsp">
+    <jsp:param name="pageName" value="Manager dashboard"/>
+</jsp:include>
 
 <div id="wrapper">
 
@@ -130,15 +97,17 @@
                             </tfoot>
                             <tbody>
                             <c:forEach var="team" items="${listTeam}" varStatus="status">
-                                <tr>
+                                <tr id="team_${team.id}">
                                     <td>${team.id}</td>
                                     <td>${team.name}</td>
-                                    <%--<td>${listDevelopers[status]}</td>--%>
                                     <td>
                                         <a class="btn btn-warning" href="#"
-                                           data-toggle="modal" data-target="#editTeam"><i class="fas fa-edit"></i></a>
+                                           data-toggle="modal" data-target="#editTeam"
+                                        onclick="editCurrentTeam(${team.id})"><i class="fas fa-edit"></i></a>
                                         <a class="btn btn-danger" href="#"
-                                           data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i></a>
+                                           data-toggle="modal" data-target="#deleteModal"
+                                           onclick="deleteCurrentTeam(${team.id})"><i
+                                                class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -172,28 +141,10 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="../logout">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Add Team-->
-<div class="modal fade" id="addNewTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addNewTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -205,11 +156,12 @@
             <div class="modal-body">
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-body">
-                        <form method="POST" action="${pageContext.request.contextPath}/team/add">
+                        <form method="POST" action="${pageContext.request.contextPath}/team/insert">
 
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="inputName" name="email" class="form-control" required="required" autofocus="autofocus">
+                                    <input type="text" id="inputName" name="name" class="form-control"
+                                           required="required" autofocus="autofocus">
                                     <label for="inputName">Team name</label>
                                 </div>
                             </div>
@@ -224,7 +176,8 @@
 
 
 <!-- Edit team-->
-<div class="modal fade" id="editTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -236,37 +189,17 @@
             <div class="modal-body">
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-body">
-                        <form method="POST" action="${pageContext.request.contextPath}/team/edit">
+                        <form method="POST" action="${pageContext.request.contextPath}/team/update">
+                            <input type="hidden" id="editId" name="editId">
+
                             <div class="form-group">
                                 <div class="form-label-group">
-                                    <input type="text" id="editID" name="teamId" class="form-control" required="required"
-                                           autofocus="autofocus" pattern="\d+" title="only number" readonly value="${team.id}">
-                                    <label for="editID">Team id</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                    <input type="text" id="editName" name="email" class="form-control"
-                                           required="required" autofocus="autofocus" value="${team.name}">
+                                    <input type="text" id="editName" name="editName" class="form-control"
+                                           required="required" autofocus="autofocus">
                                     <label for="editName">Team name</label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                    <input type="text" id="editDevelopers" name="totalDev" class="form-control"
-                                           required="required" autofocus="autofocus" pattern="\d+"
-                                           title="only number" readonly value="${team.totalDev}">
-                                    <label for="editDevelopers">Total developers</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                    <input type="text" id="totalTask" name="totalTasks" class="form-control"
-                                           required="required" autofocus="autofocus"
-                                           pattern="\d+" title="only number" readonly value="${team.totalTask}">
-                                    <label for="totalTask">Total tasks</label>
-                                </div>
-                            </div>
+
                             <input class="btn btn-primary btn-block" type="submit" value="Edit & Save"/>
                         </form>
                     </div>
@@ -278,7 +211,8 @@
 
 
 <!-- Delete team Modal-->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -290,7 +224,7 @@
             <div class="modal-body">Are you sure you want to delete this team?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a id="deleteUserBtn" class="btn btn-danger" href="team.jsp">Delete</a>
+                <a id="deleteTeamBtn" class="btn btn-danger" href="team.jsp">Delete</a>
             </div>
         </div>
     </div>
@@ -314,6 +248,41 @@
 <!-- Demo scripts for this page-->
 <script src="../resources/js/demo/datatables-demo.js"></script>
 <script src="../resources/js/demo/chart-area-demo.js"></script>
+
+
+<script>
+
+    function deleteCurrentTeam(id) {
+        console.log(id);
+        $("#deleteTeamBtn").click(function () {
+            $.post("/team/delete",
+                {
+                    id: id,
+                }).done(function (data) {
+                $("#team_" + id).remove();
+                $("#deleteModal").modal("hide");
+            }).fail(function (err) {
+                alert("error: " + err);
+            });
+        })
+    }
+
+
+    function editCurrentTeam(id) {
+        $.get("/team/edit",
+            {
+                id: id,
+            }).done(function (data) {
+            alert(data.id);
+            $("#editId").val(data.editId);
+            $("#editName").val(data.name);
+
+
+        }).fail(function (err) {
+            alert("error: " + err);
+        });
+    }
+</script>
 
 </body>
 
