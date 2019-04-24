@@ -20,7 +20,7 @@ import model.Task;
 import model.User;
 import util.AppUtils;
 
-@WebServlet(urlPatterns = {"/task", "/task/*"})
+@WebServlet(urlPatterns = {"/task", "/task/*", "/developer"})
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;
@@ -56,7 +56,7 @@ public class TaskServlet extends HttpServlet {
                 case "/task/manager":
                     listTask(request, response);
                     break;
-                case "/task/developer":
+                case "/developer":
                     listUserTasks(request, response);
                     break;
                 case "/task/retrieve":
@@ -115,7 +115,8 @@ public class TaskServlet extends HttpServlet {
                         listTask = TaskRepository.getTasks(id);
         }
         if(listTask!=null){
-
+            List<Integer> teamId = TaskRepository.getTeamIdsByTask(listTask);
+            request.setAttribute("teamId", teamId);
             request.setAttribute("listTask", listTask);
         }
         else{
