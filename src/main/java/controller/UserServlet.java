@@ -130,14 +130,19 @@ public class UserServlet extends HttpServlet {
 		System.out.println("EDIT ID : "+request.getParameter("id"));
 		int id = Integer.parseInt(request.getParameter("id"));
 		User existingUser = UserRepository.getUser(id);
-		List<Team> team = (List<Team>) TeamRepository.getAllTeam();
+		List<Team> teams = (List<Team>) TeamRepository.getAllTeam();
 
-		String json = new Gson().toJson(existingUser);
-		String json2 = new Gson().toJson(team);
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(json);
-		response.getWriter().write(json2);
+
+		request.setAttribute("user",existingUser);
+		request.setAttribute("teams",teams);
+
+//		String json = new Gson().toJson(existingUser);
+//		String json2 = new Gson().toJson(team);
+//
+//		response.setContentType("application/json");
+//		response.setCharacterEncoding("UTF-8");
+//		response.getWriter().write(json);
+//		response.getWriter().write(json2);
 
 	}
 
