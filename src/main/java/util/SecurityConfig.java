@@ -20,8 +20,8 @@ public class SecurityConfig {
         // Configure For "DEVELOPER" Role.
         List<String> urlPatterns1 = new ArrayList<String>();
 
-        urlPatterns1.add("/developer");
-        urlPatterns1.add("/developer/*");
+        urlPatterns1.add("/task/*");
+//        urlPatterns1.add("/developer/*");
 
         mapConfig.put(ROLE_DEVELOPER, urlPatterns1);
 

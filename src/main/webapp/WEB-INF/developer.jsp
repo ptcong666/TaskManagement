@@ -217,7 +217,7 @@
             <div class="modal-body">Task status would be changed as completed.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="#" id="editTaskBtn">Change</a>
+                <a class="btn btn-primary" id="editTaskBtn">Change</a>
             </div>
         </div>
     </div>

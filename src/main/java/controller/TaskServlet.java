@@ -20,7 +20,7 @@ import model.Task;
 import model.User;
 import util.AppUtils;
 
-@WebServlet(urlPatterns = {"/task", "/task/*", "/developer"})
+@WebServlet(urlPatterns = {"/task", "/task/*"})
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;
@@ -56,7 +56,7 @@ public class TaskServlet extends HttpServlet {
                 case "/task/manager":
                     listTask(request, response);
                     break;
-                case "/developer":
+                case "/task/developer":
                     listUserTasks(request, response);
                     break;
                 case "/task/retrieve":

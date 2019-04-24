@@ -31,6 +31,9 @@ public class HibernateUtil {
             settings.put(Environment.URL, "jdbc:mysql://remotemysql.com/EfS6uRzdy2");
             settings.put(Environment.USER, "EfS6uRzdy2");
             settings.put(Environment.PASS, "MXpz50McqL");
+//            settings.put(Environment.URL, "jdbc:mysql://localhost:3306/TaskManagement");
+//            settings.put(Environment.USER, "root");
+//            settings.put(Environment.PASS, "Admin@123");
             settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
 
             settings.put(Environment.SHOW_SQL, "true");
