@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Table(name="team")
     public class Team {
 
+
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
@@ -27,7 +29,9 @@ import javax.persistence.*;
     public String getName() {
         return name;
     }
-
+    public int getId() {
+        return id;
+    }
     public void setName(String name) {
         this.name = name;
     }
