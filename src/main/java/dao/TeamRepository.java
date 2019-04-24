@@ -132,9 +132,7 @@ public class TeamRepository {
             session = HibernateUtil.getCurrentSession();
             Query query = session.createQuery("from model.Team");
             listOfTeam = query.list();
-            for (Team team: listOfTeam){
-                System.out.println(team.getId()+" "+team.getName());
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
