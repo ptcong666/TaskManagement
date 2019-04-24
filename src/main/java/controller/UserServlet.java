@@ -116,8 +116,6 @@ public class UserServlet extends HttpServlet {
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		System.out.println("EDIT ID : "+request.getParameter("id"));
-
 		int id = Integer.parseInt(request.getParameter("id"));
 		User existingUser = UserRepository.getUser(id);
 		String json = new Gson().toJson(existingUser);
@@ -130,12 +128,9 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		System.out.println("EDIT ID : "+request.getParameter("id"));
-
 		int id = Integer.parseInt(request.getParameter("id"));
 		User existingUser = UserRepository.getUser(id);
-
-		Team team = (Team)TeamRepository.getTeam(existingUser.getTeamId());
-
+		List<Team> team = (List<Team>) TeamRepository.getAllTeam();
 
 		String json = new Gson().toJson(existingUser);
 		String json2 = new Gson().toJson(team);
