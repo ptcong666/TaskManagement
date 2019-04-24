@@ -135,7 +135,7 @@ public class TaskRepository {
 
     /**
      * Get Task By Priority
-     * @param priority
+     * @parapriority
      * @return
      */
     public List<Task> getTasksByPriority(String prio) {
@@ -205,7 +205,7 @@ public class TaskRepository {
                    team = teamRepository.getTeam(userRepository.getUser(t.getDeveloperId()).getTeamId());
                }
                else {
-                   team = null
+                   team = null;
                }
                teamIds.add(team);
             }
