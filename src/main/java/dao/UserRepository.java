@@ -196,6 +196,9 @@ public class UserRepository {
                     if(t!=null){
                         teams.add(t);
                     }
+                    else{
+                        teams.add(null);
+                    }
             }
 
         } catch (Exception e) {
