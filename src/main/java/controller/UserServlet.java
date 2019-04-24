@@ -170,15 +170,23 @@ public class UserServlet extends HttpServlet {
 	private void updateUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		System.out.println("UPDATE ID : "+request.getParameter("id"));
-
+		User user;
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		String password = request.getParameter("password");
-		User user = new User(id, name, email, password, address, phone);
-		user.setRolesByString(request.getParameter("roles"));
+		String team_id = request.getParameter("team_id");
+		if(team_id!=null && team_id!=""){
+			user = UserRepository.getUser(id);
+			user.setTeamId(Integer.parseInt(team_id));
+			user.setRolesByString(request.getParameter("roles"));
+		}
+		else{
+			user= new User(id, name, email, password, address, phone);
+			user.setRolesByString(request.getParameter("roles"));
+		}
 		UserRepository.updateUser(user);
 		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
 	}
