@@ -180,7 +180,7 @@
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-body">
                         <form method="POST" action="${pageContext.request.contextPath}/user/update">
-                            <input type="hidden" id="editId" name="id">
+                            <input type="hidden" id="editDevId" name="idDev">
 
                             <div class="form-group">
                                 <div class="form-label-group">
@@ -218,10 +218,10 @@
             {
                 id: id,
             }).done(function (data) {
-                alert(data.id);
-            $("#editId").val(data.id);
+                alert(data.idDev);
+            $("#editDevId").val(data.idDev);
             $("#editDeveloperName").val(data.name);
-            $("#editTeam").value(data.team_id);
+            $("#team_id").value(data.team_id);
 
         }).fail(function (err) {
             alert("error: " + err);

@@ -224,7 +224,7 @@
             <div class="modal-body">Are you sure you want to delete this team?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a id="deleteTeamBtn" class="btn btn-danger" href="team.jsp">Delete</a>
+                <a id="deleteTeamBtn" class="btn btn-danger" href="#">Delete</a>
             </div>
         </div>
     </div>
@@ -273,12 +273,13 @@
             {
                 id: id,
             }).done(function (data) {
-            alert(data.id);
-            $("#editId").val(data.editId);
+                console.log(data);
+            $("#editId").val(data.id);
             $("#editName").val(data.name);
 
 
         }).fail(function (err) {
+            console.log("err");
             alert("error: " + err);
         });
     }
