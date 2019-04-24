@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import config.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
@@ -182,16 +183,20 @@ public class UserRepository {
     }
 
     public List<Team> getTeamByUser(List<User> users){
-        List<Team> teams = null;
-        Team t;
+        List<Team> teams = new ArrayList<Team>();
+        Team t =new Team();
         try {
             session = HibernateUtil.getCurrentSession();
 
             for(User u:users){
-                t =(Team) session.createQuery("from model.Team where id="+u.getTeamId()).getResultList().get(0);
-             if(t!=null){
-                 teams.add(t);
-             }
+                if(session.createQuery("from model.Team where id="+u.getTeamId()).getResultList()!=null){
+                    t = (Team) session.createQuery("from model.Team where id="+u.getTeamId()).getSingleResult();
+
+                    if(t!=null){
+                        teams.add(t);
+                    }
+                }
+
             }
 
         } catch (Exception e) {

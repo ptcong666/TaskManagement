@@ -63,8 +63,8 @@ public class TeamServlet extends HttpServlet{
 
     private void listTeam(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Team> listTeam = TeamRepository.getAllTeam();
 
+        List<Team> listTeam = TeamRepository.getAllTeam();
         request.setAttribute("listTeam", listTeam);
         List<User> listUser = UserRepository.getAllUser();
         List<User> developerUser = UserServlet.filterDeveloper(listUser);

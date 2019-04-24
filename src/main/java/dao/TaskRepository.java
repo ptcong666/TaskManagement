@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import config.HibernateUtil;
+import org.hibernate.query.Query;
 
 public class TaskRepository {
     Session session = null;
@@ -137,12 +138,16 @@ public class TaskRepository {
      * @param priority
      * @return
      */
-    public List<Task> getTasksByPriority(String priority) {
+    public List<Task> getTasksByPriority(String prio) {
 
         List<Task> listOfTask = null;
         try {
+            System.out.println(prio);
             session = HibernateUtil.getCurrentSession();
-            listOfTask = session.createQuery("from model.Task where priority="+priority).getResultList();
+
+            Query query = session.createQuery("from model.Task T where T.priority= :prio");
+            query.setParameter("prio",prio);
+            listOfTask = query.list();
 
         } catch (Exception e) {
             e.printStackTrace();
