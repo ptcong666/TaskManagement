@@ -107,7 +107,7 @@ public class TaskServlet extends HttpServlet {
         else if(request.getParameter("team_id")!=null && request.getParameter("team_id")!="") {
             System.out.println("Team Id : "+request.getParameter("team_id"));
 
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("team_id"));
             listTask = TaskRepository.getTasksByTeamId(id);
         }
         else if(request.getParameter("user_id")!=null){

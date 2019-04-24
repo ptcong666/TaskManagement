@@ -29,6 +29,26 @@
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin.css" rel="stylesheet">
     <script src="../resources/js/forDeveloper.js" type="text/javascript"></script>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../resources/vendor/jquery/jquery.min.js"></script>
+    <script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="../resources/vendor/chart.js/Chart.min.js"></script>
+    <script src="../resources/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="../resources/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../resources/js/sb-admin.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="../resources/js/demo/datatables-demo.js"></script>
+    <script src="../resources/js/demo/chart-area-demo.js"></script>
     <style>
         .completed {
             background-color: #1dd1a1;
@@ -203,24 +223,6 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="../resources/vendor/jquery/jquery.min.js"></script>
-<script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="../resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Page level plugin JavaScript-->
-<script src="../resources/vendor/chart.js/Chart.min.js"></script>
-<script src="../resources/vendor/datatables/jquery.dataTables.js"></script>
-<script src="../resources/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="../resources/js/sb-admin.min.js"></script>
-
-<!-- Demo scripts for this page-->
-<script src="../resources/js/demo/datatables-demo.js"></script>
-<script src="../resources/js/demo/chart-area-demo.js"></script>
 <script>
     function editCurrentTask(id) {
         $("#editTaskBtn").click(function () {
