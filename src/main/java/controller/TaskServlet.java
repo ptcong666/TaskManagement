@@ -104,7 +104,9 @@ public class TaskServlet extends HttpServlet {
             String priority = request.getParameter("priority");
             listTask = TaskRepository.getTasksByPriority(priority);
         }
-        else if(request.getParameter("team_id")!=null) {
+        else if(request.getParameter("team_id")!=null && request.getParameter("team_id")!="") {
+            System.out.println("Team Id : "+request.getParameter("team_id"));
+
             int id = Integer.parseInt(request.getParameter("id"));
             listTask = TaskRepository.getTasksByTeamId(id);
         }
