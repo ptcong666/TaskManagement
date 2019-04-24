@@ -113,10 +113,7 @@ public class TaskRepository {
         return task;
     }
 
-    /**
-     * Get all Tasks
-     * @return
-     */
+
     @SuppressWarnings("unchecked")
     public List<Task> getAllTask() {
         List<Task> listOfTask = null;
@@ -135,8 +132,8 @@ public class TaskRepository {
 
     /**
      * Get Task By Priority
-     * @parapriority
-     * @return
+     *
+     *
      */
     public List<Task> getTasksByPriority(String prio) {
 
