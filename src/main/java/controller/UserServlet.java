@@ -89,7 +89,10 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("listUser", developerUser);
 				team = UserRepository.getTeamByUser(listUser);
 				request.setAttribute("team", team);
+				List<Team> teams = (List<Team>) TeamRepository.getAllTeam();
+				request.setAttribute("allTeam",teams);
 			}
+
 			else {
 				System.out.println("Developer user is not found");
 			}
