@@ -178,7 +178,7 @@ public class UserServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String password = request.getParameter("password");
 		String team_id = request.getParameter("team_id");
-
+		System.out.println(team_id);
 		if(team_id!=null && team_id!=""){
 			user = UserRepository.getUser(id);
 			user.setTeamId(Integer.parseInt(team_id));

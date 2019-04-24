@@ -121,7 +121,8 @@
                                 <tr>
                                     <td>${each.id}</td>
                                     <td>${each.name}</td>
-                                    <td>${each.id}</td>
+                                    <td>${each.teamId}</td>
+
 
                                     <td>
 
@@ -180,7 +181,7 @@
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-body">
                         <form method="POST" action="${pageContext.request.contextPath}/user/update">
-                            <input type="hidden" id="editDevId" name="idDev">
+                            <input type="hidden" id="editDevId" name="id">
 
                             <div class="form-group">
                                 <div class="form-label-group">
@@ -195,7 +196,7 @@
                                     <p class="titlePragraph">Choose team:</p>
                                     <select id="team_id" type="text" name="team_id"
                                             class="form-control" autofocus="autofocus">
-                                        <c:forEach varStatus="team" items="${team}">
+                                        <c:forEach var="team" items="${allTeam}">
                                             <option value="${team.id}">${team.name}</option>
                                         </c:forEach>
                                     </select>
@@ -214,12 +215,11 @@
 
 <script>
     function editCurrentDev(id) {
-        $.get("/team/edit",
+        $.get("/user/edit",
             {
                 id: id,
             }).done(function (data) {
-                alert(data.idDev);
-            $("#editDevId").val(data.idDev);
+            $("#editDevId").val(data.id);
             $("#editDeveloperName").val(data.name);
             $("#team_id").value(data.team_id);
 
