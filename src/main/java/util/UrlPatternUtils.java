@@ -18,7 +18,6 @@ public class UrlPatternUtils {
             if (mappings.contains(urlPattern)) {
                 return true;
             }
-
         }
         return false;
     }

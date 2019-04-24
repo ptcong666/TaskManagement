@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import dao.UserRepository;
 import model.User;
+import model.Team;
 
 @WebServlet(urlPatterns = {"/user", "/user/*"})
 public class UserServlet extends HttpServlet {
@@ -75,16 +77,39 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		List<User> listUser=null,developerUser=null;
 		listUser = UserRepository.getAllUser();
+		List<Team> team = null;
 		System.out.println(listUser);
-		developerUser = UserRepository.filterDeveloper(listUser);
-		System.out.println(developerUser);
-		request.setAttribute("listUser", developerUser);
-		System.out.println(developerUser.size());
+		if(listUser!=null){
+
+			developerUser = filterDeveloper(listUser);
+			if(developerUser!=null){
+				request.setAttribute("listUser", developerUser);
+				team = UserRepository.getTeamByUser(listUser);
+				request.setAttribute("team", team);
+				System.out.println(developerUser.size());
+			}
+			else {
+				System.out.println("Developer user is not found");
+			}
+		}
+		else{
+			System.out.println("User not found");
+		}
 		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
 //		dispatcher.forward(request, response);
 	}
 
+	public static List<User> filterDeveloper(List<User> Users){
+		List<User> listDevelopers = new ArrayList<>();
+		for(User u: Users){
+			if(u.getRoles().contains("DEVELOPER")){
+
+				listDevelopers.add(u);
+			}
+		}
+		return listDevelopers;
+	}
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {

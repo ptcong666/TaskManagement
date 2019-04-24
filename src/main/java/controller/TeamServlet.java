@@ -14,16 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.TeamRepository;
+import dao.UserRepository;
 import model.Team;
+import model.User;
 
 @WebServlet(urlPatterns = {"/team", "/team/*"})
 public class TeamServlet extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
     private TeamRepository TeamRepository;
+    private dao.UserRepository UserRepository;
 
     public void init() {
         TeamRepository = new TeamRepository();
+        UserRepository = new UserRepository();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -62,6 +66,9 @@ public class TeamServlet extends HttpServlet{
         List<Team> listTeam = TeamRepository.getAllTeam();
 
         request.setAttribute("listTeam", listTeam);
+        List<User> listUser = UserRepository.getAllUser();
+        List<User> developerUser = UserServlet.filterDeveloper(listUser);
+        request.setAttribute("listDevelopers", developerUser);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/team.jsp");
 		dispatcher.forward(request, response);
     }

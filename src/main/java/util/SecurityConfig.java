@@ -42,7 +42,7 @@ public class SecurityConfig {
 
         urlPatterns3.add("/user");
         urlPatterns3.add("/admin");
-        urlPatterns3.add("/user/*");
+//        urlPatterns3.add("/user/*");
 
         mapConfig.put(ROLE_ADMIN, urlPatterns3);
     }
