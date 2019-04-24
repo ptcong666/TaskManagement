@@ -193,20 +193,21 @@ public class TaskRepository {
         }
         return listOfTask;
     }
-    public List<Integer> getTeamIdsByTask(List<Task> tasks){
-        List<Integer> teamIds= new ArrayList<Integer>();
+    public List<Team> getTeamsByTask(List<Task> tasks){
+        List<Team> teamIds= new ArrayList<Team>();
         try {
             session = HibernateUtil.getCurrentSession();
             UserRepository userRepository = new UserRepository();
-            int id;
+            Team team;
+            TeamRepository teamRepository = new TeamRepository();
             for(Task t: tasks){
                if(userRepository.getUser(t.getDeveloperId())!=null){
-                   id = userRepository.getUser(t.getDeveloperId()).getTeamId();
+                   team = teamRepository.getTeam(userRepository.getUser(t.getDeveloperId()).getTeamId());
                }
                else {
-                   id =0;
+                   team = null
                }
-               teamIds.add(id);
+               teamIds.add(team);
             }
         } catch (Exception e) {
             e.printStackTrace();
