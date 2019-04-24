@@ -75,8 +75,12 @@ public class TeamServlet extends HttpServlet{
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Team existingTeam = TeamRepository.getTeam(id);
+        System.out.println("TEam id : "+request.getParameter("id"));
+        if(request.getParameter("id")!=null){
+            int id = Integer.parseInt(request.getParameter("id"));
+            Team existingTeam = TeamRepository.getTeam(id);
+            request.setAttribute("team", existingTeam);
+        }
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("team-form.jsp");
 //		request.setAttribute("team", existingTeam);
 //		dispatcher.forward(request, response);
