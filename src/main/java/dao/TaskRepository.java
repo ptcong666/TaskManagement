@@ -119,7 +119,7 @@ public class TaskRepository {
      */
     @SuppressWarnings("unchecked")
     public List<Task> getAllTask() {
-        List<Task> listOfTask = null;
+        List<Task> listOfTask = new ArrayList<>();
         try {
             session = HibernateUtil.getCurrentSession();
             listOfTask = session.createQuery("from model.Task").getResultList();
@@ -135,12 +135,12 @@ public class TaskRepository {
 
     /**
      * Get Task By Priority
-     * @param priority
+     * @param prio
      * @return
      */
     public List<Task> getTasksByPriority(String prio) {
 
-        List<Task> listOfTask = null;
+        List<Task> listOfTask = new ArrayList<>();
         try {
             System.out.println(prio);
             session = HibernateUtil.getCurrentSession();
@@ -161,14 +161,16 @@ public class TaskRepository {
 
     public List<Task> getTasksByTeamId(int id ) {
 
-        List<Task> listOfTask = null;
+        List<Task> listOfTask = new ArrayList<>();
         try {
             session = HibernateUtil.getCurrentSession();
             UserRepository UserRepository = new UserRepository();
             List<User> listOfUsers = session.createQuery("from model.User where team_id="+id).getResultList();
 
             for(User u: listOfUsers){
-               listOfTask.addAll(UserRepository.getTasks(u.getId()));
+                List<Task> tasks = UserRepository.getTasks(u.getId());
+                if (tasks.size() == 0) continue;
+               listOfTask.addAll(tasks);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -180,7 +182,7 @@ public class TaskRepository {
     }
 
     public List<Task> getTasks(int devId) {
-        List<Task> listOfTask = null;
+        List<Task> listOfTask = new ArrayList<>();
         try {
             session = HibernateUtil.getCurrentSession();
             listOfTask = session.createQuery("from model.Task where developer_id="+devId).getResultList();
