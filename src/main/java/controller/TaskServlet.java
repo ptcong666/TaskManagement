@@ -119,7 +119,7 @@ public class TaskServlet extends HttpServlet {
         }
         if(listTask!=null){
             List<Team> team = TaskRepository.getTeamsByTask(listTask);
-            request.setAttribute("teamId", team);
+            request.setAttribute("team", team);
             request.setAttribute("listTask", listTask);
         }
         else{
