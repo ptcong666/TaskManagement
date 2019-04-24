@@ -133,7 +133,7 @@
                                 <tr>
                                     <td>${team.id}</td>
                                     <td>${team.name}</td>
-                                    <td>${listDevelopers[status]}</td>
+                                    <%--<td>${listDevelopers[status]}</td>--%>
                                     <td>
                                         <a class="btn btn-warning" href="#"
                                            data-toggle="modal" data-target="#editTeam"><i class="fas fa-edit"></i></a>
