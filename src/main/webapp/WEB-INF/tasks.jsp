@@ -114,33 +114,40 @@
 
             <!-- DataTables Example -->
             <div class="input-group">
-                <label class="finders" for="findUserID">Find By User ID:
-                    <input id="findUserID" type="text" pattern="^\d+" title="Enter only number"/>
-                </label>
-                <div class="input-group-append">
-                    <button class="btn btn-primary findButton" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <label class="finders" for="findTeamID">Find By Team ID:
-                    <input id="findTeamID" type="text" pattern="^\d+" title="Enter only number"/>
-                </label>
-                <div class="input-group-append">
-                    <button class="btn btn-primary findButton" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                <label class="finders">Find task by priority:
-                    <select size="1" class="priorities">
-                        <option>Select priority</option>
-                        <option value="important">Important</option>
-                        <option value="regular">Regular</option>
-                    </select></label>
-                <div class="input-group-append">
-                    <button class="btn btn-primary findButton" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                <form style="display: inherit" id="findByUserIdForm" action="/task/retrieve">
+                    <label class="finders" for="findUserID">Find By User ID:
+                        <input name="user_id" id="findUserID" type="text" pattern="^\d+" title="Enter only number"/>
+                    </label>
+                    <div class="input-group-append">
+                        <button id="findUserIDButton" class="btn btn-primary findButton" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <form style="display: inherit" id="findByTeamIdForm" action="/task/retrieve">
+                    <label class="finders" for="findTeamID">Find By Team ID:
+                        <input name="team_id" id="findTeamID" type="text" pattern="^\d+" title="Enter only number"/>
+                    </label>
+                    <div class="input-group-append">
+                        <button id="findTeamIDButton" class="btn btn-primary findButton" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <form style="display: inherit" id="findByPriorityForm" action="/task/retrieve">
+                    <label class="finders">Find task by priority:
+                        <select name="priority" size="1" class="priorities">
+                            <option>Select priority</option>
+                            <option value="important">Important</option>
+                            <option value="regular">Regular</option>
+                        </select></label>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary findButton" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
 
 
