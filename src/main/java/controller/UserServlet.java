@@ -150,7 +150,7 @@ public class UserServlet extends HttpServlet {
 		User user = new User(id, name, email, password, address, phone);
 		user.setRolesByString(request.getParameter("roles"));
 		UserRepository.updateUser(user);
-		request.getRequestDispatcher("/user/manager").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
 	}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response)

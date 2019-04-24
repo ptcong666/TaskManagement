@@ -102,8 +102,9 @@
                                     <td>${each.id}</td>
 
                                     <td>
+
                                         <a class="btn btn-warning" href="#"
-                                           data-toggle="modal" data-target="#changeTeam"
+                                           data-toggle="modal" data-target="#editDev"
                                            onclick="editCurrentDev(${each.id})"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
@@ -138,28 +139,26 @@
 </a>
 
 
-<!-- Edit task-->
-<div class="modal fade" id="changeTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+
+
+<!-- Edit developer-->
+<div class="modal fade" id="editDev" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Change team for developer</h5>
+                <h5 class="modal-title">Edit task</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
+
             <div class="modal-body">
                 <div class="card card-login mx-auto mt-5">
                     <div class="card-body">
                         <form method="POST" action="${pageContext.request.contextPath}/user/update">
-                            <div class="form-group">
-                                <div class="form-label-group">
-                                    <input type="text" id="editDeveloperId" name="id" class="form-control"
-                                           autofocus="autofocus" readonly>
-                                    <label for="editDeveloperId">Developer id</label>
-                                </div>
-                            </div>
+                            <input type="hidden" id="editId" name="id">
 
                             <div class="form-group">
                                 <div class="form-label-group">
@@ -172,7 +171,7 @@
                             <div class="form-group">
                                 <div class="form-label-group">
                                     <p class="titlePragraph">Choose team:</p>
-                                    <select id="editTeam" type="text" name="editTeam"
+                                    <select id="team_id" type="text" name="team_id"
                                             class="form-control" autofocus="autofocus">
                                         <c:forEach varStatus="team" items="${team}">
                                             <option value="${team.id}">${team.name}</option>
@@ -189,6 +188,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
@@ -215,7 +216,9 @@
             {
                 id: id,
             }).done(function (data) {
-            $("#editTeam").value(data.editTeam);
+            $("#editId").val(data.id);
+            $("#editDeveloperName").val(data.name);
+            $("#editTeam").value(data.team_id);
 
         }).fail(function (err) {
             alert("error: " + err);
