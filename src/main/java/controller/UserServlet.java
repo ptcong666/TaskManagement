@@ -188,7 +188,7 @@ public class UserServlet extends HttpServlet {
 			user.setRolesByString(request.getParameter("roles"));
 		}
 		UserRepository.updateUser(user);
-		request.getRequestDispatcher("/WEB-INF/manager.jsp").forward(request, response);
+		request.getRequestDispatcher("/user/manager").forward(request, response);
 	}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
