@@ -97,11 +97,13 @@ public class TeamServlet extends HttpServlet{
 
     private void updateTeam(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
 
-        Team newTeam = new Team(id,name);
-        TeamRepository.updateTeam(newTeam);
+        if(request.getParameter("id")!=null){
+            int id = Integer.parseInt(request.getParameter("id"));
+            String name = request.getParameter("name");
+            Team newTeam = new Team(id,name);
+            TeamRepository.updateTeam(newTeam);
+        }
 
 //		response.sendRedirect("list");
     }
