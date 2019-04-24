@@ -110,7 +110,8 @@
                             <option>Select priority</option>
                             <option value="important">Important</option>
                             <option value="regular">Regular</option>
-                        </select></label>
+                        </select>
+                    </label>
                     <div class="input-group-append">
                         <button class="btn btn-primary findButton" type="submit">
                             <i class="fas fa-search"></i>

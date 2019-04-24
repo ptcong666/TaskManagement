@@ -20,7 +20,7 @@ import model.Task;
 import model.User;
 import util.AppUtils;
 
-@WebServlet(urlPatterns = {"/task", "/task/*","/developer"})
+@WebServlet(urlPatterns = {"/task", "/task/*"})
 public class TaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TaskRepository TaskRepository;
@@ -56,7 +56,7 @@ public class TaskServlet extends HttpServlet {
                 case "/task/manager":
                     listTask(request, response);
                     break;
-                case "/developer":
+                case "/task/developer":
                     listUserTasks(request, response);
                     break;
                 case "/task/retrieve":
@@ -99,11 +99,14 @@ public class TaskServlet extends HttpServlet {
     private void retrieveTask(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         List<Task> listTask = new ArrayList<>();
+
         if(request.getParameter("priority")!=null){
             String priority = request.getParameter("priority");
             listTask = TaskRepository.getTasksByPriority(priority);
         }
-        else if(request.getParameter("team_id")!=null) {
+        else if(request.getParameter("team_id")!=null && request.getParameter("team_id")!="") {
+            System.out.println("Team Id : "+request.getParameter("team_id"));
+
             int id = Integer.parseInt(request.getParameter("team_id"));
             listTask = TaskRepository.getTasksByTeamId(id);
         }
@@ -112,9 +115,8 @@ public class TaskServlet extends HttpServlet {
                         listTask = TaskRepository.getTasks(id);
         }
         if(listTask!=null){
-            List<Integer> teamId = TaskRepository.getTeamIdsByTask(listTask);
+
             request.setAttribute("listTask", listTask);
-            request.setAttribute("teamId", teamId);
         }
         else{
             System.out.println("no retrieved task");
