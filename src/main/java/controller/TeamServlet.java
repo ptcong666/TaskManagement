@@ -68,7 +68,6 @@ public class TeamServlet extends HttpServlet{
         if(listTeam!=null){
             request.setAttribute("listTeam", listTeam);
         }
-        System.out.println("Team members : "+listTeam.toString());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/team.jsp");
 		dispatcher.forward(request, response);
