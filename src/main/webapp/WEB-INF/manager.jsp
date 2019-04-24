@@ -77,7 +77,7 @@
     <ul class="sidebar navbar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="user/manager">
+            <a class="nav-link" href="/user/manager">
                 <i class="fas fa-fw fa-table"></i>
                 <span style="color: #f1f2f6;">Developer table</span></a>
         </li>
@@ -112,9 +112,8 @@
                             <tr>
                                 <th>Developer ID</th>
                                 <th>Developer Name</th>
-                                <th>Task ID</th>
-                                <th>Task Name</th>
-                                <th>Team Name</th>
+                                <th>Team id</th>
+                                <%--<th>Team Name</th>--%>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -122,20 +121,18 @@
                             <tr>
                                 <th>Developer ID</th>
                                 <th>Developer Name</th>
-                                <th>Task ID</th>
-                                <th>Task Name</th>
-                                <th>Team Name</th>
+                                <th>Team id</th>
+                                <%--<th>Team Name</th>--%>
                                 <th>Action</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="each" items="${listUser}">
+                            <c:forEach var="each" items="${listUser}" varStatus="status">
                                 <tr>
                                     <td>${each.id}</td>
                                     <td>${each.name}</td>
-                                    <%--<td>${each.task.id}</td>--%>
-                                    <%--<td>${each.task.name}</td>--%>
-                                    <%--<td>${each.team.name}</td>--%>
+                                    <td>${each.id}</td>
+
                                     <td>
                                         <a class="btn btn-warning" href="#' + ${each.id}}"
                                            data-toggle="modal" data-target="#changeTeam"><i class="fas fa-edit"></i></a>

@@ -78,7 +78,7 @@
     <ul class="sidebar navbar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="user/manager">
+            <a class="nav-link" href="/user/manager">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Developer table</span></a>
         </li>
@@ -129,10 +129,11 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="team" items="${listTeam}">
+                            <c:forEach var="team" items="${listTeam}" varStatus="status">
                                 <tr>
                                     <td>${team.id}</td>
                                     <td>${team.name}</td>
+                                    <td>${listDevelopers[status]}</td>
                                     <td>
                                         <a class="btn btn-warning" href="#"
                                            data-toggle="modal" data-target="#editTeam"><i class="fas fa-edit"></i></a>

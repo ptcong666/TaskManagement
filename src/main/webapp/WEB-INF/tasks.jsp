@@ -89,7 +89,7 @@
     <ul class="sidebar navbar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="user/manager">
+            <a class="nav-link" href="/user/manager">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Developer table</span></a>
         </li>
