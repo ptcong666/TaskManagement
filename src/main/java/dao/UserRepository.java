@@ -189,14 +189,13 @@ public class UserRepository {
             session = HibernateUtil.getCurrentSession();
 
             for(User u:users){
-                if(session.createQuery("from model.Team where id="+u.getTeamId()).getResultList()!=null){
-                    t = (Team) session.createQuery("from model.Team where id="+u.getTeamId()).getSingleResult();
-
+                String qstr = "from model.Team where id=:team_id";
+                Query query = session.createQuery(qstr);
+                query.setParameter("team_id",u.getTeamId());
+                t = (Team) query.uniqueResult();
                     if(t!=null){
                         teams.add(t);
                     }
-                }
-
             }
 
         } catch (Exception e) {
