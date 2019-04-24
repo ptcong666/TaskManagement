@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import dao.TeamRepository;
 import dao.UserRepository;
 import model.Team;
@@ -78,7 +79,11 @@ public class TeamServlet extends HttpServlet{
        if(request.getParameter("id")!=null){
             int id = Integer.parseInt(request.getParameter("id"));
             Team existingTeam = TeamRepository.getTeam(id);
-            request.setAttribute("team", existingTeam);
+//            request.setAttribute("team", existingTeam);
+           String json = new Gson().toJson(existingTeam);
+           response.setContentType("application/json");
+           response.setCharacterEncoding("UTF-8");
+           response.getWriter().write(json);
         }
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("team-form.jsp");
 //		request.setAttribute("team", existingTeam);
@@ -96,14 +101,15 @@ public class TeamServlet extends HttpServlet{
     }
 
     private void updateTeam(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ServletException {
 
-        if(request.getParameter("id")!=null){
-            System.out.println("TEAM ID :" +request.getParameter("id")+":------");
-            int id = Integer.parseInt(request.getParameter("id"));
-            String name = request.getParameter("name");
+        if(request.getParameter("editId")!=null){
+            System.out.println("TEAM ID :" +request.getParameter("editId")+":------");
+            int id = Integer.parseInt(request.getParameter("editId"));
+            String name = request.getParameter("editName");
             Team newTeam = new Team(id,name);
             TeamRepository.updateTeam(newTeam);
+            request.getRequestDispatcher("WEB-INF/team.jsp").forward(request, response);
         }
 
 //		response.sendRedirect("list");

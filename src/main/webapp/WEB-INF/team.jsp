@@ -273,12 +273,13 @@
             {
                 id: id,
             }).done(function (data) {
-            alert(data.id);
-            $("#editId").val(data.editId);
+                console.log(data);
+            $("#editId").val(data.id);
             $("#editName").val(data.name);
 
 
         }).fail(function (err) {
+            console.log("err");
             alert("error: " + err);
         });
     }
