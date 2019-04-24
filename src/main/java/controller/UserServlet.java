@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import dao.TeamRepository;
 import dao.UserRepository;
 import model.User;
 import model.Team;
@@ -21,9 +22,10 @@ import model.Team;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserRepository UserRepository;
-
+	private TeamRepository TeamRepository;
 	public void init() {
 		UserRepository = new UserRepository();
+		TeamRepository = new TeamRepository();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -44,6 +46,8 @@ public class UserServlet extends HttpServlet {
 					break;
 				case "/user/edit":
 					showEditForm(request, response);
+				case "/user/manageredit":
+					showManagerEditForm(request,response);
 					break;
 				case "/user/update":
 					updateUser(request, response);
@@ -78,7 +82,6 @@ public class UserServlet extends HttpServlet {
 		List<User> listUser=null,developerUser=null;
 		listUser = UserRepository.getAllUser();
 		List<Team> team = null;
-		System.out.println(listUser);
 		if(listUser!=null){
 
 			developerUser = filterDeveloper(listUser);
@@ -86,7 +89,6 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("listUser", developerUser);
 				team = UserRepository.getTeamByUser(listUser);
 				request.setAttribute("team", team);
-				System.out.println(developerUser.size());
 			}
 			else {
 				System.out.println("Developer user is not found");
@@ -113,12 +115,35 @@ public class UserServlet extends HttpServlet {
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
+
+		System.out.println("EDIT ID : "+request.getParameter("id"));
+
 		int id = Integer.parseInt(request.getParameter("id"));
 		User existingUser = UserRepository.getUser(id);
 		String json = new Gson().toJson(existingUser);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
+	}
+
+	private void showManagerEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		System.out.println("EDIT ID : "+request.getParameter("id"));
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		User existingUser = UserRepository.getUser(id);
+
+		Team team = (Team)TeamRepository.getTeam(existingUser.getTeamId());
+
+
+		String json = new Gson().toJson(existingUser);
+		String json2 = new Gson().toJson(team);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(json);
+		response.getWriter().write(json2);
+
 	}
 
 	private void insertUser(HttpServletRequest request, HttpServletResponse response)
@@ -141,6 +166,8 @@ public class UserServlet extends HttpServlet {
 
 	private void updateUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		System.out.println("UPDATE ID : "+request.getParameter("id"));
+
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");

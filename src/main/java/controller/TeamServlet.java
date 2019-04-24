@@ -75,7 +75,7 @@ public class TeamServlet extends HttpServlet{
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-       if(request.getParameter("id")!=null){
+       if(request.getParameter("id")!=null || request.getParameter("id")!=""){
             int id = Integer.parseInt(request.getParameter("id"));
             Team existingTeam = TeamRepository.getTeam(id);
             request.setAttribute("team", existingTeam);
@@ -97,8 +97,7 @@ public class TeamServlet extends HttpServlet{
 
     private void updateTeam(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-
-        if(request.getParameter("id")!=null){
+        if(request.getParameter("id")!=null || request.getParameter("id")!=""){
             System.out.println("TEAM ID :" +request.getParameter("id")+":------");
             int id = Integer.parseInt(request.getParameter("id"));
             String name = request.getParameter("name");
