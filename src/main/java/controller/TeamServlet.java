@@ -65,11 +65,12 @@ public class TeamServlet extends HttpServlet{
             throws SQLException, IOException, ServletException {
 
         List<Team> listTeam = TeamRepository.getAllTeam();
-        request.setAttribute("listTeam", listTeam);
-        List<User> listUser = UserRepository.getAllUser();
-        List<User> developerUser = UserServlet.filterDeveloper(listUser);
-        request.setAttribute("listDevelopers", developerUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/team.jsp");
+        if(listTeam!=null){
+            request.setAttribute("listTeam", listTeam);
+        }
+        System.out.println("Team members : "+listTeam.toString());
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/team.jsp");
 		dispatcher.forward(request, response);
     }
 

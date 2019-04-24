@@ -56,6 +56,16 @@ public class User {
 		this.phone = phone;
 	}
 
+	public User(int id, String name, String email, String password, String address, String phone,int teamId){
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.phone = phone;
+		this.teamId=teamId;
+	}
+
 	public void setRolesByString(String roles) {
 		this.roles = roles.split(",");
 	}

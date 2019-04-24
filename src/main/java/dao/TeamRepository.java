@@ -3,9 +3,9 @@ package dao;
 import config.HibernateUtil;
 import model.Team;
 import model.User;
-import model.Team;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,7 +130,9 @@ public class TeamRepository {
         List<Team> listOfTeam = null;
         try {
             session = HibernateUtil.getCurrentSession();
-            listOfTeam = session.createQuery("from model.Team").getResultList();
+            Query query = session.createQuery("from model.Team");
+
+            listOfTeam = query.list();
 
         } catch (Exception e) {
             e.printStackTrace();

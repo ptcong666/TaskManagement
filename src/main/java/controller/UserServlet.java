@@ -147,10 +147,17 @@ public class UserServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		String password = request.getParameter("password");
-		User user = new User(id, name, email, password, address, phone);
-		user.setRolesByString(request.getParameter("roles"));
+		int team_id;
+		User user;
+		if(request.getParameter("team_id")!=null){
+			team_id= Integer.parseInt(request.getParameter("team_id"));
+			user = new User(id, name, email, password, address, phone,team_id);
+		}
+		else{
+			user = new User(id, name, email, password, address, phone);
+		}
 		UserRepository.updateUser(user);
-		request.getRequestDispatcher("/user").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/manager.jsp").forward(request, response);
 	}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response)

@@ -16,6 +16,7 @@ import javax.persistence.*;
     public Team() {}
 
     public Team(String name) {
+
         this.name =name;
     }
     public Team(int id, String name) {
