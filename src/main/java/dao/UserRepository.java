@@ -167,7 +167,7 @@ public class UserRepository {
     }
 
     public List<Task> getTasks(int devId) {
-        List<Task> listOfTask = null;
+        List<Task> listOfTask = new ArrayList<>();
         try {
             session = HibernateUtil.getCurrentSession();
             listOfTask = session.createQuery("from model.Task where developer_id="+devId).getResultList();

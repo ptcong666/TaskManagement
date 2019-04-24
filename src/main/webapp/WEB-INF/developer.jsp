@@ -62,7 +62,7 @@
 <body id="page-top">
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="developer.jsp">Welcome ${user.name}!</a>
+    <a class="navbar-brand mr-1" href="developer">Welcome ${user.name}!</a>
 
 
     <!-- Navbar Search -->
